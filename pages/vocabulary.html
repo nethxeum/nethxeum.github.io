@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vocabulary - Nethxeum (NTU)</title>
+<meta content="Key terms and definitions for understanding Nethxeum." name="description"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+<canvas id="particles-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+<nav class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="../index.html"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></a>
+<ul class="nav-links">
+<li><a href="getting-started.html">Getting Started</a></li>
+<li><a href="download.html">Downloads</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="community.html">Community</a></li>
+<li><a href="resources.html">Resources</a></li>
+</ul>
+<div class="nav-cta">
+<div class="lang-selector">
+<button class="lang-btn"><i class="fas fa-globe"></i><span class="current-lang">EN</span><i class="fas fa-chevron-down" style="font-size:0.7rem"></i></button>
+<div class="lang-dropdown">
+<div class="lang-option active" data-lang="en"><span>English</span></div>
+<div class="lang-option" data-lang="fr"><span>Francais</span></div>
+<div class="lang-option" data-lang="es"><span>Espanol</span></div>
+<div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+<div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+<div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+<div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+<div class="lang-option" data-lang="ko"><span>Korean</span></div>
+<div class="lang-option" data-lang="ru"><span>Russian</span></div>
+<div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+</div>
+</div>
+</div>
+<div class="mobile-lang-selector">
+          <button class="mobile-lang-btn">
+            <i class="fas fa-globe"></i>
+            <span class="current-lang">EN</span>
+          </button>
+          <div class="mobile-lang-dropdown">
+            <div class="lang-option active" data-lang="en"><span>English</span></div>
+            <div class="lang-option" data-lang="fr"><span>Francais</span></div>
+            <div class="lang-option" data-lang="es"><span>Espanol</span></div>
+            <div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+            <div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+            <div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+            <div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+            <div class="lang-option" data-lang="ko"><span>Korean</span></div>
+            <div class="lang-option" data-lang="ru"><span>Russian</span></div>
+            <div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+          </div>
+        </div>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+</div>
+</nav>
+<div class="mobile-menu-overlay"></div>
+<div class="mobile-menu">
+<button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+<div class="mobile-menu-category">Menu</div>
+<ul class="mobile-menu-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="vocabulary.html">Vocabulary</a></li>
+</ul>
+</div>
+<div class="download-section">
+<div class="container">
+<div class="section-header">
+<span class="section-label" data-i18n="vocab_resources">Resources</span>
+<h1 class="gradient-text" data-i18n="vocab_vocabulary" style="font-size: clamp(2rem, 4vw, 3.5rem);">Vocabulary</h1>
+<p class="section-desc" data-i18n="vocab_key_terms_and_definitions_for">Key terms and definitions for understanding Nethxeum.</p>
+</div>
+<div class="grid-2">
+<div class="glass-card">
+<h3 data-i18n="vocab_a_f" style="color: var(--ntu-cyan); margin-bottom: 16px;">A-F</h3>
+<dl style="color: var(--text-secondary);">
+<dt data-i18n="vocab_address" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Address</dt><dd data-i18n="vocab_a_string_of_characters_used">A string of characters used to receive NTU. Starts with "NTU" followed by encoded public keys.</dd>
+<dt data-i18n="vocab_atomic_unit" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Atomic Unit</dt><dd data-i18n="vocab_the_smallest_denomination_of_ntu">The smallest denomination of NTU. 1 NTU = 10^8 atomic units (8 decimal places).</dd>
+<dt data-i18n="vocab_block" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Block</dt><dd data-i18n="vocab_a_collection_of_transactions_bundled">A collection of transactions bundled together and added to the blockchain approximately every 5 minutes.</dd>
+<dt data-i18n="vocab_blockchain" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Blockchain</dt><dd data-i18n="vocab_the_distributed_ledger_containing_all">The distributed ledger containing all Nethxeum transactions since the genesis block.</dd>
+<dt data-i18n="vocab_daemon_nethxeumd" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Daemon (nethxeumd)</dt><dd data-i18n="vocab_the_background_process_that_maintains">The background process that maintains a copy of the blockchain and handles network communication.</dd>
+<dt data-i18n="vocab_fungibility" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Fungibility</dt><dd data-i18n="vocab_the_property_that_each_unit">The property that each unit of currency is interchangeable with any other unit. Nethxeum's privacy ensures perfect fungibility.</dd>
+</dl>
+</div>
+<div class="glass-card">
+<h3 data-i18n="vocab_g_p" style="color: var(--ntu-cyan); margin-bottom: 16px;">G-P</h3>
+<dl style="color: var(--text-secondary);">
+<dt data-i18n="vocab_genesis_block" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Genesis Block</dt><dd data-i18n="vocab_the_first_block_in_the">The first block in the Nethxeum blockchain, mined on May 31, 2026. Contains no coinbase reward.</dd>
+<dt data-i18n="vocab_halving" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Halving</dt><dd data-i18n="vocab_the_event_where_the_block">The event where the block reward is cut in half, occurring every 420,000 blocks (~4 years).</dd>
+<dt data-i18n="vocab_key_image" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Key Image</dt><dd data-i18n="vocab_a_cryptographi_marker_that_prevents">A cryptographic marker that prevents double-spending while maintaining sender anonymity.</dd>
+<dt data-i18n="vocab_mining" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Mining</dt><dd data-i18n="vocab_the_process_of_using_computationa">The process of using computational power (CPU with RandomX) to secure the network and earn block rewards.</dd>
+<dt data-i18n="vocab_node" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Node</dt><dd data-i18n="vocab_a_computer_running_the_nethxeum">A computer running the Nethxeum daemon that maintains a copy of the blockchain and relays transactions.</dd>
+<dt data-i18n="vocab_pedersen_commitment" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Pedersen Commitment</dt><dd data-i18n="vocab_a_cryptographi_technique_used_in">A cryptographic technique used in RingCT to hide transaction amounts while preserving mathematical validity.</dd>
+</dl>
+</div>
+<div class="glass-card">
+<h3 data-i18n="vocab_r_z" style="color: var(--ntu-cyan); margin-bottom: 16px;">R-Z</h3>
+<dl style="color: var(--text-secondary);">
+<dt data-i18n="vocab_randomx" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">RandomX</dt><dd data-i18n="vocab_a_cpu_optimized_proof_of">A CPU-optimized proof-of-work algorithm that uses random code execution and memory-hard operations.</dd>
+<dt data-i18n="vocab_ringct" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">RingCT</dt><dd data-i18n="vocab_ring_confidential_transactions_hides_transaction">Ring Confidential Transactions — hides transaction amounts using cryptographic commitments and range proofs.</dd>
+<dt data-i18n="vocab_ring_signature" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Ring Signature</dt><dd data-i18n="vocab_a_cryptographi_signature_that_hides">A cryptographic signature that hides the true signer among a group of possible signers (the "ring").</dd>
+<dt data-i18n="vocab_seed_mnemonic" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Seed Mnemonic</dt><dd data-i18n="vocab_a_25_word_phrase_that">A 25-word phrase that encodes your wallet's private keys. Can restore your entire wallet.</dd>
+<dt data-i18n="vocab_stealth_address" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Stealth Address</dt><dd data-i18n="vocab_a_one_time_address_generated">A one-time address generated for each transaction that prevents linking payments to a recipient.</dd>
+<dt data-i18n="vocab_view_key" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">View Key</dt><dd data-i18n="vocab_a_private_key_that_allows">A private key that allows viewing incoming transactions without the ability to spend funds.</dd>
+</dl>
+</div>
+<div class="glass-card">
+<h3 data-i18n="vocab_network_terms" style="color: var(--ntu-cyan); margin-bottom: 16px;">Network Terms</h3>
+<dl style="color: var(--text-secondary);">
+<dt data-i18n="vocab_mainnet" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Mainnet</dt><dd data-i18n="vocab_the_live_nethxeum_network_where">The live Nethxeum network where real NTU is transacted.</dd>
+<dt data-i18n="vocab_testnet" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Testnet</dt><dd data-i18n="vocab_a_separate_network_for_testing">A separate network for testing with valueless test-NTU.</dd>
+<dt data-i18n="vocab_stagenet" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Stagenet</dt><dd data-i18n="vocab_a_staging_network_that_mimics">A staging network that mimics mainnet for pre-release testing.</dd>
+<dt data-i18n="vocab_difficulty" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Difficulty</dt><dd data-i18n="vocab_a_measure_of_how_hard">A measure of how hard it is to find a valid block hash, adjusted to maintain 5-minute block times.</dd>
+<dt data-i18n="vocab_mempool" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Mempool</dt><dd data-i18n="vocab_the_pool_of_unconfirmed_transactions">The pool of unconfirmed transactions waiting to be included in a block.</dd>
+<dt data-i18n="vocab_confirmation" style="color: var(--text-primary); font-weight: 600; margin-top: 16px;">Confirmation</dt><dd data-i18n="vocab_when_a_transaction_is_included">When a transaction is included in a block. Nethxeum requires 100 confirmations for mined coins.</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<footer class="main-footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></div>
+<p>Nethxeum (NTU) - A decentralized, privacy-preserving cryptocurrency. Founded by Rony Katie.</p>
+<div class="social-links" style="margin-top: 24px;">
+<a href="https://discord.gg/bwYwsyd4u" rel="noopener" target="_blank"><i class="fab fa-discord"></i></a>
+<a href="https://t.me/nethxeum_community" rel="noopener" target="_blank"><i class="fab fa-telegram"></i></a>
+<a href="https://x.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-x-twitter"></i></a>
+<a href="https://github.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-github"></i></a>
+</div>
+</div>
+<div class="footer-links"><h4>Getting Started</h4><ul><li><a href="what-is-nethxeum.html">What is Nethxeum?</a></li><li><a href="contribute.html">Contribute</a></li><li><a href="mining.html">Mining</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+<div class="footer-links"><h4>Resources</h4><ul><li><a href="about.html">About</a></li><li><a href="../whitepaper/Nethxeum_Whitepaper_v2.0.pdf">Whitepaper</a></li><li><a href="vocabulary.html">Vocabulary</a></li><li><a href="user-guides.html">User Guides</a></li></ul></div>
+<div class="footer-links"><h4>Other</h4><ul><li><a href="avoid-scams.html">Avoid Scams</a></li><li><a href="legal.html">Legal</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+</div>
+<div class="footer-bottom"><p>© Nethxeum Project 2026. Released under the MIT license.</p></div>
+</div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

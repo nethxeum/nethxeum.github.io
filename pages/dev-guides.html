@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Developer Guides - Nethxeum (NTU)</title>
+<meta content="Technical resources for Nethxeum developers." name="description"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+<canvas id="particles-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+<nav class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="../index.html"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></a>
+<ul class="nav-links">
+<li><a href="getting-started.html">Getting Started</a></li>
+<li><a href="download.html">Downloads</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="community.html">Community</a></li>
+<li><a href="resources.html">Resources</a></li>
+</ul>
+<div class="nav-cta">
+<div class="lang-selector">
+<button class="lang-btn"><i class="fas fa-globe"></i><span class="current-lang">EN</span><i class="fas fa-chevron-down" style="font-size:0.7rem"></i></button>
+<div class="lang-dropdown">
+<div class="lang-option active" data-lang="en"><span>English</span></div>
+<div class="lang-option" data-lang="fr"><span>Francais</span></div>
+<div class="lang-option" data-lang="es"><span>Espanol</span></div>
+<div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+<div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+<div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+<div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+<div class="lang-option" data-lang="ko"><span>Korean</span></div>
+<div class="lang-option" data-lang="ru"><span>Russian</span></div>
+<div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+</div>
+</div>
+</div>
+<div class="mobile-lang-selector">
+          <button class="mobile-lang-btn">
+            <i class="fas fa-globe"></i>
+            <span class="current-lang">EN</span>
+          </button>
+          <div class="mobile-lang-dropdown">
+            <div class="lang-option active" data-lang="en"><span>English</span></div>
+            <div class="lang-option" data-lang="fr"><span>Francais</span></div>
+            <div class="lang-option" data-lang="es"><span>Espanol</span></div>
+            <div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+            <div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+            <div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+            <div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+            <div class="lang-option" data-lang="ko"><span>Korean</span></div>
+            <div class="lang-option" data-lang="ru"><span>Russian</span></div>
+            <div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+          </div>
+        </div>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+</div>
+</nav>
+<div class="mobile-menu-overlay"></div>
+<div class="mobile-menu">
+<button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+<div class="mobile-menu-category">Menu</div>
+<ul class="mobile-menu-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="dev-guides.html">Developer Guides</a></li>
+</ul>
+</div>
+<div class="download-section">
+<div class="container">
+<div class="section-header">
+<span class="section-label" data-i18n="dev_resources">Resources</span>
+<h1 class="gradient-text" data-i18n="dev_developer_guides" style="font-size: clamp(2rem, 4vw, 3.5rem);">Developer Guides</h1>
+<p class="section-desc" data-i18n="dev_technical_resources_for_nethxeum_developers">Technical resources for Nethxeum developers.</p>
+</div>
+<div class="glass-card" style="margin-bottom: 32px;">
+<h3 data-i18n-html="dev_building_from_source"><i class="fas fa-code" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Building from Source</h3>
+<p data-i18n="dev_nethxeum_requires_c_17_cmake" style="color: var(--text-secondary); margin-bottom: 16px;">Nethxeum requires C++17, CMake 3.10+, and various system libraries. See the complete build instructions for your platform.</p>
+<h4 data-i18n="dev_dependencies" style="color: var(--ntu-cyan); margin: 16px 0 8px;">Dependencies</h4>
+<ul style="color: var(--text-secondary);">
+<li data-i18n="dev_cmake_3_10">CMake 3.10+</li>
+<li data-i18n="dev_boost_1_58">Boost 1.58+</li>
+<li data-i18n="dev_openssl">OpenSSL</li>
+<li data-i18n="dev_libzmq">libzmq</li>
+<li data-i18n="dev_libsodium">libsodium</li>
+<li data-i18n="dev_libunbound">libunbound</li>
+<li data-i18n="dev_libunwind_optional_for_stack_traces">libunwind (optional, for stack traces)</li>
+</ul>
+</div>
+<div class="glass-card" style="margin-bottom: 32px;">
+<h3 data-i18n-html="dev_integrating_with_nethxeum"><i class="fas fa-plug" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Integrating with Nethxeum</h3>
+<p data-i18n="dev_applications_can_interact_with_nethxeum" style="color: var(--text-secondary); margin-bottom: 16px;">Applications can interact with Nethxeum through:</p>
+<ul style="color: var(--text-secondary);">
+<li data-i18n-html="dev_json_rpc_api_direct_daemon"><strong data-i18n="dev_json_rpc_api">JSON-RPC API:</strong> Direct daemon communication for blockchain data and transaction submission</li>
+<li data-i18n-html="dev_wallet_rpc_wallet_operations_via"><strong data-i18n="dev_wallet_rpc">wallet-rpc:</strong> Wallet operations via HTTP API</li>
+<li data-i18n-html="dev_libwallet_link_against_the_wallet"><strong data-i18n="dev_libwallet">libwallet:</strong> Link against the wallet library for C++ applications</li>
+<li data-i18n-html="dev_zeromq_real_time_blockchain_notification"><strong data-i18n="dev_zeromq">ZeroMQ:</strong> Real-time blockchain notifications</li>
+</ul>
+</div>
+<div class="glass-card">
+<h3 data-i18n-html="dev_repository_structure"><i class="fas fa-link" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Repository Structure</h3>
+<div class="code-block" data-i18n-html="dev_key_directories_in_the_source">
+<span class="comment" data-i18n="dev_key_directories_in_the_source_1"># Key directories in the source tree</span><br/>
+src/<br/>
+├── daemon/           <span class="comment" data-i18n="dev_nethxeumd_full_node_daemon"># nethxeumd — Full node daemon</span><br/>
+├── wallet/           <span class="comment" data-i18n="dev_wallet_implementati"># Wallet implementation</span><br/>
+├── cryptonote_core/  <span class="comment" data-i18n="dev_core_consensus_and_validation"># Core consensus and validation</span><br/>
+├── cryptonote_protocol/ <span class="comment" data-i18n="dev_p2p_network_protocol"># P2P network protocol</span><br/>
+├── rpc/              <span class="comment" data-i18n="dev_rpc_server_implementati"># RPC server implementations</span><br/>
+├── blockchain_db/    <span class="comment" data-i18n="dev_blockchain_storage_lmdb"># Blockchain storage (LMDB)</span><br/>
+├── ringct/           <span class="comment" data-i18n="dev_ringct_implementati"># RingCT implementation</span><br/>
+├── crypto/           <span class="comment" data-i18n="dev_cryptographi_primitives"># Cryptographic primitives</span><br/>
+├── common/           <span class="comment" data-i18n="dev_shared_utilities"># Shared utilities</span><br/>
+├── contrib/          <span class="comment" data-i18n="dev_build_scripts_and_tools"># Build scripts and tools</span><br/>
+└── tests/            <span class="comment" data-i18n="dev_unit_and_integration_tests"># Unit and integration tests</span>
+</div>
+</div>
+</div>
+</div>
+<footer class="main-footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></div>
+<p>Nethxeum (NTU) - A decentralized, privacy-preserving cryptocurrency. Founded by Rony Katie.</p>
+<div class="social-links" style="margin-top: 24px;">
+<a href="https://discord.gg/bwYwsyd4u" rel="noopener" target="_blank"><i class="fab fa-discord"></i></a>
+<a href="https://t.me/nethxeum_community" rel="noopener" target="_blank"><i class="fab fa-telegram"></i></a>
+<a href="https://x.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-x-twitter"></i></a>
+<a href="https://github.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-github"></i></a>
+</div>
+</div>
+<div class="footer-links"><h4>Getting Started</h4><ul><li><a href="what-is-nethxeum.html">What is Nethxeum?</a></li><li><a href="contribute.html">Contribute</a></li><li><a href="mining.html">Mining</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+<div class="footer-links"><h4>Resources</h4><ul><li><a href="about.html">About</a></li><li><a href="../whitepaper/Nethxeum_Whitepaper_v2.0.pdf">Whitepaper</a></li><li><a href="vocabulary.html">Vocabulary</a></li><li><a href="user-guides.html">User Guides</a></li></ul></div>
+<div class="footer-links"><h4>Other</h4><ul><li><a href="avoid-scams.html">Avoid Scams</a></li><li><a href="legal.html">Legal</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+</div>
+<div class="footer-bottom"><p>© Nethxeum Project 2026. Released under the MIT license.</p></div>
+</div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

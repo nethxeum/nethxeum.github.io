@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Downloads - Nethxeum (NTU)</title>
+<meta content="Download Nethxeum GUI wallet and daemon. Available for Windows, Linux, and macOS." name="description"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+<canvas id="particles-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+<!-- Navigation -->
+<nav class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="../index.html">
+<div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div>
+<span class="logo-text">Nethxeum</span>
+</a>
+<ul class="nav-links">
+<li><a href="getting-started.html">Getting Started</a></li>
+<li><a href="download.html">Downloads</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="community.html">Community</a></li>
+<li><a href="resources.html">Resources</a></li>
+</ul>
+<div class="nav-cta">
+<div class="lang-selector">
+<button class="lang-btn"><i class="fas fa-globe"></i><span class="current-lang">EN</span><i class="fas fa-chevron-down" style="font-size:0.7rem"></i></button>
+<div class="lang-dropdown">
+<div class="lang-option active" data-lang="en"><span>English</span></div>
+<div class="lang-option" data-lang="fr"><span>Francais</span></div>
+<div class="lang-option" data-lang="es"><span>Espanol</span></div>
+<div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+<div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+<div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+<div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+<div class="lang-option" data-lang="ko"><span>Korean</span></div>
+<div class="lang-option" data-lang="ru"><span>Russian</span></div>
+<div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+</div>
+</div>
+</div>
+<div class="mobile-lang-selector">
+          <button class="mobile-lang-btn">
+            <i class="fas fa-globe"></i>
+            <span class="current-lang">EN</span>
+          </button>
+          <div class="mobile-lang-dropdown">
+            <div class="lang-option active" data-lang="en"><span>English</span></div>
+            <div class="lang-option" data-lang="fr"><span>Francais</span></div>
+            <div class="lang-option" data-lang="es"><span>Espanol</span></div>
+            <div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+            <div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+            <div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+            <div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+            <div class="lang-option" data-lang="ko"><span>Korean</span></div>
+            <div class="lang-option" data-lang="ru"><span>Russian</span></div>
+            <div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+          </div>
+        </div>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+</div>
+</nav>
+<div class="mobile-menu-overlay"></div>
+<div class="mobile-menu">
+<button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+<div class="mobile-menu-category">Menu</div>
+<ul class="mobile-menu-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="getting-started.html">Getting Started</a></li>
+<li><a href="download.html">Downloads</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="community.html">Community</a></li>
+<li><a href="resources.html">Resources</a></li>
+</ul>
+</div>
+<!-- Download Page -->
+<div class="download-section">
+<div class="container">
+<div class="section-header">
+<span class="section-label" data-i18n="dl_downloads">Downloads</span>
+<h1 class="gradient-text" data-i18n="dl_download_nethxeum" style="font-size: clamp(2rem, 4vw, 3.5rem);">Download Nethxeum</h1>
+<p class="section-desc" data-i18n="dl_get_the_latest_gui_wallet">Get the latest GUI wallet and daemon software for your platform.</p>
+</div>
+<!-- Status -->
+<div class="status-indicator" data-i18n-html="dl_latest_release_v0_10_0" style="margin-bottom: 32px;">
+<span class="status-dot"></span>
+<span>Latest Release: v0.10.0.0 (Helium Synthetic)</span>
+</div>
+<!-- GUI Wallet Download -->
+<div class="download-card" style="margin-bottom: 48px;">
+<div class="download-card-header">
+<div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+<div class="feature-icon" style="margin: 0;"><i class="fas fa-desktop"></i></div>
+<div>
+<h2 data-i18n="dl_nethxeum_gui_wallet">Nethxeum GUI Wallet</h2>
+<p data-i18n="dl_graphical_user_interface_wallet_recommended" style="color: var(--text-muted);">Graphical user interface wallet — Recommended for most users</p>
+</div>
+</div>
+</div>
+<div class="download-card-body">
+<!-- Screenshot -->
+<div class="screenshot-container">
+<img alt="Nethxeum GUI Wallet Screenshot" loading="lazy" src="../images/screenshot-gui.jpg"/>
+</div>
+<div class="download-meta">
+<div class="download-meta-item">
+<h4 data-i18n="dl_current_version">Current Version</h4>
+<p data-i18n="dl_v0_10_0_0_helium">v0.10.0.0 "Helium Synthetic"</p>
+</div>
+<div class="download-meta-item">
+<h4 data-i18n="dl_release_date">Release Date</h4>
+<p data-i18n="dl_june_2026">June 2026</p>
+</div>
+<div class="download-meta-item">
+<h4 data-i18n="dl_architecture">Architecture</h4>
+<p data-i18n="dl_qt5_qml_based_gui_connects">Qt5/QML-based GUI, connects to local or remote daemon</p>
+</div>
+<div class="download-meta-item">
+<h4 data-i18n="dl_checksum_sha256">Checksum (SHA256)</h4>
+<p data-i18n="dl_coming_with_release" style="font-family: var(--font-mono); font-size: 0.8rem; word-break: break-all;">Coming with release</p>
+</div>
+</div>
+<h3 data-i18n-html="dl_supported_platforms" style="margin: 32px 0 16px;"><i class="fas fa-desktop" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Supported Platforms</h3>
+<div class="platform-grid">
+<div class="platform-card">
+<div class="platform-icon"><i class="fab fa-windows"></i></div>
+<div class="platform-name" data-i18n="dl_windows">Windows</div>
+<div class="platform-status" data-i18n="dl_64_bit_available">64-bit available</div>
+<a class="btn btn-primary" data-i18n-html="dl_download" href="https://github.com/nethxeum/nethxeum-gui/releases/download/v0.10.0.0/Hellium-Synthetic-win-x64-v0.10.0.exe" rel="noopener" style="margin-top: 12px; width: 100%; padding: 10px;" target="_blank">
+<i class="fas fa-download"></i> Download
+              </a>
+</div>
+<div class="platform-card">
+<div class="platform-icon"><i class="fab fa-linux"></i></div>
+<div class="platform-name" data-i18n="dl_linux">Linux</div>
+<div class="platform-status" data-i18n="dl_64_bit_appimage_deb">64-bit AppImage / DEB</div>
+<a class="btn btn-primary" data-i18n-html="dl_download_1" href="https://github.com/nethxeum/nethxeum-gui/releases" rel="noopener" style="margin-top: 12px; width: 100%; padding: 10px;" target="_blank">
+<i class="fas fa-download"></i> Download
+              </a>
+</div>
+<div class="platform-card coming-soon">
+<div class="platform-icon"><i class="fab fa-apple"></i></div>
+<div class="platform-name" data-i18n="dl_macos">macOS</div>
+<div class="platform-status" data-i18n="dl_coming_soon">Coming soon</div>
+<button class="btn btn-secondary" data-i18n-html="dl_soon" disabled="" style="margin-top: 12px; width: 100%; padding: 10px;">
+<i class="fas fa-clock"></i> Soon
+              </button>
+</div>
+</div>
+<div style="margin-top: 32px;">
+<h4 data-i18n="dl_source_code" style="margin-bottom: 12px;">Source Code</h4>
+<a class="btn btn-outline" data-i18n-html="dl_github_repository" href="https://github.com/nethxeum/nethxeum-gui" rel="noopener" target="_blank">
+<i class="fab fa-github"></i> GitHub Repository
+            </a>
+<a class="btn btn-outline" data-i18n-html="dl_all_releases" href="https://github.com/nethxeum/nethxeum-gui/releases" rel="noopener" style="margin-left: 12px;" target="_blank">
+<i class="fas fa-tag"></i> All Releases
+            </a>
+</div>
+<div class="info-banner" style="margin-top: 32px;">
+<h4 data-i18n-html="dl_system_requirements" style="color: var(--ntu-cyan); margin-bottom: 8px;"><i class="fas fa-info-circle"></i> System Requirements</h4>
+<p data-i18n-html="dl_os_windows_10_ubuntu_18" style="color: var(--text-secondary); font-size: 0.9rem;">
+<strong data-i18n="dl_os">OS:</strong> Windows 10+ / Ubuntu 18.04+ / macOS 11+ (soon)<br/>
+<strong data-i18n="dl_ram">RAM:</strong> 4GB minimum (8GB recommended)<br/>
+<strong data-i18n="dl_disk">Disk:</strong> 50GB+ free space for blockchain<br/>
+<strong data-i18n="dl_network">Network:</strong> Broadband internet connection
+            </p>
+</div>
+</div>
+</div>
+<!-- Daemon Download -->
+<div class="download-card">
+<div class="download-card-header">
+<div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+<div class="feature-icon" style="background: linear-gradient(135deg, #7B2FF7, #E040FB); margin: 0;"><i class="fas fa-server"></i></div>
+<div>
+<h2 data-i18n="dl_nethxeum_daemon_nethxeumd">Nethxeum Daemon (nethxeumd)</h2>
+<p data-i18n="dl_command_line_daemon_for_running" style="color: var(--text-muted);">Command-line daemon for running a full node — For advanced users</p>
+</div>
+</div>
+</div>
+<div class="download-card-body">
+<!-- Screenshot -->
+<div class="screenshot-container">
+<img alt="Nethxeum Daemon Screenshot" loading="lazy" src="../images/screenshot-daemon.jpg"/>
+</div>
+<div class="download-meta">
+<div class="download-meta-item">
+<h4 data-i18n="dl_current_version_1">Current Version</h4>
+<p data-i18n="dl_v0_10_0_0_helium_1">v0.10.0.0 "Helium Synthetic"</p>
+</div>
+<div class="download-meta-item">
+<h4 data-i18n="dl_release_date_1">Release Date</h4>
+<p data-i18n="dl_june_2026_1">June 2026</p>
+</div>
+<div class="download-meta-item">
+<h4 data-i18n="dl_architecture_1">Architecture</h4>
+<p data-i18n="dl_c_17_p2p_network_node">C++17, P2P network node, RPC server, embedded miner</p>
+</div>
+<div class="download-meta-item">
+<h4 data-i18n="dl_ports">Ports</h4>
+<p data-i18n="dl_p2p_18333_rpc_18331_zmq">P2P: 18333 | RPC: 18331 | ZMQ: 18332</p>
+</div>
+</div>
+<h3 data-i18n-html="dl_supported_platforms_1" style="margin: 32px 0 16px;"><i class="fas fa-server" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Supported Platforms</h3>
+<div class="platform-grid">
+<div class="platform-card">
+<div class="platform-icon"><i class="fab fa-windows"></i></div>
+<div class="platform-name" data-i18n="dl_windows_1">Windows</div>
+<div class="platform-status" data-i18n="dl_64_bit_binary">64-bit binary</div>
+<a class="btn btn-primary" data-i18n-html="dl_download_2" href="https://github.com/nethxeum/nethxeum/releases/download/v0.10.0.0/Hellium-Synthetic-deamon-win-x64-v0.10.0.exe" rel="noopener" style="margin-top: 12px; width: 100%; padding: 10px;" target="_blank">
+<i class="fas fa-download"></i> Download
+              </a>
+</div>
+<div class="platform-card">
+<div class="platform-icon"><i class="fab fa-linux"></i></div>
+<div class="platform-name" data-i18n="dl_linux_1">Linux</div>
+<div class="platform-status" data-i18n="dl_64_bit_static_binary">64-bit static binary</div>
+<a class="btn btn-primary" data-i18n-html="dl_download_3" href="https://github.com/nethxeum/nethxeum/releases" rel="noopener" style="margin-top: 12px; width: 100%; padding: 10px;" target="_blank">
+<i class="fas fa-download"></i> Download
+              </a>
+</div>
+<div class="platform-card coming-soon">
+<div class="platform-icon"><i class="fab fa-apple"></i></div>
+<div class="platform-name" data-i18n="dl_macos_1">macOS</div>
+<div class="platform-status" data-i18n="dl_coming_soon_1">Coming soon</div>
+<button class="btn btn-secondary" data-i18n-html="dl_soon_1" disabled="" style="margin-top: 12px; width: 100%; padding: 10px;">
+<i class="fas fa-clock"></i> Soon
+              </button>
+</div>
+</div>
+<div style="margin-top: 32px;">
+<h4 data-i18n="dl_source_code_1" style="margin-bottom: 12px;">Source Code</h4>
+<a class="btn btn-outline" data-i18n-html="dl_github_repository_1" href="https://github.com/nethxeum/nethxeum" rel="noopener" target="_blank">
+<i class="fab fa-github"></i> GitHub Repository
+            </a>
+<a class="btn btn-outline" data-i18n-html="dl_all_releases_1" href="https://github.com/nethxeum/nethxeum/releases" rel="noopener" style="margin-left: 12px;" target="_blank">
+<i class="fas fa-tag"></i> All Releases
+            </a>
+</div>
+<div class="info-banner" style="margin-top: 32px;">
+<h4 data-i18n-html="dl_quick_start" style="color: var(--ntu-cyan); margin-bottom: 8px;"><i class="fas fa-terminal"></i> Quick Start</h4>
+<div class="code-block" data-i18n-html="dl_start_the_daemon_mainnet_nethxeumd" style="margin-top: 12px;">
+<span class="comment" data-i18n="dl_start_the_daemon_mainnet"># Start the daemon (mainnet)</span><br/>
+./nethxeumd --detach<br/><br/>
+<span class="comment" data-i18n="dl_check_sync_status"># Check sync status</span><br/>
+./nethxeumd status<br/><br/>
+<span class="comment" data-i18n="dl_start_mining_solo"># Start mining (solo)</span><br/>
+./nethxeumd --start-mining --mining-threads 4
+            </div>
+</div>
+</div>
+</div>
+<!-- Warning -->
+<div class="warning-banner" style="margin-top: 48px;">
+<div class="warning-banner-icon">⚠️</div>
+<div>
+<h4 data-i18n="dl_verify_your_downloads">Verify Your Downloads</h4>
+<p data-i18n="dl_always_verify_the_sha256_checksum">Always verify the SHA256 checksum of downloaded files against the official release page. Never download Nethxeum software from unofficial sources.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="main-footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+<div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div>
+<span class="logo-text">Nethxeum</span>
+</div>
+<p>Nethxeum (NTU) - A decentralized, privacy-preserving cryptocurrency. Founded by Rony Katie.</p>
+<div class="social-links" style="margin-top: 24px;">
+<a href="https://discord.gg/bwYwsyd4u" rel="noopener" target="_blank"><i class="fab fa-discord"></i></a>
+<a href="https://t.me/nethxeum_community" rel="noopener" target="_blank"><i class="fab fa-telegram"></i></a>
+<a href="https://x.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-x-twitter"></i></a>
+<a href="https://github.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-github"></i></a>
+</div>
+</div>
+<div class="footer-links">
+<h4>Getting Started</h4>
+<ul>
+<li><a href="what-is-nethxeum.html">What is Nethxeum?</a></li>
+<li><a href="contribute.html">Contribute</a></li>
+<li><a href="mining.html">Mining</a></li>
+<li><a href="faq.html">FAQ</a></li>
+</ul>
+</div>
+<div class="footer-links">
+<h4>Resources</h4>
+<ul>
+<li><a href="about.html">About</a></li>
+<li><a href="../whitepaper/Nethxeum_Whitepaper_v2.0.pdf">Whitepaper</a></li>
+<li><a href="vocabulary.html">Vocabulary</a></li>
+<li><a href="user-guides.html">User Guides</a></li>
+<li><a href="dev-guides.html">Developer Guides</a></li>
+</ul>
+</div>
+<div class="footer-links">
+<h4>Other</h4>
+<ul>
+<li><a href="avoid-scams.html">Avoid Scams</a></li>
+<li><a href="legal.html">Legal</a></li>
+<li><a href="privacy-policy.html">Privacy Policy</a></li>
+<li><a href="blog.html">Blog</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© Nethxeum Project 2026. Released under the MIT license.</p>
+</div>
+</div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Security - Nethxeum (NTU)</title>
+<meta content="Best practices for securing your Nethxeum." name="description"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+<canvas id="particles-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+<nav class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="../index.html"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></a>
+<ul class="nav-links">
+<li><a href="getting-started.html">Getting Started</a></li>
+<li><a href="download.html">Downloads</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="community.html">Community</a></li>
+<li><a href="resources.html">Resources</a></li>
+</ul>
+<div class="nav-cta">
+<div class="lang-selector">
+<button class="lang-btn"><i class="fas fa-globe"></i><span class="current-lang">EN</span><i class="fas fa-chevron-down" style="font-size:0.7rem"></i></button>
+<div class="lang-dropdown">
+<div class="lang-option active" data-lang="en"><span>English</span></div>
+<div class="lang-option" data-lang="fr"><span>Francais</span></div>
+<div class="lang-option" data-lang="es"><span>Espanol</span></div>
+<div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+<div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+<div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+<div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+<div class="lang-option" data-lang="ko"><span>Korean</span></div>
+<div class="lang-option" data-lang="ru"><span>Russian</span></div>
+<div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+</div>
+</div>
+</div>
+<div class="mobile-lang-selector">
+          <button class="mobile-lang-btn">
+            <i class="fas fa-globe"></i>
+            <span class="current-lang">EN</span>
+          </button>
+          <div class="mobile-lang-dropdown">
+            <div class="lang-option active" data-lang="en"><span>English</span></div>
+            <div class="lang-option" data-lang="fr"><span>Francais</span></div>
+            <div class="lang-option" data-lang="es"><span>Espanol</span></div>
+            <div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+            <div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+            <div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+            <div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+            <div class="lang-option" data-lang="ko"><span>Korean</span></div>
+            <div class="lang-option" data-lang="ru"><span>Russian</span></div>
+            <div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+          </div>
+        </div>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+</div>
+</nav>
+<div class="mobile-menu-overlay"></div>
+<div class="mobile-menu">
+<button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+<div class="mobile-menu-category">Menu</div>
+<ul class="mobile-menu-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="security.html">Security</a></li>
+</ul>
+</div>
+<div class="download-section">
+<div class="container">
+<div class="section-header">
+<span class="section-label" data-i18n="sec_resources">Resources</span>
+<h1 class="gradient-text" data-i18n="sec_security" style="font-size: clamp(2rem, 4vw, 3.5rem);">Security</h1>
+<p class="section-desc" data-i18n="sec_best_practices_for_securing_your">Best practices for securing your Nethxeum.</p>
+</div>
+<div class="warning-banner" style="margin-bottom: 32px;">
+<div class="warning-banner-icon"><i class="fas fa-exclamation-triangle"></i></div>
+<div>
+<h4 data-i18n="sec_critical_security_reminder">Critical Security Reminder</h4>
+<p data-i18n="sec_never_share_your_seed_mnemonic">Never share your seed mnemonic or private keys with anyone. Nethxeum team members will NEVER ask for your keys.</p>
+</div>
+</div>
+<div class="grid-2" style="margin-bottom: 48px;">
+<div class="glass-card">
+<h3 data-i18n-html="sec_wallet_security"><i class="fas fa-wallet" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Wallet Security</h3>
+<ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+<li data-i18n-html="sec_1_backup_your_seed_write" style="margin-bottom: 12px;"><strong data-i18n="sec_1_backup_your_seed">1. Backup your seed:</strong> Write down your 25-word mnemonic on paper. Store in a secure, fireproof location. Never digitally.</li>
+<li data-i18n-html="sec_2_strong_password_use_a" style="margin-bottom: 12px;"><strong data-i18n="sec_2_strong_password">2. Strong password:</strong> Use a unique, strong password for your wallet. Consider a password manager.</li>
+<li data-i18n-html="sec_3_verify_addresses_always_verify" style="margin-bottom: 12px;"><strong data-i18n="sec_3_verify_addresses">3. Verify addresses:</strong> Always verify recipient addresses carefully before sending.</li>
+<li data-i18n-html="sec_4_use_subaddresses_generate_new" style="margin-bottom: 12px;"><strong data-i18n="sec_4_use_subaddresses">4. Use subaddresses:</strong> Generate new subaddresses for each recipient to prevent address reuse.</li>
+<li data-i18n-html="sec_5_run_your_own_node"><strong data-i18n="sec_5_run_your_own_node_1">5. Run your own node:</strong> For maximum privacy, run a full node rather than using remote nodes.</li>
+</ul>
+</div>
+<div class="glass-card">
+<h3 data-i18n-html="sec_network_security"><i class="fas fa-network-wired" style="color: var(--ntu-violet); margin-right: 8px;"></i>Network Security</h3>
+<ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+<li data-i18n-html="sec_tor_support_route_your_node" style="margin-bottom: 12px;"><strong data-i18n="sec_tor_support">Tor support:</strong> Route your node through Tor for IP-level anonymity. Use --tx-proxy and --anonymous-inbound flags.</li>
+<li data-i18n-html="sec_i2p_support_alternative_anonymity_network" style="margin-bottom: 12px;"><strong data-i18n="sec_i2p_support">I2P support:</strong> Alternative anonymity network supported by the daemon.</li>
+<li data-i18n-html="sec_dandelion_transaction_relay_protocol_that" style="margin-bottom: 12px;"><strong data-i18n="sec_dandelion">Dandelion++:</strong> Transaction relay protocol that prevents origin tracking at the network layer.</li>
+<li data-i18n-html="sec_firewall_only_open_required_ports" style="margin-bottom: 12px;"><strong data-i18n="sec_firewall">Firewall:</strong> Only open required ports (18333 P2P, 18331 RPC if needed).</li>
+<li data-i18n-html="sec_stay_updated_always_run_the"><strong data-i18n="sec_stay_updated">Stay updated:</strong> Always run the latest version for security patches.</li>
+</ul>
+</div>
+</div>
+<div class="glass-card">
+<h3 data-i18n-html="sec_security_checklist"><i class="fas fa-shield-alt" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Security Checklist</h3>
+<div class="grid-2" style="margin-top: 20px;">
+<div>
+<h4 data-i18n="sec_essential" style="color: var(--ntu-cyan); margin-bottom: 12px;">Essential</h4>
+<ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+<li data-i18n-html="sec_seed_backed_up_offline" style="margin-bottom: 8px;"><i class="far fa-check-square" style="color: #4CAF50; margin-right: 8px;"></i>Seed backed up offline</li>
+<li data-i18n-html="sec_strong_wallet_password" style="margin-bottom: 8px;"><i class="far fa-check-square" style="color: #4CAF50; margin-right: 8px;"></i>Strong wallet password</li>
+<li data-i18n-html="sec_software_from_official_sources_only" style="margin-bottom: 8px;"><i class="far fa-check-square" style="color: #4CAF50; margin-right: 8px;"></i>Software from official sources only</li>
+<li data-i18n-html="sec_verify_download_checksums" style="margin-bottom: 8px;"><i class="far fa-check-square" style="color: #4CAF50; margin-right: 8px;"></i>Verify download checksums</li>
+</ul>
+</div>
+<div>
+<h4 data-i18n="sec_advanced" style="color: var(--ntu-cyan); margin-bottom: 12px;">Advanced</h4>
+<ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+<li data-i18n-html="sec_full_node_not_remote" style="margin-bottom: 8px;"><i class="far fa-square" style="color: var(--text-muted); margin-right: 8px;"></i>Full node (not remote)</li>
+<li data-i18n-html="sec_tor_i2p_for_network_privacy" style="margin-bottom: 8px;"><i class="far fa-square" style="color: var(--text-muted); margin-right: 8px;"></i>Tor/I2P for network privacy</li>
+<li data-i18n-html="sec_dedicated_hardware_wallet_future" style="margin-bottom: 8px;"><i class="far fa-square" style="color: var(--text-muted); margin-right: 8px;"></i>Dedicated hardware wallet (future)</li>
+<li data-i18n-html="sec_view_only_wallet_for_monitoring" style="margin-bottom: 8px;"><i class="far fa-square" style="color: var(--text-muted); margin-right: 8px;"></i>View-only wallet for monitoring</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<footer class="main-footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></div>
+<p>Nethxeum (NTU) - A decentralized, privacy-preserving cryptocurrency. Founded by Rony Katie.</p>
+<div class="social-links" style="margin-top: 24px;">
+<a href="https://discord.gg/bwYwsyd4u" rel="noopener" target="_blank"><i class="fab fa-discord"></i></a>
+<a href="https://t.me/nethxeum_community" rel="noopener" target="_blank"><i class="fab fa-telegram"></i></a>
+<a href="https://x.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-x-twitter"></i></a>
+<a href="https://github.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-github"></i></a>
+</div>
+</div>
+<div class="footer-links"><h4>Getting Started</h4><ul><li><a href="what-is-nethxeum.html">What is Nethxeum?</a></li><li><a href="contribute.html">Contribute</a></li><li><a href="mining.html">Mining</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+<div class="footer-links"><h4>Resources</h4><ul><li><a href="about.html">About</a></li><li><a href="../whitepaper/Nethxeum_Whitepaper_v2.0.pdf">Whitepaper</a></li><li><a href="vocabulary.html">Vocabulary</a></li><li><a href="user-guides.html">User Guides</a></li></ul></div>
+<div class="footer-links"><h4>Other</h4><ul><li><a href="avoid-scams.html">Avoid Scams</a></li><li><a href="legal.html">Legal</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+</div>
+<div class="footer-bottom"><p>© Nethxeum Project 2026. Released under the MIT license.</p></div>
+</div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

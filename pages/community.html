@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Community - Nethxeum (NTU)</title>
+<meta content="Join the Nethxeum community. Discord, Telegram, Twitter, and more." name="description"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+<canvas id="particles-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+<nav class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="../index.html"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></a>
+<ul class="nav-links">
+<li><a href="getting-started.html">Getting Started</a></li>
+<li><a href="download.html">Downloads</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="community.html">Community</a></li>
+<li><a href="resources.html">Resources</a></li>
+</ul>
+<div class="nav-cta">
+<div class="lang-selector">
+<button class="lang-btn"><i class="fas fa-globe"></i><span class="current-lang">EN</span><i class="fas fa-chevron-down" style="font-size:0.7rem"></i></button>
+<div class="lang-dropdown">
+<div class="lang-option active" data-lang="en"><span>English</span></div>
+<div class="lang-option" data-lang="fr"><span>Francais</span></div>
+<div class="lang-option" data-lang="es"><span>Espanol</span></div>
+<div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+<div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+<div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+<div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+<div class="lang-option" data-lang="ko"><span>Korean</span></div>
+<div class="lang-option" data-lang="ru"><span>Russian</span></div>
+<div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+</div>
+</div>
+</div>
+<div class="mobile-lang-selector">
+          <button class="mobile-lang-btn">
+            <i class="fas fa-globe"></i>
+            <span class="current-lang">EN</span>
+          </button>
+          <div class="mobile-lang-dropdown">
+            <div class="lang-option active" data-lang="en"><span>English</span></div>
+            <div class="lang-option" data-lang="fr"><span>Francais</span></div>
+            <div class="lang-option" data-lang="es"><span>Espanol</span></div>
+            <div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+            <div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+            <div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+            <div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+            <div class="lang-option" data-lang="ko"><span>Korean</span></div>
+            <div class="lang-option" data-lang="ru"><span>Russian</span></div>
+            <div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+          </div>
+        </div>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+</div>
+</nav>
+<div class="mobile-menu-overlay"></div>
+<div class="mobile-menu">
+<button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+<div class="mobile-menu-category">Menu</div>
+<ul class="mobile-menu-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="community.html">Community</a></li>
+<li><a href="download.html">Downloads</a></li>
+</ul>
+</div>
+<div class="download-section">
+<div class="container">
+<div class="section-header">
+<span class="section-label" data-i18n="comm_community">Community</span>
+<h1 class="gradient-text" data-i18n="comm_join_the_nethxeum_community" style="font-size: clamp(2rem, 4vw, 3.5rem);">Join the Nethxeum Community</h1>
+<p class="section-desc" data-i18n="comm_connect_with_privacy_enthusiasts_developers">Connect with privacy enthusiasts, developers, and miners worldwide.</p>
+</div>
+<div class="grid-2" data-i18n-html="comm_discordreal_time_chat_support_and" style="margin-bottom: 48px;">
+<a class="glass-card" href="https://discord.gg/bwYwsyd4u" rel="noopener" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+<div style="display: flex; align-items: center; gap: 20px;">
+<div style="width: 64px; height: 64px; background: #5865F2; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">
+<i class="fab fa-discord"></i>
+</div>
+<div>
+<h3 data-i18n="comm_discord">Discord</h3>
+<p data-i18n="comm_real_time_chat_support_and" style="color: var(--text-muted);">Real-time chat, support, and community discussions</p>
+</div>
+</div>
+</a>
+<a class="glass-card" href="https://t.me/nethxeum_community" rel="noopener" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+<div style="display: flex; align-items: center; gap: 20px;">
+<div style="width: 64px; height: 64px; background: #0088cc; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">
+<i class="fab fa-telegram"></i>
+</div>
+<div>
+<h3 data-i18n="comm_telegram">Telegram</h3>
+<p data-i18n="comm_announcement_and_community_chat" style="color: var(--text-muted);">Announcements and community chat</p>
+</div>
+</div>
+</a>
+<a class="glass-card" href="https://x.com/nethxeum" rel="noopener" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+<div style="display: flex; align-items: center; gap: 20px;">
+<div style="width: 64px; height: 64px; background: #000; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; border: 1px solid #333;">
+<i class="fab fa-x-twitter"></i>
+</div>
+<div>
+<h3 data-i18n="comm_x_twitter">X (Twitter)</h3>
+<p data-i18n="comm_latest_news_and_updates_from" style="color: var(--text-muted);">Latest news and updates from the Nethxeum team</p>
+</div>
+</div>
+</a>
+<a class="glass-card" href="https://github.com/nethxeum" rel="noopener" style="text-decoration: none; color: inherit; display: block;" target="_blank">
+<div style="display: flex; align-items: center; gap: 20px;">
+<div style="width: 64px; height: 64px; background: #333; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">
+<i class="fab fa-github"></i>
+</div>
+<div>
+<h3 data-i18n="comm_github">GitHub</h3>
+<p data-i18n="comm_source_code_contribution_and_technical" style="color: var(--text-muted);">Source code, contributions, and technical development</p>
+</div>
+</div>
+</a>
+</div>
+<div class="glass-card">
+<h2 data-i18n-html="comm_community_guidelines" style="margin-bottom: 16px;"><i class="fas fa-heart" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Community Guidelines</h2>
+<ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+<li data-i18n-html="comm_be_respectful_and_constructive_in" style="margin-bottom: 12px;"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Be respectful and constructive in all interactions</li>
+<li data-i18n-html="comm_no_spam_scams_or_promotional" style="margin-bottom: 12px;"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>No spam, scams, or promotional content without permission</li>
+<li data-i18n-html="comm_help_newcomers_learn_about_nethxeum" style="margin-bottom: 12px;"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Help newcomers learn about Nethxeum and privacy</li>
+<li data-i18n-html="comm_report_security_vulnerabilit_responsibly" style="margin-bottom: 12px;"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Report security vulnerabilities responsibly</li>
+<li data-i18n-html="comm_respect_everyone_s_privacy_never"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Respect everyone's privacy — never ask for seeds or keys</li>
+</ul>
+</div>
+</div>
+</div>
+<footer class="main-footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></div>
+<p>Nethxeum (NTU) - A decentralized, privacy-preserving cryptocurrency. Founded by Rony Katie.</p>
+<div class="social-links" style="margin-top: 24px;">
+<a href="https://discord.gg/bwYwsyd4u" rel="noopener" target="_blank"><i class="fab fa-discord"></i></a>
+<a href="https://t.me/nethxeum_community" rel="noopener" target="_blank"><i class="fab fa-telegram"></i></a>
+<a href="https://x.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-x-twitter"></i></a>
+<a href="https://github.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-github"></i></a>
+</div>
+</div>
+<div class="footer-links"><h4>Getting Started</h4><ul><li><a href="what-is-nethxeum.html">What is Nethxeum?</a></li><li><a href="contribute.html">Contribute</a></li><li><a href="mining.html">Mining</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+<div class="footer-links"><h4>Resources</h4><ul><li><a href="about.html">About</a></li><li><a href="../whitepaper/Nethxeum_Whitepaper_v2.0.pdf">Whitepaper</a></li><li><a href="vocabulary.html">Vocabulary</a></li><li><a href="user-guides.html">User Guides</a></li></ul></div>
+<div class="footer-links"><h4>Other</h4><ul><li><a href="avoid-scams.html">Avoid Scams</a></li><li><a href="legal.html">Legal</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+</div>
+<div class="footer-bottom"><p>© Nethxeum Project 2026. Released under the MIT license.</p></div>
+</div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

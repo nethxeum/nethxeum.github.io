@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Documentation - Nethxeum (NTU)</title>
+<meta content="Complete technical documentation for Nethxeum." name="description"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+<canvas id="particles-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+<nav class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="../index.html"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></a>
+<ul class="nav-links">
+<li><a href="getting-started.html">Getting Started</a></li>
+<li><a href="download.html">Downloads</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="community.html">Community</a></li>
+<li><a href="resources.html">Resources</a></li>
+</ul>
+<div class="nav-cta">
+<div class="lang-selector">
+<button class="lang-btn"><i class="fas fa-globe"></i><span class="current-lang">EN</span><i class="fas fa-chevron-down" style="font-size:0.7rem"></i></button>
+<div class="lang-dropdown">
+<div class="lang-option active" data-lang="en"><span>English</span></div>
+<div class="lang-option" data-lang="fr"><span>Francais</span></div>
+<div class="lang-option" data-lang="es"><span>Espanol</span></div>
+<div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+<div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+<div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+<div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+<div class="lang-option" data-lang="ko"><span>Korean</span></div>
+<div class="lang-option" data-lang="ru"><span>Russian</span></div>
+<div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+</div>
+</div>
+</div>
+<div class="mobile-lang-selector">
+          <button class="mobile-lang-btn">
+            <i class="fas fa-globe"></i>
+            <span class="current-lang">EN</span>
+          </button>
+          <div class="mobile-lang-dropdown">
+            <div class="lang-option active" data-lang="en"><span>English</span></div>
+            <div class="lang-option" data-lang="fr"><span>Francais</span></div>
+            <div class="lang-option" data-lang="es"><span>Espanol</span></div>
+            <div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+            <div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+            <div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+            <div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+            <div class="lang-option" data-lang="ko"><span>Korean</span></div>
+            <div class="lang-option" data-lang="ru"><span>Russian</span></div>
+            <div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+          </div>
+        </div>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+</div>
+</nav>
+<div class="mobile-menu-overlay"></div>
+<div class="mobile-menu">
+<button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+<div class="mobile-menu-category">Menu</div>
+<ul class="mobile-menu-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="docs.html">Documentation</a></li>
+</ul>
+</div>
+<div class="download-section">
+<div class="container">
+<div class="section-header">
+<span class="section-label" data-i18n="docs_resources">Resources</span>
+<h1 class="gradient-text" data-i18n="docs_documentatio" style="font-size: clamp(2rem, 4vw, 3.5rem);">Documentation</h1>
+<p class="section-desc" data-i18n="docs_complete_technical_documentatio_for_nethxeum">Complete technical documentation for Nethxeum.</p>
+</div>
+<div class="grid-2" data-i18n-html="docs_user_guideslearn_how_to_install" style="margin-bottom: 48px;">
+<a class="glass-card" href="user-guides.html" style="text-decoration: none; color: inherit; display: block;">
+<div class="feature-icon"><i class="fas fa-user"></i></div>
+<h3 data-i18n="docs_user_guides">User Guides</h3>
+<p data-i18n="docs_learn_how_to_install_the" style="color: var(--text-secondary);">Learn how to install the wallet, create accounts, send and receive NTU, and mine.</p>
+</a>
+<a class="glass-card" href="dev-guides.html" style="text-decoration: none; color: inherit; display: block;">
+<div class="feature-icon" style="background: linear-gradient(135deg, #7B2FF7, #E040FB);"><i class="fas fa-code"></i></div>
+<h3 data-i18n="docs_developer_guides">Developer Guides</h3>
+<p data-i18n="docs_api_references_integration_guides_and" style="color: var(--text-secondary);">API references, integration guides, and protocol specifications for developers.</p>
+</a>
+</div>
+<div class="glass-card" style="margin-bottom: 32px;">
+<h3 data-i18n-html="docs_rpc_api_reference"><i class="fas fa-book" style="color: var(--ntu-cyan); margin-right: 8px;"></i>RPC API Reference</h3>
+<p data-i18n="docs_the_nethxeum_daemon_exposes_a" style="color: var(--text-secondary); margin-bottom: 16px;">The Nethxeum daemon exposes a JSON-RPC API on port 18331. Below are commonly used endpoints:</p>
+<div class="code-block" data-i18n-html="docs_get_blockchain_heightcurl_x_post" style="margin-bottom: 16px;">
+<span class="comment" data-i18n="docs_get_blockchain_height"># Get blockchain height</span><br/>
+curl -X POST http://127.0.0.1:18331/json_rpc \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":"0","method":"get_block_count"}'<br/><br/>
+<span class="comment" data-i18n="docs_get_node_info"># Get node info</span><br/>
+curl -X POST http://127.0.0.1:18331/json_rpc \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":"0","method":"get_info"}'<br/><br/>
+<span class="comment" data-i18n="docs_get_block_header_by_height"># Get block header by height</span><br/>
+curl -X POST http://127.0.0.1:18331/json_rpc \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":"0","method":"get_block_header_by_height","params":{"height":100}}'
+        </div>
+</div>
+<div class="glass-card">
+<h3 data-i18n-html="docs_network_configuratio"><i class="fas fa-network-wired" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Network Configuration</h3>
+<div class="specs-grid" style="margin-top: 20px;">
+<div class="spec-card"><div class="spec-label" data-i18n="docs_mainnet_p2p">Mainnet P2P</div><div class="spec-value" data-i18n="docs_18333">18333</div></div>
+<div class="spec-card"><div class="spec-label" data-i18n="docs_mainnet_rpc">Mainnet RPC</div><div class="spec-value" data-i18n="docs_18331">18331</div></div>
+<div class="spec-card"><div class="spec-label" data-i18n="docs_mainnet_zmq">Mainnet ZMQ</div><div class="spec-value" data-i18n="docs_18332">18332</div></div>
+<div class="spec-card"><div class="spec-label" data-i18n="docs_testnet_p2p">Testnet P2P</div><div class="spec-value" data-i18n="docs_28333">28333</div></div>
+<div class="spec-card"><div class="spec-label" data-i18n="docs_testnet_rpc">Testnet RPC</div><div class="spec-value" data-i18n="docs_28331">28331</div></div>
+<div class="spec-card"><div class="spec-label" data-i18n="docs_stagenet_p2p">Stagenet P2P</div><div class="spec-value" data-i18n="docs_38333">38333</div></div>
+</div>
+</div>
+</div>
+</div>
+<footer class="main-footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></div>
+<p>Nethxeum (NTU) - A decentralized, privacy-preserving cryptocurrency. Founded by Rony Katie.</p>
+<div class="social-links" style="margin-top: 24px;">
+<a href="https://discord.gg/bwYwsyd4u" rel="noopener" target="_blank"><i class="fab fa-discord"></i></a>
+<a href="https://t.me/nethxeum_community" rel="noopener" target="_blank"><i class="fab fa-telegram"></i></a>
+<a href="https://x.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-x-twitter"></i></a>
+<a href="https://github.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-github"></i></a>
+</div>
+</div>
+<div class="footer-links"><h4>Getting Started</h4><ul><li><a href="what-is-nethxeum.html">What is Nethxeum?</a></li><li><a href="contribute.html">Contribute</a></li><li><a href="mining.html">Mining</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+<div class="footer-links"><h4>Resources</h4><ul><li><a href="about.html">About</a></li><li><a href="../whitepaper/Nethxeum_Whitepaper_v2.0.pdf">Whitepaper</a></li><li><a href="vocabulary.html">Vocabulary</a></li><li><a href="user-guides.html">User Guides</a></li></ul></div>
+<div class="footer-links"><h4>Other</h4><ul><li><a href="avoid-scams.html">Avoid Scams</a></li><li><a href="legal.html">Legal</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+</div>
+<div class="footer-bottom"><p>© Nethxeum Project 2026. Released under the MIT license.</p></div>
+</div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

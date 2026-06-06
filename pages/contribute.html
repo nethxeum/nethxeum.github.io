@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contribute - Nethxeum (NTU)</title>
+<meta content="Help build the future of private finance." name="description"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+<canvas id="particles-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+<nav class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="../index.html"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></a>
+<ul class="nav-links">
+<li><a href="getting-started.html">Getting Started</a></li>
+<li><a href="download.html">Downloads</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="community.html">Community</a></li>
+<li><a href="resources.html">Resources</a></li>
+</ul>
+<div class="nav-cta">
+<div class="lang-selector">
+<button class="lang-btn"><i class="fas fa-globe"></i><span class="current-lang">EN</span><i class="fas fa-chevron-down" style="font-size:0.7rem"></i></button>
+<div class="lang-dropdown">
+<div class="lang-option active" data-lang="en"><span>English</span></div>
+<div class="lang-option" data-lang="fr"><span>Francais</span></div>
+<div class="lang-option" data-lang="es"><span>Espanol</span></div>
+<div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+<div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+<div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+<div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+<div class="lang-option" data-lang="ko"><span>Korean</span></div>
+<div class="lang-option" data-lang="ru"><span>Russian</span></div>
+<div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+</div>
+</div>
+</div>
+<div class="mobile-lang-selector">
+          <button class="mobile-lang-btn">
+            <i class="fas fa-globe"></i>
+            <span class="current-lang">EN</span>
+          </button>
+          <div class="mobile-lang-dropdown">
+            <div class="lang-option active" data-lang="en"><span>English</span></div>
+            <div class="lang-option" data-lang="fr"><span>Francais</span></div>
+            <div class="lang-option" data-lang="es"><span>Espanol</span></div>
+            <div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+            <div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+            <div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+            <div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+            <div class="lang-option" data-lang="ko"><span>Korean</span></div>
+            <div class="lang-option" data-lang="ru"><span>Russian</span></div>
+            <div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+          </div>
+        </div>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+</div>
+</nav>
+<div class="mobile-menu-overlay"></div>
+<div class="mobile-menu">
+<button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+<div class="mobile-menu-category">Menu</div>
+<ul class="mobile-menu-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="contribute.html">Contribute to Nethxeum</a></li>
+</ul>
+</div>
+<div class="download-section">
+<div class="container">
+<div class="section-header">
+<span class="section-label" data-i18n="contrib_getting_started">Getting Started</span>
+<h1 class="gradient-text" data-i18n="contrib_contribute_to_nethxeum" style="font-size: clamp(2rem, 4vw, 3.5rem);">Contribute to Nethxeum</h1>
+<p class="section-desc" data-i18n="contrib_help_build_the_future_of">Help build the future of private finance.</p>
+</div>
+<div class="grid-2" style="margin-bottom: 48px;">
+<div class="glass-card">
+<div class="feature-icon"><i class="fas fa-code"></i></div>
+<h3 data-i18n="contrib_development">Development</h3>
+<p data-i18n="contrib_contribute_code_to_the_nethxeum" style="color: var(--text-secondary); margin-bottom: 16px;">Contribute code to the Nethxeum daemon, GUI wallet, or ecosystem tools. We welcome developers of all skill levels.</p>
+<ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+<li data-i18n-html="contrib_c_developers_for_daemon_improvements"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>C++ developers for daemon improvements</li>
+<li data-i18n-html="contrib_qt_qml_developers_for_gui"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Qt/QML developers for GUI wallet</li>
+<li data-i18n-html="contrib_web_developers_for_ecosystem_tools"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Web developers for ecosystem tools</li>
+</ul>
+<a class="btn btn-outline" data-i18n-html="contrib_github_repositories" href="https://github.com/nethxeum" rel="noopener" style="margin-top: 16px;" target="_blank"><i class="fab fa-github"></i> GitHub Repositories</a>
+</div>
+<div class="glass-card">
+<div class="feature-icon" style="background: linear-gradient(135deg, #7B2FF7, #E040FB);"><i class="fas fa-bug"></i></div>
+<h3 data-i18n="contrib_testing_qa">Testing &amp; QA</h3>
+<p data-i18n="contrib_help_test_new_releases_report" style="color: var(--text-secondary); margin-bottom: 16px;">Help test new releases, report bugs, and verify fixes. Quality assurance is critical for financial software.</p>
+<ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+<li data-i18n-html="contrib_test_wallet_functionalit"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Test wallet functionality</li>
+<li data-i18n-html="contrib_verify_daemon_synchronizat"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Verify daemon synchronization</li>
+<li data-i18n-html="contrib_test_on_different_platforms"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Test on different platforms</li>
+</ul>
+<a class="btn btn-outline" data-i18n-html="contrib_report_issues" href="https://github.com/nethxeum/nethxeum/issues" rel="noopener" style="margin-top: 16px;" target="_blank"><i class="fas fa-exclamation-circle"></i> Report Issues</a>
+</div>
+<div class="glass-card">
+<div class="feature-icon" style="background: linear-gradient(135deg, #E040FB, #FF4081);"><i class="fas fa-book"></i></div>
+<h3 data-i18n="contrib_documentatio">Documentation</h3>
+<p data-i18n="contrib_write_guides_improve_documentatio_and" style="color: var(--text-secondary); margin-bottom: 16px;">Write guides, improve documentation, and translate content to make Nethxeum accessible worldwide.</p>
+<ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+<li data-i18n-html="contrib_user_guides_and_tutorials"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>User guides and tutorials</li>
+<li data-i18n-html="contrib_developer_documentatio"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Developer documentation</li>
+<li data-i18n-html="contrib_translations_10_languages"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Translations (10+ languages)</li>
+</ul>
+<a class="btn btn-outline" data-i18n-html="contrib_documentatio_repo" href="https://github.com/nethxeum/docs" rel="noopener" style="margin-top: 16px;" target="_blank"><i class="fas fa-edit"></i> Documentation Repo</a>
+</div>
+<div class="glass-card">
+<div class="feature-icon" style="background: linear-gradient(135deg, #00D4FF, #0077FF);"><i class="fas fa-bullhorn"></i></div>
+<h3 data-i18n="contrib_community">Community</h3>
+<p data-i18n="contrib_spread_the_word_help_newcomers" style="color: var(--text-secondary); margin-bottom: 16px;">Spread the word, help newcomers, moderate community channels, and organize local meetups.</p>
+<ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+<li data-i18n-html="contrib_help_newcomers_in_chat"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Help newcomers in chat</li>
+<li data-i18n-html="contrib_create_educational_content"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Create educational content</li>
+<li data-i18n-html="contrib_organize_meetups_and_events"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Organize meetups and events</li>
+</ul>
+<a class="btn btn-outline" data-i18n-html="contrib_join_community" href="community.html" style="margin-top: 16px;"><i class="fas fa-users"></i> Join Community</a>
+</div>
+</div>
+<div class="glass-card">
+<h2 data-i18n-html="contrib_donations" style="margin-bottom: 16px;"><i class="fas fa-donate" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Donations</h2>
+<p data-i18n="contrib_nethxeum_development_is_funded_entirely" style="color: var(--text-secondary); margin-bottom: 16px;">Nethxeum development is funded entirely by community donations. There is no premine, no developer tax, and no corporate backing. If you believe in private finance, consider donating to support ongoing development.</p>
+<div class="code-block" data-i18n-html="contrib_nethxeum_donation_addressnethx_development_fund">
+<span class="comment" data-i18n="contrib_nethxeum_donation_address"># Nethxeum donation address</span><br/>
+          Nethxeum Development Fund: [Address coming soon]
+        </div>
+<p data-i18n="contrib_all_donations_are_used_exclusively" style="color: var(--text-muted); margin-top: 16px; font-size: 0.9rem;">All donations are used exclusively for development, security audits, and infrastructure. Transparent reporting will be published regularly.</p>
+</div>
+</div>
+</div>
+<footer class="main-footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></div>
+<p>Nethxeum (NTU) - A decentralized, privacy-preserving cryptocurrency. Founded by Rony Katie.</p>
+<div class="social-links" style="margin-top: 24px;">
+<a href="https://discord.gg/bwYwsyd4u" rel="noopener" target="_blank"><i class="fab fa-discord"></i></a>
+<a href="https://t.me/nethxeum_community" rel="noopener" target="_blank"><i class="fab fa-telegram"></i></a>
+<a href="https://x.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-x-twitter"></i></a>
+<a href="https://github.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-github"></i></a>
+</div>
+</div>
+<div class="footer-links"><h4>Getting Started</h4><ul><li><a href="what-is-nethxeum.html">What is Nethxeum?</a></li><li><a href="contribute.html">Contribute</a></li><li><a href="mining.html">Mining</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+<div class="footer-links"><h4>Resources</h4><ul><li><a href="about.html">About</a></li><li><a href="../whitepaper/Nethxeum_Whitepaper_v2.0.pdf">Whitepaper</a></li><li><a href="vocabulary.html">Vocabulary</a></li><li><a href="user-guides.html">User Guides</a></li></ul></div>
+<div class="footer-links"><h4>Other</h4><ul><li><a href="avoid-scams.html">Avoid Scams</a></li><li><a href="legal.html">Legal</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+</div>
+<div class="footer-bottom"><p>© Nethxeum Project 2026. Released under the MIT license.</p></div>
+</div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

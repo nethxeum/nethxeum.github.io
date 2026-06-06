@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mining - Nethxeum (NTU)</title>
+<meta content="Mine Nethxeum (NTU) with your CPU. RandomX algorithm, no ASICs required." name="description"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+<canvas id="particles-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+<nav class="main-nav">
+<div class="nav-container">
+<a class="nav-logo" href="../index.html"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></a>
+<ul class="nav-links">
+<li><a href="getting-started.html">Getting Started</a></li>
+<li><a href="download.html">Downloads</a></li>
+<li><a href="library.html">Library</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="community.html">Community</a></li>
+<li><a href="resources.html">Resources</a></li>
+</ul>
+<div class="nav-cta">
+<div class="lang-selector">
+<button class="lang-btn"><i class="fas fa-globe"></i><span class="current-lang">EN</span><i class="fas fa-chevron-down" style="font-size:0.7rem"></i></button>
+<div class="lang-dropdown">
+<div class="lang-option active" data-lang="en"><span>English</span></div>
+<div class="lang-option" data-lang="fr"><span>Francais</span></div>
+<div class="lang-option" data-lang="es"><span>Espanol</span></div>
+<div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+<div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+<div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+<div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+<div class="lang-option" data-lang="ko"><span>Korean</span></div>
+<div class="lang-option" data-lang="ru"><span>Russian</span></div>
+<div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+</div>
+</div>
+</div>
+<div class="mobile-lang-selector">
+          <button class="mobile-lang-btn">
+            <i class="fas fa-globe"></i>
+            <span class="current-lang">EN</span>
+          </button>
+          <div class="mobile-lang-dropdown">
+            <div class="lang-option active" data-lang="en"><span>English</span></div>
+            <div class="lang-option" data-lang="fr"><span>Francais</span></div>
+            <div class="lang-option" data-lang="es"><span>Espanol</span></div>
+            <div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+            <div class="lang-option" data-lang="ja"><span>Japanese</span></div>
+            <div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
+            <div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
+            <div class="lang-option" data-lang="ko"><span>Korean</span></div>
+            <div class="lang-option" data-lang="ru"><span>Russian</span></div>
+            <div class="lang-option" data-lang="ar"><span>Arabic</span></div>
+          </div>
+        </div>
+        <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+</div>
+</nav>
+<div class="mobile-menu-overlay"></div>
+<div class="mobile-menu">
+<button class="mobile-menu-close"><i class="fas fa-times"></i></button>
+<div class="mobile-menu-category">Menu</div>
+<ul class="mobile-menu-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="mining.html">Mining</a></li>
+<li><a href="download.html">Downloads</a></li>
+</ul>
+</div>
+<div class="download-section">
+<div class="container">
+<div class="section-header">
+<span class="section-label" data-i18n="mine_getting_started">Getting Started</span>
+<h1 class="gradient-text" data-i18n="mine_mining_nethxeum" style="font-size: clamp(2rem, 4vw, 3.5rem);">Mining Nethxeum</h1>
+<p class="section-desc" data-i18n="mine_democratic_mining_with_randomx_anyone">Democratic mining with RandomX — anyone with a CPU can participate.</p>
+</div>
+<div class="mining-animation-container" style="margin-bottom: 48px;">
+<div class="pickaxe">⛏️</div>
+<div class="rock"><img alt="Nethxeum" src="../images/logo.png"/></div>
+</div>
+<div class="grid-2" style="margin-bottom: 48px;">
+<div class="glass-card">
+<h2 data-i18n-html="mine_why_randomx" style="margin-bottom: 16px;"><i class="fas fa-microchip" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Why RandomX?</h2>
+<p data-i18n="mine_randomx_is_a_proof_of" style="color: var(--text-secondary); margin-bottom: 16px;">RandomX is a proof-of-work algorithm designed to be efficient on general-purpose CPUs while being economically impractical for ASICs and inefficient for GPUs.</p>
+<p data-i18n="mine_it_achieves_this_through_random" style="color: var(--text-secondary); margin-bottom: 16px;">It achieves this through random code execution and memory-hard operations tuned to CPU cache sizes. This design keeps mining accessible to individual participants worldwide, resisting the hardware centralization that has concentrated Bitcoin mining in industrial farms.</p>
+<ul style="color: var(--text-secondary);">
+<li data-i18n-html="mine_optimized_for_modern_cpus_x86"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Optimized for modern CPUs (x86_64 and ARM64)</li>
+<li data-i18n-html="mine_2_gb_ram_required_per"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>2+ GB RAM required per mining thread</li>
+<li data-i18n-html="mine_cache_size_tuned_operations"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Cache-size tuned operations</li>
+<li data-i18n-html="mine_code_execution_focus_penalizes_asics"><i class="fas fa-check" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Code execution focus penalizes ASICs</li>
+</ul>
+</div>
+<div class="glass-card">
+<h2 data-i18n-html="mine_mining_options" style="margin-bottom: 16px;"><i class="fas fa-cogs" style="color: var(--ntu-violet); margin-right: 8px;"></i>Mining Options</h2>
+<h4 data-i18n-html="mine_solo_mining" style="color: var(--ntu-cyan); margin: 20px 0 12px;"><i class="fas fa-user"></i> Solo Mining</h4>
+<p data-i18n="mine_mine_directly_through_the_daemon" style="color: var(--text-secondary); margin-bottom: 12px;">Mine directly through the daemon. You keep the entire block reward when you find a block.</p>
+<div class="code-block" data-i18n-html="mine_start_solo_mining_4_threads" style="margin-bottom: 20px;">
+<span class="comment" data-i18n="mine_start_solo_mining_4_threads_1"># Start solo mining (4 threads)</span><br/>
+./nethxeumd --start-mining --mining-threads 4<br/><br/>
+<span class="comment" data-i18n="mine_or_from_daemon_console"># Or from daemon console</span><br/>
+start_mining 4
+          </div>
+<h4 data-i18n-html="mine_pool_mining" style="color: var(--ntu-cyan); margin: 20px 0 12px;"><i class="fas fa-users"></i> Pool Mining</h4>
+<p data-i18n="mine_join_a_mining_pool_for" style="color: var(--text-secondary); margin-bottom: 12px;">Join a mining pool for more consistent, smaller rewards. XMRig-compatible.</p>
+<div class="code-block" data-i18n-html="mine_pool_mining_with_xmrig_xmrig">
+<span class="comment" data-i18n="mine_pool_mining_with_xmrig"># Pool mining with XMRig</span><br/>
+./xmrig -o pool.nethxeum.io:3333 -u YOUR_ADDRESS -p worker1 --coin nethxeum
+          </div>
+</div>
+</div>
+<div class="glass-card" style="margin-bottom: 48px;">
+<h2 data-i18n-html="mine_system_requirements" style="margin-bottom: 16px;"><i class="fas fa-server" style="color: var(--ntu-cyan); margin-right: 8px;"></i>System Requirements</h2>
+<div class="specs-grid">
+<div class="spec-card">
+<div class="spec-label" data-i18n="mine_minimum">Minimum</div>
+<div class="spec-value" data-i18n="mine_2_cpu_cores">2 CPU cores</div>
+<div class="spec-detail" data-i18n="mine_x86_64_or_arm64_architecture">x86_64 or ARM64 architecture</div>
+</div>
+<div class="spec-card">
+<div class="spec-label" data-i18n="mine_recommended">Recommended</div>
+<div class="spec-value" data-i18n="mine_4_cpu_cores">4+ CPU cores</div>
+<div class="spec-detail" data-i18n="mine_more_cores_higher_hashrate_with">More cores = higher hashrate with RandomX</div>
+</div>
+<div class="spec-card">
+<div class="spec-label" data-i18n="mine_ram">RAM</div>
+<div class="spec-value" data-i18n="mine_4_gb_minimum">4 GB minimum</div>
+<div class="spec-detail" data-i18n="mine_8_gb_recommended_for_optimal">8 GB+ recommended for optimal performance</div>
+</div>
+<div class="spec-card">
+<div class="spec-label" data-i18n="mine_disk">Disk</div>
+<div class="spec-value" data-i18n="mine_50_gb_ssd">50 GB SSD</div>
+<div class="spec-detail" data-i18n="mine_200_gb_nvme_recommended_for">200 GB NVMe recommended for full node</div>
+</div>
+<div class="spec-card">
+<div class="spec-label" data-i18n="mine_network">Network</div>
+<div class="spec-value" data-i18n="mine_10_mbps">10 Mbps</div>
+<div class="spec-detail" data-i18n="mine_100_mbps_recommended">100 Mbps recommended</div>
+</div>
+<div class="spec-card">
+<div class="spec-label" data-i18n="mine_os">OS</div>
+<div class="spec-value" data-i18n="mine_linux_windows">Linux / Windows</div>
+<div class="spec-detail" data-i18n="mine_ubuntu_20_04_windows_10">Ubuntu 20.04+ / Windows 10+</div>
+</div>
+</div>
+</div>
+<div class="glass-card">
+<h2 data-i18n-html="mine_optimization_tips" style="margin-bottom: 16px;"><i class="fas fa-rocket" style="color: var(--ntu-cyan); margin-right: 8px;"></i>Optimization Tips</h2>
+<ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+<li data-i18n-html="mine_enable_huge_pages_linux_improves" style="margin-bottom: 12px;"><strong data-i18n="mine_enable_huge_pages_linux" style="color: var(--ntu-cyan);">Enable huge pages (Linux):</strong> Improves RandomX performance by 20-40%</li>
+<li data-i18n-html="mine_sudo_bash_c_echo_1280" style="margin-bottom: 12px;"><code style="background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 4px;">sudo bash -c 'echo 1280 &gt; /proc/sys/vm/nr_hugepages'</code></li>
+<li data-i18n-html="mine_use_1gb_pages_linux_best" style="margin-bottom: 12px;"><strong data-i18n="mine_use_1gb_pages_linux" style="color: var(--ntu-cyan);">Use 1GB pages (Linux):</strong> Best performance for CPUs with enough RAM</li>
+<li data-i18n-html="mine_xmrig_randomx_1gb_pages" style="margin-bottom: 12px;"><code style="background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 4px;">./xmrig --randomx-1gb-pages</code></li>
+<li data-i18n-html="mine_cpu_affinity_pin_threads_to" style="margin-bottom: 12px;"><strong data-i18n="mine_cpu_affinity" style="color: var(--ntu-cyan);">CPU affinity:</strong> Pin threads to specific cores for better cache utilization</li>
+<li data-i18n-html="mine_disable_hyper_threading_physical_cores"><strong data-i18n="mine_disable_hyper_threading" style="color: var(--ntu-cyan);">Disable hyper-threading:</strong> Physical cores perform better than logical cores for RandomX</li>
+</ul>
+</div>
+</div>
+</div>
+<footer class="main-footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></div>
+<p>Nethxeum (NTU) - A decentralized, privacy-preserving cryptocurrency. Founded by Rony Katie.</p>
+<div class="social-links" style="margin-top: 24px;">
+<a href="https://discord.gg/bwYwsyd4u" rel="noopener" target="_blank"><i class="fab fa-discord"></i></a>
+<a href="https://t.me/nethxeum_community" rel="noopener" target="_blank"><i class="fab fa-telegram"></i></a>
+<a href="https://x.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-x-twitter"></i></a>
+<a href="https://github.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-github"></i></a>
+</div>
+</div>
+<div class="footer-links"><h4>Getting Started</h4><ul><li><a href="what-is-nethxeum.html">What is Nethxeum?</a></li><li><a href="contribute.html">Contribute</a></li><li><a href="mining.html">Mining</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+<div class="footer-links"><h4>Resources</h4><ul><li><a href="about.html">About</a></li><li><a href="../whitepaper/Nethxeum_Whitepaper_v2.0.pdf">Whitepaper</a></li><li><a href="vocabulary.html">Vocabulary</a></li><li><a href="user-guides.html">User Guides</a></li></ul></div>
+<div class="footer-links"><h4>Other</h4><ul><li><a href="avoid-scams.html">Avoid Scams</a></li><li><a href="legal.html">Legal</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+</div>
+<div class="footer-bottom"><p>© Nethxeum Project 2026. Released under the MIT license.</p></div>
+</div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>
