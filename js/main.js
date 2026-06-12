@@ -73,8 +73,57 @@ const translations = {
     cta_download: "Download Wallet",
     cta_docs: "Read Documentation",
     
+    // Announcement bar
+    announce_text: "Nethxeum mainnet is live — CPU mining with RandomX, 50 NTU per block",
+    announce_cta: "Join the Mining Pool →",
+
     // Navigation extra
     nav_pool: "Mining Pool",
+    nav_download_btn: "Download",
+
+    // Hero
+    hero_live: "Mainnet Live",
+    hero_title_line1: "The Future of",
+    hero_title_line2: "Private Finance",
+    hero_card_title: "Network Stats",
+    hero_stratum_label: "Stratum Endpoint",
+    trust_fork: "Monero v0.18.3.3 fork",
+    trust_oss: "Open source",
+    trust_mit: "MIT License",
+
+    // Stats bar
+    stat_supply_full: "Max Supply (NTU)",
+    stat_halving: "Halving Interval",
+    stat_tail: "Tail Emission",
+
+    // Pool section
+    pool_label: "Mining Pool",
+    pool_title: "pool.nethxeum.com",
+    pool_desc: "The official Nethxeum mining pool. PPLNS rewards, real-time hashrate, instant payout tracking.",
+    pool_spotlight_title: "Mine with Any CPU",
+    pool_spotlight_desc: "No specialized hardware required. RandomX is designed to run efficiently on general-purpose CPUs. Your laptop, desktop, or server can contribute to securing the network while earning NTU rewards proportional to your work.",
+    pool_open_btn: "View Pool Dashboard",
+    pool_guide_btn: "Mining Guide",
+    pool_stratum_title: "Stratum Connection Ports",
+    port_low: "CPU / Low difficulty",
+    port_mid: "GPU / Mid range",
+    port_high: "GPU / High end",
+    pool_xmrig_label: "XMRig Config Example",
+
+    // Other links
+    home_learn_more_btn: "Learn More About Nethxeum",
+    footer_explorer_soon: "coming soon",
+
+    // Comparison table (simple text keys)
+    home_hard_supply_cap_label: "Hard Supply Cap",
+    home_halving_schedule_label: "Halving Schedule",
+    home_tail_emission_label: "Tail Emission",
+    home_default_privacy_label: "Default Privacy",
+    home_sender_hidden_label: "Sender Hidden",
+    home_amount_hidden_label: "Amount Hidden",
+    home_fungible_label: "Fungible",
+    home_asic_resistant_label: "ASIC-Resistant",
+    home_fair_launch_label: "Fair Launch",
 
     // Get Started Section
     start_label: "Start Now",
@@ -181,8 +230,45 @@ const translations = {
     cta_download: "Télécharger le Portefeuille",
     cta_docs: "Lire la Documentation",
     
+    // Announcement bar
+    announce_text: "Nethxeum est en ligne sur le mainnet — Minage CPU avec RandomX, 50 NTU par bloc",
+    announce_cta: "Rejoindre le Pool →",
+
     // Navigation extra
     nav_pool: "Pool de Minage",
+    nav_download_btn: "Télécharger",
+
+    // Hero
+    hero_live: "Réseau en ligne",
+    hero_title_line1: "Le Futur de la",
+    hero_title_line2: "Finance Privée",
+    hero_card_title: "Stats Réseau",
+    hero_stratum_label: "Point de Connexion Stratum",
+    trust_fork: "Fork de Monero v0.18.3.3",
+    trust_oss: "Open source",
+    trust_mit: "Licence MIT",
+
+    // Stats bar
+    stat_supply_full: "Supply Max (NTU)",
+    stat_halving: "Intervalle de Halving",
+    stat_tail: "Émission Résiduelle",
+
+    // Pool section
+    pool_label: "Pool de Minage",
+    pool_title: "pool.nethxeum.com",
+    pool_desc: "Le pool de minage officiel de Nethxeum. Récompenses PPLNS, hashrate en temps réel.",
+    pool_spotlight_title: "Miner avec n'importe quel CPU",
+    pool_spotlight_desc: "Aucun matériel spécialisé requis. RandomX est conçu pour fonctionner efficacement sur des CPU standard. Votre ordinateur peut contribuer à la sécurité du réseau tout en gagnant des NTU.",
+    pool_open_btn: "Voir le Dashboard",
+    pool_guide_btn: "Guide de Minage",
+    pool_stratum_title: "Ports de Connexion Stratum",
+    port_low: "CPU / Faible difficulté",
+    port_mid: "GPU / Milieu de gamme",
+    port_high: "GPU / Haut de gamme",
+    pool_xmrig_label: "Exemple Config XMRig",
+
+    home_learn_more_btn: "En savoir plus sur Nethxeum",
+    footer_explorer_soon: "bientôt disponible",
 
     // Get Started Section
     start_label: "Commencer",
@@ -774,11 +860,10 @@ function setLanguage(lang) {
     }
   });
   
-  // Update current-lang display
-  const currentLangEl = document.querySelector('.current-lang');
-  if (currentLangEl) {
-    currentLangEl.textContent = lang.toUpperCase();
-  }
+  // Update current-lang display (desktop + mobile)
+  document.querySelectorAll('.current-lang').forEach(el => {
+    el.textContent = lang.toUpperCase();
+  });
   
   document.querySelectorAll('.lang-option').forEach(opt => {
     opt.classList.toggle('active', opt.dataset.lang === lang);
@@ -853,16 +938,31 @@ document.addEventListener('click', (e) => {
 });
 
 // ============================================
-// NAVIGATION SCROLL EFFECT
+// NAVIGATION + ANNOUNCEMENT BAR SCROLL
 // ============================================
 
 const nav = document.querySelector('.main-nav');
+const announceBar = document.getElementById('announce-bar');
+const ANN_H = 38; // must match --ann-h in CSS
 
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
+  const y = window.scrollY;
+
+  // Slide announcement bar out as user scrolls
+  if (announceBar) {
+    const shift = Math.min(y, ANN_H);
+    announceBar.style.transform = `translateY(-${shift}px)`;
+  }
+
+  // Move nav up as announcement bar disappears
+  if (nav) {
+    const navTop = Math.max(0, ANN_H - y);
+    nav.style.top = navTop + 'px';
+    if (y > ANN_H + 20) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
   }
 });
 

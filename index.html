@@ -1,649 +1,725 @@
 <!DOCTYPE html>
-
 <html dir="ltr" lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Nethxeum (NTU) - Private · Scarce · Untraceable</title>
+<title>Nethxeum (NTU) — Private · Scarce · Untraceable</title>
 <meta content="Nethxeum combines Bitcoin-like scarcity with Monero-grade privacy. 42 million coins. No premine. No ICO. Pure privacy by design." name="description"/>
-<meta content="Nethxeum, NTU, cryptocurrency, privacy, Monero fork, Bitcoin, blockchain, RandomX" name="keywords"/>
+<meta content="Nethxeum, NTU, cryptocurrency, privacy, Monero fork, Bitcoin, blockchain, RandomX, mining pool" name="keywords"/>
 <meta content="Nethxeum Project" name="author"/>
-<meta content="Nethxeum (NTU) - Private · Scarce · Untraceable" property="og:title"/>
+<meta content="Nethxeum (NTU) — Private · Scarce · Untraceable" property="og:title"/>
 <meta content="The future of private finance. 42M hard cap. No premine. No ICO." property="og:description"/>
 <meta content="website" property="og:type"/>
-<meta content="https://nethxeum.io" property="og:url"/>
+<meta content="https://nethxeum.com" property="og:url"/>
 <meta content="summary_large_image" name="twitter:card"/>
+<meta name="theme-color" content="#050510"/>
 <link href="css/main.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
-<!-- Particle Effects Canvas -->
+
+<!-- Particles -->
 <canvas id="particles-canvas"></canvas>
+
+<!-- Announcement Bar -->
+<div class="announce-bar" id="announce-bar">
+  <div class="container">
+    <span class="announce-dot"></span>
+    <span data-i18n="announce_text">Nethxeum mainnet is live — CPU mining with RandomX, 50 NTU per block</span>
+    <a href="https://pool.nethxeum.com" class="announce-link" target="_blank" rel="noopener" data-i18n="announce_cta">Join the Mining Pool →</a>
+  </div>
+</div>
+
 <!-- Navigation -->
-<nav class="main-nav">
+<nav class="main-nav" id="main-nav">
 <div class="nav-container">
 <a class="nav-logo" href="index.html">
-<div class="logo-icon"><img alt="Nethxeum" src="images/logo.png"/></div>
-<span class="logo-text">Nethxeum</span>
+  <div class="logo-icon"><img alt="Nethxeum" src="images/logo.png"/></div>
+  <span class="logo-text">Nethxeum</span>
 </a>
 <ul class="nav-links">
-<li><a data-i18n="nav_getting_started" href="pages/getting-started.html">Getting Started</a></li>
-<li><a data-i18n="nav_download" href="pages/download.html">Downloads</a></li>
-<li><a data-i18n="nav_mining" href="pages/mining.html">Mining</a></li>
-<li><a data-i18n="nav_pool" href="https://pool.nethxeum.com" target="_blank" rel="noopener" style="color:var(--ntu-cyan)">Mining Pool <i class="fas fa-external-link-alt" style="font-size:0.65rem;vertical-align:middle"></i></a></li>
-<li><a data-i18n="nav_community" href="pages/community.html">Community</a></li>
-<li><a data-i18n="nav_resources" href="pages/resources.html">Resources</a></li>
+  <li><a data-i18n="nav_getting_started" href="pages/getting-started.html">Getting Started</a></li>
+  <li><a data-i18n="nav_download" href="pages/download.html">Downloads</a></li>
+  <li><a data-i18n="nav_mining" href="pages/mining.html">Mining</a></li>
+  <li><a data-i18n="nav_pool" href="https://pool.nethxeum.com" target="_blank" rel="noopener" class="nav-pool-link">Mining Pool <i class="fas fa-external-link-alt" style="font-size:.6rem;vertical-align:middle"></i></a></li>
+  <li><a data-i18n="nav_community" href="pages/community.html">Community</a></li>
+  <li><a data-i18n="nav_resources" href="pages/resources.html">Resources</a></li>
 </ul>
 <div class="nav-cta">
-<div class="lang-selector">
-<button class="lang-btn">
-<i class="fas fa-globe"></i>
-<span class="current-lang">EN</span>
-<i class="fas fa-chevron-down" style="font-size:0.7rem"></i>
-</button>
-<div class="lang-dropdown">
-<div class="lang-option active" data-lang="en"><span>English</span></div>
-<div class="lang-option" data-lang="fr"><span>Francais</span></div>
-<div class="lang-option" data-lang="es"><span>Espanol</span></div>
-<div class="lang-option" data-lang="de"><span>Deutsch</span></div>
-<div class="lang-option" data-lang="ja"><span>Japanese</span></div>
-<div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
-<div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
-<div class="lang-option" data-lang="ko"><span>Korean</span></div>
-<div class="lang-option" data-lang="ru"><span>Russian</span></div>
-<div class="lang-option" data-lang="ar"><span>Arabic</span></div>
-</div>
-</div>
+  <div class="lang-selector">
+    <button class="lang-btn">
+      <i class="fas fa-globe"></i>
+      <span class="current-lang">EN</span>
+      <i class="fas fa-chevron-down" style="font-size:.6rem"></i>
+    </button>
+    <div class="lang-dropdown">
+      <div class="lang-option active" data-lang="en"><span>English</span></div>
+      <div class="lang-option" data-lang="fr"><span>Français</span></div>
+      <div class="lang-option" data-lang="es"><span>Español</span></div>
+      <div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+      <div class="lang-option" data-lang="ja"><span>日本語</span></div>
+      <div class="lang-option" data-lang="zh-CN"><span>简体中文</span></div>
+      <div class="lang-option" data-lang="zh-TW"><span>繁體中文</span></div>
+      <div class="lang-option" data-lang="ko"><span>한국어</span></div>
+      <div class="lang-option" data-lang="ru"><span>Русский</span></div>
+      <div class="lang-option" data-lang="ar"><span>العربية</span></div>
+    </div>
+  </div>
+  <a href="pages/download.html" class="btn btn-primary btn-sm btn-glow" data-i18n="nav_download_btn">Download</a>
 </div>
 <div class="mobile-lang-selector">
-          <button class="mobile-lang-btn">
-            <i class="fas fa-globe"></i>
-            <span class="current-lang">EN</span>
-          </button>
-          <div class="mobile-lang-dropdown">
-            <div class="lang-option active" data-lang="en"><span>English</span></div>
-            <div class="lang-option" data-lang="fr"><span>Francais</span></div>
-            <div class="lang-option" data-lang="es"><span>Espanol</span></div>
-            <div class="lang-option" data-lang="de"><span>Deutsch</span></div>
-            <div class="lang-option" data-lang="ja"><span>Japanese</span></div>
-            <div class="lang-option" data-lang="zh-CN"><span>Simplified Chinese</span></div>
-            <div class="lang-option" data-lang="zh-TW"><span>Traditional Chinese</span></div>
-            <div class="lang-option" data-lang="ko"><span>Korean</span></div>
-            <div class="lang-option" data-lang="ru"><span>Russian</span></div>
-            <div class="lang-option" data-lang="ar"><span>Arabic</span></div>
-          </div>
-        </div>
-<button class="mobile-menu-btn">
-<i class="fas fa-bars"></i>
-</button>
+  <button class="mobile-lang-btn"><i class="fas fa-globe"></i><span class="current-lang">EN</span></button>
+  <div class="mobile-lang-dropdown">
+    <div class="lang-option active" data-lang="en"><span>English</span></div>
+    <div class="lang-option" data-lang="fr"><span>Français</span></div>
+    <div class="lang-option" data-lang="es"><span>Español</span></div>
+    <div class="lang-option" data-lang="de"><span>Deutsch</span></div>
+    <div class="lang-option" data-lang="ja"><span>日本語</span></div>
+    <div class="lang-option" data-lang="zh-CN"><span>简体中文</span></div>
+    <div class="lang-option" data-lang="zh-TW"><span>繁體中文</span></div>
+    <div class="lang-option" data-lang="ko"><span>한국어</span></div>
+    <div class="lang-option" data-lang="ru"><span>Русский</span></div>
+    <div class="lang-option" data-lang="ar"><span>العربية</span></div>
+  </div>
+</div>
+<button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
 </div>
 </nav>
+
 <!-- Mobile Menu -->
 <div class="mobile-menu-overlay"></div>
 <div class="mobile-menu">
 <button class="mobile-menu-close"><i class="fas fa-times"></i></button>
 <div class="mobile-menu-category" data-i18n="nav_getting_started">Getting Started</div>
 <ul class="mobile-menu-links">
-<li><a data-i18n="nav_what_is" href="pages/what-is-nethxeum.html">What is Nethxeum?</a></li>
-<li><a data-i18n="nav_contribute" href="pages/contribute.html">Contribute</a></li>
-<li><a data-i18n="nav_mining" href="pages/mining.html">Mining</a></li>
-<li><a data-i18n="nav_faq" href="pages/faq.html">FAQ</a></li>
+  <li><a data-i18n="nav_what_is" href="pages/what-is-nethxeum.html">What is Nethxeum?</a></li>
+  <li><a data-i18n="nav_contribute" href="pages/contribute.html">Contribute</a></li>
+  <li><a data-i18n="nav_mining" href="pages/mining.html">Mining</a></li>
+  <li><a data-i18n="nav_faq" href="pages/faq.html">FAQ</a></li>
 </ul>
 <div class="mobile-menu-category">Menu</div>
 <ul class="mobile-menu-links">
-<li><a data-i18n="nav_download" href="pages/download.html">Downloads</a></li>
-<li><a data-i18n="nav_library" href="pages/library.html">Library</a></li>
-<li><a data-i18n="nav_blog" href="pages/blog.html">Blog</a></li>
-<li><a data-i18n="nav_community" href="pages/community.html">Community</a></li>
-<li><a data-i18n="nav_pool" href="https://pool.nethxeum.com" target="_blank" rel="noopener" style="color:var(--ntu-cyan)">Mining Pool</a></li>
+  <li><a data-i18n="nav_download" href="pages/download.html">Downloads</a></li>
+  <li><a data-i18n="nav_library" href="pages/library.html">Library</a></li>
+  <li><a data-i18n="nav_blog" href="pages/blog.html">Blog</a></li>
+  <li><a data-i18n="nav_community" href="pages/community.html">Community</a></li>
+  <li><a data-i18n="nav_pool" href="https://pool.nethxeum.com" target="_blank" rel="noopener" style="color:var(--ntu-cyan)">Mining Pool <i class="fas fa-external-link-alt" style="font-size:.65rem"></i></a></li>
 </ul>
 <div class="mobile-menu-category" data-i18n="nav_resources">Resources</div>
 <ul class="mobile-menu-links">
-<li><a data-i18n="nav_security" href="pages/security.html">Security</a></li>
-<li><a data-i18n="nav_docs" href="pages/docs.html">Docs</a></li>
-<li><a data-i18n="nav_about" href="pages/about.html">About</a></li>
-<li><a data-i18n="nav_whitepaper" href="whitepaper/Nethxeum_Whitepaper.pdf">Whitepaper</a></li>
-<li><a data-i18n="nav_vocab" href="pages/vocabulary.html">Vocabulary</a></li>
+  <li><a data-i18n="nav_security" href="pages/security.html">Security</a></li>
+  <li><a data-i18n="nav_docs" href="pages/docs.html">Docs</a></li>
+  <li><a data-i18n="nav_about" href="pages/about.html">About</a></li>
+  <li><a data-i18n="nav_whitepaper" href="whitepaper/Nethxeum_Whitepaper.pdf">Whitepaper</a></li>
+  <li><a data-i18n="nav_vocab" href="pages/vocabulary.html">Vocabulary</a></li>
 </ul>
 </div>
-<!-- Hero Section -->
+
+<!-- ═══════════════════════════════════════ HERO -->
 <section class="hero">
 <canvas id="hero-canvas"></canvas>
 <div class="container">
-<div class="hero-content">
-<div class="hero-badge" data-i18n-html="home_private_scarce_untraceable">
-<i class="fas fa-shield-alt"></i>
-<span data-i18n="hero_badge">Private · Scarce · Untraceable</span>
-</div>
-<h1 class="hero-title" data-i18n-html="home_the_future_of_private_finance">
-<span class="gradient-text" data-i18n="hero_title">The Future of Private Finance</span>
-</h1>
-<p class="hero-subtitle" data-i18n="hero_subtitle">
-          Nethxeum combines Bitcoin-like scarcity with Monero-grade privacy. 42 million coins. No premine. No ICO. Pure privacy by design.
-        </p>
-<div class="hero-buttons">
-<a class="btn btn-primary btn-glow" data-i18n="cta_download" href="pages/download.html">
-<i class="fas fa-download"></i> Download Wallet
-          </a>
-<a class="btn btn-secondary" href="https://pool.nethxeum.com" target="_blank" rel="noopener" data-i18n="cta_mine">
-<i class="fas fa-network-wired"></i> Start Mining
-          </a>
-<a class="btn btn-outline" data-i18n="btn_about" href="pages/about.html">
-<i class="fas fa-info-circle"></i> About
-          </a>
-</div>
-<!-- Stats Bar -->
-<div class="stats-bar">
-<div class="stat-item">
-<div class="stat-value" data-i18n="home_42m">42M</div>
-<div class="stat-label" data-i18n="stat_supply">Max Supply</div>
-</div>
-<div class="stat-item">
-<div class="stat-value" data-i18n="home_50_ntu">50 NTU</div>
-<div class="stat-label" data-i18n="stat_reward">Block Reward</div>
-</div>
-<div class="stat-item">
-<div class="stat-value" data-i18n="home_5_min">5 min</div>
-<div class="stat-label" data-i18n="stat_time">Block Time</div>
-</div>
-<div class="stat-item">
-<div class="stat-value" data-i18n="home_randomx">RandomX</div>
-<div class="stat-label" data-i18n="stat_algo">Algorithm</div>
-</div>
-</div>
-</div>
+  <div class="hero-grid">
+
+    <!-- Left: Content -->
+    <div class="hero-content">
+      <div class="hero-network-badge">
+        <span class="live-dot"></span>
+        <span data-i18n="hero_live">Mainnet Live</span>
+      </div>
+      <h1 class="hero-title">
+        <span data-i18n="hero_title_line1">The Future of</span><br>
+        <span class="gradient-text" data-i18n="hero_title_line2">Private Finance</span>
+      </h1>
+      <p class="hero-subtitle" data-i18n="hero_subtitle">
+        Nethxeum combines Bitcoin-like scarcity with Monero-grade privacy. 42 million coins. No premine. No ICO. Pure privacy by design.
+      </p>
+      <div class="hero-buttons">
+        <a class="btn btn-primary btn-glow" href="pages/download.html" data-i18n="cta_download">
+          <i class="fas fa-download"></i> Download Wallet
+        </a>
+        <a class="btn btn-secondary" href="https://pool.nethxeum.com" target="_blank" rel="noopener" data-i18n="cta_mine">
+          <i class="fas fa-network-wired"></i> Start Mining
+        </a>
+      </div>
+      <div class="hero-trust">
+        <span><i class="fas fa-code-branch"></i> <span data-i18n="trust_fork">Monero v0.18.3.3 fork</span></span>
+        <span><i class="fab fa-github"></i> <span data-i18n="trust_oss">Open source</span></span>
+        <span><i class="fas fa-certificate"></i> <span data-i18n="trust_mit">MIT License</span></span>
+      </div>
+    </div>
+
+    <!-- Right: Network stats card -->
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <div class="hero-card-live">
+            <span class="live-dot"></span>
+            <span data-i18n="hero_card_title">Network Stats</span>
+          </div>
+          <span class="hero-card-badge">MAINNET</span>
+        </div>
+        <div class="hero-stats-grid">
+          <div class="hero-stat">
+            <div class="hero-stat-value">50 NTU</div>
+            <div class="hero-stat-label" data-i18n="stat_reward">Block Reward</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">5 min</div>
+            <div class="hero-stat-label" data-i18n="stat_time">Block Time</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">42M</div>
+            <div class="hero-stat-label" data-i18n="stat_supply">Max Supply</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">1%</div>
+            <div class="hero-stat-label" data-i18n="pool_stat_fee_label">Pool Fee</div>
+          </div>
+        </div>
+        <div class="hero-code-block">
+          <div class="hero-code-label" data-i18n="hero_stratum_label">Stratum Endpoint</div>
+          <div class="hero-code-value">stratum.nethxeum.com:3333</div>
+        </div>
+        <a href="https://pool.nethxeum.com" target="_blank" rel="noopener"
+           class="btn btn-primary" style="width:100%"
+           data-i18n="start_step2_btn">
+          <i class="fas fa-network-wired"></i> Open Mining Pool
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Stats Strip -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-value">42,000,000</div>
+      <div class="stat-label" data-i18n="stat_supply_full">Max Supply (NTU)</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">50 NTU</div>
+      <div class="stat-label" data-i18n="stat_reward">Block Reward</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">420,000</div>
+      <div class="stat-label" data-i18n="stat_halving">Halving Interval</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">0 NTU</div>
+      <div class="stat-label" data-i18n="stat_tail">Tail Emission</div>
+    </div>
+  </div>
 </div>
 </section>
-<!-- Introduction Section -->
+
+<!-- ═══════════════════════════════════════ WHAT IS -->
 <section class="section section-alt">
 <div class="container">
-<div class="section-header">
-<span class="section-label" data-i18n="home_introduction">Introduction</span>
-<h2 class="section-title gradient-text" data-i18n="home_what_is_nethxeum">What is Nethxeum?</h2>
-<p class="section-desc" data-i18n="home_nethxeum_ntu_is_a_decentralize">
-          Nethxeum (NTU) is a decentralized, privacy-preserving cryptocurrency that combines the proven scarcity model of Bitcoin with the battle-tested cryptographic privacy of Monero. Founded by Rony Katie, it introduces a hard supply cap of 42,000,000 NTU, a Bitcoin-style halving schedule every 420,000 blocks, zero tail emission, and full transaction confidentiality enforced at the protocol level.
-        </p>
-</div>
-<div class="grid-2" style="margin-top: 60px;">
-<div class="glass-card">
-<h3 data-i18n-html="home_privacy_by_default" style="margin-bottom: 16px;"><i class="fas fa-lock" style="color: var(--ntu-cyan); margin-right: 12px;"></i>Privacy by Default</h3>
-<p data-i18n="home_every_transaction_on_the_nethxeum" style="color: var(--text-secondary);">
-            Every transaction on the Nethxeum network is private by default. Sender identity, recipient identity, and transaction amounts are all cryptographically concealed through Ring Signatures, RingCT, and Stealth Addresses. Privacy is not optional — it is mandatory.
-          </p>
-</div>
-<div class="glass-card">
-<h3 data-i18n-html="home_sound_money" style="margin-bottom: 16px;"><i class="fas fa-coins" style="color: var(--ntu-violet); margin-right: 12px;"></i>Sound Money</h3>
-<p data-i18n="home_with_a_fixed_supply_of" style="color: var(--text-secondary);">
-            With a fixed supply of 42 million NTU and no tail emission, Nethxeum implements true digital scarcity. The halving every 420,000 blocks creates a predictable, transparent monetary policy that anyone can verify and trust. No central authority can inflate the supply.
-          </p>
-</div>
-</div>
-<div data-i18n-html="home_learn_more_about_nethxeum" style="text-align: center; margin-top: 48px;">
-<a class="btn btn-outline" href="pages/what-is-nethxeum.html">Learn More About Nethxeum <i class="fas fa-arrow-right"></i></a>
-</div>
+  <div class="section-header">
+    <span class="section-label" data-i18n="home_introduction">Introduction</span>
+    <h2 class="section-title gradient-text" data-i18n="home_what_is_nethxeum">What is Nethxeum?</h2>
+    <p class="section-desc" data-i18n="home_nethxeum_ntu_is_a_decentralize">
+      Nethxeum (NTU) is a decentralized, privacy-preserving cryptocurrency that combines the proven scarcity model of Bitcoin with the battle-tested cryptographic privacy of Monero. Founded by Rony Katie, it introduces a hard supply cap of 42,000,000 NTU, a Bitcoin-style halving schedule every 420,000 blocks, zero tail emission, and full transaction confidentiality enforced at the protocol level.
+    </p>
+  </div>
+  <div class="grid-2" style="margin-top:0">
+    <div class="glass-card">
+      <h3 style="margin-bottom:14px;display:flex;align-items:center;gap:12px">
+        <i class="fas fa-lock" style="color:var(--ntu-cyan);font-size:1.2rem"></i>
+        <span data-i18n="home_privacy_by_default">Privacy by Default</span>
+      </h3>
+      <p style="color:var(--text-secondary);line-height:1.72" data-i18n="home_every_transaction_on_the_nethxeum">
+        Every transaction on the Nethxeum network is private by default. Sender identity, recipient identity, and transaction amounts are all cryptographically concealed through Ring Signatures, RingCT, and Stealth Addresses. Privacy is not optional — it is mandatory.
+      </p>
+    </div>
+    <div class="glass-card">
+      <h3 style="margin-bottom:14px;display:flex;align-items:center;gap:12px">
+        <i class="fas fa-coins" style="color:var(--ntu-violet);font-size:1.2rem"></i>
+        <span data-i18n="home_sound_money">Sound Money</span>
+      </h3>
+      <p style="color:var(--text-secondary);line-height:1.72" data-i18n="home_with_a_fixed_supply_of">
+        With a fixed supply of 42 million NTU and no tail emission, Nethxeum implements true digital scarcity. The halving every 420,000 blocks creates a predictable, transparent monetary policy that anyone can verify and trust. No central authority can inflate the supply.
+      </p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:44px">
+    <a class="btn btn-outline" href="pages/what-is-nethxeum.html" data-i18n="home_learn_more_btn">
+      Learn More About Nethxeum <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
 </div>
 </section>
-<!-- Features Section -->
+
+<!-- ═══════════════════════════════════════ FEATURES -->
 <section class="section">
 <div class="container">
-<div class="section-header">
-<span class="section-label" data-i18n="features_label">Why Nethxeum</span>
-<h2 class="section-title" data-i18n="features_title">The Perfect Synthesis</h2>
-<p class="section-desc" data-i18n="features_desc">What Bitcoin would be if Satoshi had built privacy in from day one.</p>
-</div>
-<div class="grid-4">
-<div class="feature-card reveal">
-<div class="feature-icon"><i class="fas fa-user-secret"></i></div>
-<h3 data-i18n="feature_privacy_title">Absolute Privacy</h3>
-<p data-i18n="feature_privacy_desc">Ring signatures, RingCT, and stealth addresses make every transaction completely untraceable. Privacy is mandatory, not optional.</p>
-</div>
-<div class="feature-card reveal">
-<div class="feature-icon" style="background: linear-gradient(135deg, #7B2FF7, #E040FB);"><i class="fas fa-gem"></i></div>
-<h3 data-i18n="feature_scarcity_title">True Scarcity</h3>
-<p data-i18n="feature_scarcity_desc">Hard-capped at 42 million NTU with Bitcoin-style halving every 420,000 blocks. No tail emission. No inflation.</p>
-</div>
-<div class="feature-card reveal">
-<div class="feature-icon" style="background: linear-gradient(135deg, #E040FB, #FF4081);"><i class="fas fa-exchange-alt"></i></div>
-<h3 data-i18n="feature_fungible_title">Perfect Fungibility</h3>
-<p data-i18n="feature_fungible_desc">Every NTU is equal. No tainted coins. No blacklist. Perfect interchangeability ensures true digital cash.</p>
-</div>
-<div class="feature-card reveal">
-<div class="feature-icon" style="background: linear-gradient(135deg, #00D4FF, #0077FF);"><i class="fas fa-microchip"></i></div>
-<h3 data-i18n="feature_mining_title">Democratic Mining</h3>
-<p data-i18n="feature_mining_desc">RandomX algorithm optimized for CPUs. Mine with any computer. No ASICs. No industrial farms needed.</p>
-</div>
-</div>
+  <div class="section-header">
+    <span class="section-label" data-i18n="features_label">Why Nethxeum</span>
+    <h2 class="section-title" data-i18n="features_title">The Perfect Synthesis</h2>
+    <p class="section-desc" data-i18n="features_desc">What Bitcoin would be if Satoshi had built privacy in from day one.</p>
+  </div>
+  <div class="grid-4">
+    <div class="feature-card reveal">
+      <div class="feature-icon"><i class="fas fa-user-secret"></i></div>
+      <h3 style="margin-bottom:12px" data-i18n="feature_privacy_title">Absolute Privacy</h3>
+      <p style="color:var(--text-secondary);font-size:.9rem;line-height:1.7" data-i18n="feature_privacy_desc">Ring signatures, RingCT, and stealth addresses make every transaction completely untraceable. Privacy is mandatory, not optional.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon" style="background:var(--grad-vm)"><i class="fas fa-gem"></i></div>
+      <h3 style="margin-bottom:12px" data-i18n="feature_scarcity_title">True Scarcity</h3>
+      <p style="color:var(--text-secondary);font-size:.9rem;line-height:1.7" data-i18n="feature_scarcity_desc">Hard-capped at 42 million NTU with Bitcoin-style halving every 420,000 blocks. No tail emission. No inflation.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon" style="background:linear-gradient(135deg,#E040FB,#FF4081)"><i class="fas fa-exchange-alt"></i></div>
+      <h3 style="margin-bottom:12px" data-i18n="feature_fungible_title">Perfect Fungibility</h3>
+      <p style="color:var(--text-secondary);font-size:.9rem;line-height:1.7" data-i18n="feature_fungible_desc">Every NTU is equal. No tainted coins. No blacklist. Perfect interchangeability ensures true digital cash.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon" style="background:linear-gradient(135deg,#00D4FF,#0066FF)"><i class="fas fa-microchip"></i></div>
+      <h3 style="margin-bottom:12px" data-i18n="feature_mining_title">Democratic Mining</h3>
+      <p style="color:var(--text-secondary);font-size:.9rem;line-height:1.7" data-i18n="feature_mining_desc">RandomX algorithm optimized for CPUs. Mine with any computer. No ASICs. No industrial farms needed.</p>
+    </div>
+  </div>
 </div>
 </section>
-<!-- Get Started Section -->
+
+<!-- ═══════════════════════════════════════ GET STARTED -->
 <section class="section section-alt">
 <div class="container">
-<div class="section-header">
-<span class="section-label" data-i18n="start_label">Start Now</span>
-<h2 class="section-title" data-i18n="start_title">Get Started in 3 Steps</h2>
-<p class="section-desc" data-i18n="start_desc">From zero to mining in minutes. Everything you need is free and open source.</p>
-</div>
-<div class="grid-3" style="margin-top:0">
-<div class="glass-card reveal" style="text-align:center;position:relative;">
-<div style="width:48px;height:48px;background:var(--gradient-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:1.4rem;font-weight:900;color:#fff">1</div>
-<h3 data-i18n="start_step1_title" style="margin-bottom:12px">Download Wallet</h3>
-<p data-i18n="start_step1_desc" style="color:var(--text-secondary);margin-bottom:24px">Download the GUI or CLI wallet to store and manage your NTU securely on your computer.</p>
-<a class="btn btn-outline" href="pages/download.html" data-i18n="start_step1_btn"><i class="fas fa-download"></i> Download</a>
-</div>
-<div class="glass-card reveal" style="text-align:center;border-color:rgba(0,212,255,0.25);">
-<div style="width:48px;height:48px;background:var(--gradient-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:1.4rem;font-weight:900;color:#fff">2</div>
-<h3 data-i18n="start_step2_title" style="margin-bottom:12px">Join the Pool</h3>
-<p data-i18n="start_step2_desc" style="color:var(--text-secondary);margin-bottom:24px">Connect your miner to pool.nethxeum.com — PPLNS rewards, 1% fee, instant payouts as blocks unlock.</p>
-<a class="btn btn-primary btn-glow" href="https://pool.nethxeum.com" target="_blank" rel="noopener" data-i18n="start_step2_btn"><i class="fas fa-network-wired"></i> Open Pool</a>
-</div>
-<div class="glass-card reveal" style="text-align:center;">
-<div style="width:48px;height:48px;background:var(--gradient-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:1.4rem;font-weight:900;color:#fff">3</div>
-<h3 data-i18n="start_step3_title" style="margin-bottom:12px">Start Mining</h3>
-<p data-i18n="start_step3_desc" style="color:var(--text-secondary);margin-bottom:24px">Point XMRig or any RandomX miner at stratum.nethxeum.com:3333. CPU mining — no GPU or ASIC needed.</p>
-<a class="btn btn-outline" href="pages/mining.html" data-i18n="start_step3_btn"><i class="fas fa-microchip"></i> Mining Guide</a>
-</div>
-</div>
-<!-- Pool stats bar -->
-<div style="margin-top:48px;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:20px;padding:32px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;text-align:center">
-<div>
-<div style="font-size:1.5rem;font-weight:800;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" data-i18n="pool_stat_fee">1%</div>
-<div style="font-size:0.85rem;color:var(--text-muted);margin-top:4px" data-i18n="pool_stat_fee_label">Pool Fee</div>
-</div>
-<div>
-<div style="font-size:1.5rem;font-weight:800;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" data-i18n="pool_stat_payout">1 NTU</div>
-<div style="font-size:0.85rem;color:var(--text-muted);margin-top:4px" data-i18n="pool_stat_payout_label">Min Payout</div>
-</div>
-<div>
-<div style="font-size:1.5rem;font-weight:800;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" data-i18n="pool_stat_method">PPLNS</div>
-<div style="font-size:0.85rem;color:var(--text-muted);margin-top:4px" data-i18n="pool_stat_method_label">Reward Method</div>
-</div>
-<div>
-<div style="font-size:1.5rem;font-weight:800;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" data-i18n="pool_stat_algo">RandomX</div>
-<div style="font-size:0.85rem;color:var(--text-muted);margin-top:4px" data-i18n="pool_stat_algo_label">Algorithm</div>
-</div>
-<div>
-<div style="font-size:1.5rem;font-weight:800;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" data-i18n="pool_stat_reward">50 NTU</div>
-<div style="font-size:0.85rem;color:var(--text-muted);margin-top:4px" data-i18n="pool_stat_reward_label">Block Reward</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Comparison Section -->
-<section class="section section-alt">
-<div class="container">
-<div class="section-header">
-<span class="section-label" data-i18n="compare_label">Comparison</span>
-<h2 class="section-title" data-i18n="compare_title">How Nethxeum Compares</h2>
-<p class="section-desc" data-i18n="compare_desc">The only cryptocurrency combining hard supply cap with mandatory full privacy.</p>
-</div>
-<div style="overflow-x: auto;">
-<table class="comparison-table">
-<thead>
-<tr>
-<th data-i18n="home_feature">Feature</th>
-<th data-i18n="home_bitcoin_btc">Bitcoin (BTC)</th>
-<th data-i18n="home_monero_xmr">Monero (XMR)</th>
-<th data-i18n="home_nethxeum_ntu" style="background: rgba(0, 212, 255, 0.1); color: var(--ntu-cyan);">Nethxeum (NTU)</th>
-<th data-i18n="home_zcash_zec">Zcash (ZEC)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td data-i18n-html="home_hard_supply_cap"><strong>Hard Supply Cap</strong></td>
-<td data-i18n="home_21m">21M</td>
-<td data-i18n-html="home_unlimited"><span class="cross">Unlimited</span></td>
-<td data-i18n="home_42m_1" style="color: var(--ntu-cyan); font-weight: 700;">42M</td>
-<td data-i18n="home_21m_1">21M</td>
-</tr>
-<tr>
-<td data-i18n-html="home_halving_schedule"><strong>Halving Schedule</strong></td>
-<td data-i18n-html="home_every_210k_blocks"><span class="check">Every 210K blocks</span></td>
-<td data-i18n-html="home_none_smooth_emission"><span class="cross">None (smooth emission)</span></td>
-<td data-i18n-html="home_every_420k_blocks" style="color: var(--ntu-cyan);"><span class="check">Every 420K blocks</span></td>
-<td data-i18n-html="home_every_840k_blocks"><span class="check">Every 840K blocks</span></td>
-</tr>
-<tr>
-<td data-i18n-html="home_tail_emission"><strong>Tail Emission</strong></td>
-<td data-i18n-html="home_none"><span class="check">None</span></td>
-<td data-i18n-html="home_0_6_xmr_min_forever"><span class="cross">0.6 XMR/min forever</span></td>
-<td data-i18n-html="home_none_0_ntu" style="color: var(--ntu-cyan);"><span class="check">None (0 NTU)</span></td>
-<td data-i18n-html="home_none_1"><span class="check">None</span></td>
-</tr>
-<tr>
-<td data-i18n-html="home_default_privacy"><strong>Default Privacy</strong></td>
-<td data-i18n-html="home_public_ledger"><span class="cross">Public ledger</span></td>
-<td data-i18n-html="home_mandatory"><span class="check">Mandatory</span></td>
-<td data-i18n-html="home_mandatory_1" style="color: var(--ntu-cyan);"><span class="check">Mandatory</span></td>
-<td data-i18n-html="home_opt_in_shielded"><span class="partial">Opt-in (shielded)</span></td>
-</tr>
-<tr>
-<td data-i18n-html="home_sender_hidden"><strong>Sender Hidden</strong></td>
-<td data-i18n-html="home_visible"><span class="cross">Visible</span></td>
-<td data-i18n-html="home_ring_signatures"><span class="check">Ring signatures</span></td>
-<td data-i18n-html="home_ring_signatures_1" style="color: var(--ntu-cyan);"><span class="check">Ring signatures</span></td>
-<td data-i18n-html="home_zk_snarks_shielded"><span class="partial">zk-SNARKs (shielded)</span></td>
-</tr>
-<tr>
-<td data-i18n-html="home_amount_hidden"><strong>Amount Hidden</strong></td>
-<td data-i18n-html="home_visible_1"><span class="cross">Visible</span></td>
-<td data-i18n-html="home_ringct"><span class="check">RingCT</span></td>
-<td data-i18n-html="home_ringct_1" style="color: var(--ntu-cyan);"><span class="check">RingCT</span></td>
-<td data-i18n-html="home_zk_snarks_shielded_1"><span class="partial">zk-SNARKs (shielded)</span></td>
-</tr>
-<tr>
-<td data-i18n-html="home_fungible"><strong>Fungible</strong></td>
-<td data-i18n-html="home_tainted_coins_exist"><span class="cross">Tainted coins exist</span></td>
-<td data-i18n-html="home_perfect"><span class="check">Perfect</span></td>
-<td data-i18n-html="home_perfect_1" style="color: var(--ntu-cyan);"><span class="check">Perfect</span></td>
-<td data-i18n-html="home_partial"><span class="partial">Partial</span></td>
-</tr>
-<tr>
-<td data-i18n-html="home_asic_resistant"><strong>ASIC-Resistant</strong></td>
-<td data-i18n-html="home_sha_256_asic_dominated"><span class="cross">SHA-256 (ASIC-dominated)</span></td>
-<td data-i18n-html="home_randomx_cpu"><span class="check">RandomX (CPU)</span></td>
-<td data-i18n-html="home_randomx_cpu_1" style="color: var(--ntu-cyan);"><span class="check">RandomX (CPU)</span></td>
-<td data-i18n-html="home_equihash_asic"><span class="cross">Equihash (ASIC)</span></td>
-</tr>
-<tr>
-<td data-i18n-html="home_no_trusted_setup"><strong>No Trusted Setup</strong></td>
-<td data-i18n-html="home_yes"><span class="check">Yes</span></td>
-<td data-i18n-html="home_yes_1"><span class="check">Yes</span></td>
-<td data-i18n-html="home_yes_2" style="color: var(--ntu-cyan);"><span class="check">Yes</span></td>
-<td data-i18n-html="home_requires_trusted_setup"><span class="cross">Requires trusted setup</span></td>
-</tr>
-<tr>
-<td data-i18n-html="home_fair_launch"><strong>Fair Launch</strong></td>
-<td data-i18n-html="home_yes_3"><span class="check">Yes</span></td>
-<td data-i18n-html="home_yes_4"><span class="check">Yes</span></td>
-<td data-i18n-html="home_yes_no_premine" style="color: var(--ntu-cyan);"><span class="check">Yes (No premine)</span></td>
-<td data-i18n-html="home_founders_reward"><span class="cross">Founders reward</span></td>
-</tr>
-</tbody>
-</table>
-</div>
+  <div class="section-header">
+    <span class="section-label" data-i18n="start_label">Start Now</span>
+    <h2 class="section-title" data-i18n="start_title">Get Started in 3 Steps</h2>
+    <p class="section-desc" data-i18n="start_desc">From zero to mining in minutes. Everything is free and open source.</p>
+  </div>
+  <div class="grid-3" style="margin-top:0">
+    <div class="step-card reveal">
+      <div class="step-num">1</div>
+      <h3 style="margin-bottom:12px" data-i18n="start_step1_title">Download Wallet</h3>
+      <p style="color:var(--text-secondary);font-size:.9rem;line-height:1.7;margin-bottom:24px" data-i18n="start_step1_desc">Download the GUI or CLI wallet to store and manage your NTU securely on your own computer.</p>
+      <a class="btn btn-outline" href="pages/download.html" data-i18n="start_step1_btn"><i class="fas fa-download"></i> Download</a>
+    </div>
+    <div class="step-card featured reveal">
+      <div class="step-num">2</div>
+      <h3 style="margin-bottom:12px" data-i18n="start_step2_title">Join the Pool</h3>
+      <p style="color:var(--text-secondary);font-size:.9rem;line-height:1.7;margin-bottom:24px" data-i18n="start_step2_desc">Connect to pool.nethxeum.com — PPLNS rewards, 1% fee, automatic payouts as blocks mature.</p>
+      <a class="btn btn-primary btn-glow" href="https://pool.nethxeum.com" target="_blank" rel="noopener" data-i18n="start_step2_btn"><i class="fas fa-network-wired"></i> Open Pool</a>
+    </div>
+    <div class="step-card reveal">
+      <div class="step-num">3</div>
+      <h3 style="margin-bottom:12px" data-i18n="start_step3_title">Start Mining</h3>
+      <p style="color:var(--text-secondary);font-size:.9rem;line-height:1.7;margin-bottom:24px" data-i18n="start_step3_desc">Point XMRig or any RandomX miner at stratum.nethxeum.com:3333. CPU only — no GPU or ASIC needed.</p>
+      <a class="btn btn-outline" href="pages/mining.html" data-i18n="start_step3_btn"><i class="fas fa-microchip"></i> Mining Guide</a>
+    </div>
+  </div>
+
+  <!-- Pool metrics band -->
+  <div class="metrics-band" style="margin-top:48px">
+    <div class="metric-cell">
+      <div class="metric-val" data-i18n="pool_stat_fee">1%</div>
+      <div class="metric-lbl" data-i18n="pool_stat_fee_label">Pool Fee</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-val" data-i18n="pool_stat_payout">1 NTU</div>
+      <div class="metric-lbl" data-i18n="pool_stat_payout_label">Min Payout</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-val" data-i18n="pool_stat_method">PPLNS</div>
+      <div class="metric-lbl" data-i18n="pool_stat_method_label">Reward Method</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-val" data-i18n="pool_stat_algo">RandomX</div>
+      <div class="metric-lbl" data-i18n="pool_stat_algo_label">Algorithm</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-val" data-i18n="pool_stat_reward">50 NTU</div>
+      <div class="metric-lbl" data-i18n="pool_stat_reward_label">Block Reward</div>
+    </div>
+  </div>
 </div>
 </section>
-<!-- Technical Architecture Section -->
+
+<!-- ═══════════════════════════════════════ MINING POOL SPOTLIGHT -->
 <section class="section">
 <div class="container">
-<div class="section-header">
-<span class="section-label" data-i18n="tech_label">Technical Architecture</span>
-<h2 class="section-title" data-i18n="tech_title">Built for Security &amp; Scale</h2>
-<p class="section-desc" data-i18n="tech_desc">Forked from Monero v0.18.3.3 with Bitcoin-inspired parameters. Battle-tested cryptography meets sound money.</p>
-</div>
-<div class="specs-grid">
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_codebase">Codebase</div>
-<div class="spec-value" data-i18n="home_monero_v0_18_3_3">Monero v0.18.3.3</div>
-<div class="spec-detail" data-i18n="home_fork_with_bitcoin_like_modification">Fork with Bitcoin-like modifications</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_consensus">Consensus</div>
-<div class="spec-value" data-i18n="home_proof_of_work">Proof-of-Work</div>
-<div class="spec-detail" data-i18n="home_randomx_algorithm_cpu_optimized">RandomX algorithm, CPU-optimized</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_block_time">Block Time</div>
-<div class="spec-value" data-i18n="home_5_minutes_300s">5 minutes (300s)</div>
-<div class="spec-detail" data-i18n="home_difficulty_target_v2">DIFFICULTY_TARGET_V2</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_max_supply">Max Supply</div>
-<div class="spec-value" data-i18n="home_42_000_000_ntu">42,000,000 NTU</div>
-<div class="spec-detail" data-i18n="home_hard_cap_never_exceeded">Hard cap — never exceeded</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_decimal_places">Decimal Places</div>
-<div class="spec-value" data-i18n="home_8_pickatie">8 (picKatie)</div>
-<div class="spec-detail" data-i18n="home_1_ntu_10_8_atomic">1 NTU = 10^8 atomic units</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_initial_block_reward">Initial Block Reward</div>
-<div class="spec-value" data-i18n="home_50_ntu_per_block">50 NTU per block</div>
-<div class="spec-detail" data-i18n="home_epoch_1_blocks_0_419">Epoch 1 (blocks 0-419,999)</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_halving_interval">Halving Interval</div>
-<div class="spec-value" data-i18n="home_420_000_blocks">420,000 blocks</div>
-<div class="spec-detail" data-i18n="home_4_years_at_5_min">~4 years at 5 min/block</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_tail_emission_1">Tail Emission</div>
-<div class="spec-value" data-i18n="home_0_ntu">0 NTU</div>
-<div class="spec-detail" data-i18n="home_hard_stop_at_42m_no">Hard stop at 42M — no inflation</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_block_maturity">Block Maturity</div>
-<div class="spec-value" data-i18n="home_100_blocks">100 blocks</div>
-<div class="spec-detail" data-i18n="home_bitcoin_like_confirmation">Bitcoin-like confirmation</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_p2p_port_mainnet">P2P Port (Mainnet)</div>
-<div class="spec-value" data-i18n="home_18333">18333</div>
-<div class="spec-detail" data-i18n="home_peer_to_peer_network">Peer-to-peer network</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_rpc_port_mainnet">RPC Port (Mainnet)</div>
-<div class="spec-value" data-i18n="home_18331">18331</div>
-<div class="spec-detail" data-i18n="home_json_rpc_api_endpoint">JSON-RPC API endpoint</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_zmq_port_mainnet">ZMQ Port (Mainnet)</div>
-<div class="spec-value" data-i18n="home_18332">18332</div>
-<div class="spec-detail" data-i18n="home_zeromq_pub_sub_notification">ZeroMQ pub/sub notifications</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_address_prefix">Address Prefix</div>
-<div class="spec-value" data-i18n="home_130_standard">130 (Standard)</div>
-<div class="spec-detail" data-i18n="home_base58_encoded_addresses">Base58 encoded addresses</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_integrated_prefix">Integrated Prefix</div>
-<div class="spec-value">120</div>
-<div class="spec-detail" data-i18n="home_with_embedded_payment_id">With embedded payment ID</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_subaddress_prefix">Subaddress Prefix</div>
-<div class="spec-value">133</div>
-<div class="spec-detail" data-i18n="home_multiple_unlinkable_addresses">Multiple unlinkable addresses</div>
-</div>
-<div class="spec-card reveal">
-<div class="spec-label" data-i18n="home_genesis_date">Genesis Date</div>
-<div class="spec-value" data-i18n="home_may_31_2026">May 31, 2026</div>
-<div class="spec-detail" data-i18n="home_founded_by_rony_katie">Founded by Rony Katie</div>
-</div>
-</div>
-<div data-i18n-html="home_view_full_documentatio" style="text-align: center; margin-top: 48px;">
-<a class="btn btn-outline" href="pages/docs.html">View Full Documentation <i class="fas fa-arrow-right"></i></a>
-</div>
+  <div class="section-header">
+    <span class="section-label" data-i18n="pool_label">Mining Pool</span>
+    <h2 class="section-title" data-i18n="pool_title">pool.nethxeum.com</h2>
+    <p class="section-desc" data-i18n="pool_desc">The official Nethxeum mining pool. PPLNS rewards, real-time hashrate, instant payout tracking.</p>
+  </div>
+
+  <div class="pool-hero">
+    <!-- Left: pool description -->
+    <div>
+      <h3 style="margin-bottom:16px;font-size:1.5rem" data-i18n="pool_spotlight_title">Mine with Any CPU</h3>
+      <p style="color:var(--text-secondary);line-height:1.75;margin-bottom:24px" data-i18n="pool_spotlight_desc">
+        No specialized hardware required. RandomX is designed to run efficiently on general-purpose CPUs. Your laptop, desktop, or server can contribute to securing the network while earning NTU rewards proportional to your work.
+      </p>
+      <div class="pool-stat-grid">
+        <div class="pool-stat-box">
+          <div class="pool-stat-val">1%</div>
+          <div class="pool-stat-lbl" data-i18n="pool_stat_fee_label">Fee</div>
+        </div>
+        <div class="pool-stat-box">
+          <div class="pool-stat-val">PPLNS</div>
+          <div class="pool-stat-lbl" data-i18n="pool_stat_method_label">Method</div>
+        </div>
+        <div class="pool-stat-box">
+          <div class="pool-stat-val">1 NTU</div>
+          <div class="pool-stat-lbl" data-i18n="pool_stat_payout_label">Min Pay</div>
+        </div>
+      </div>
+      <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+        <a href="https://pool.nethxeum.com" target="_blank" rel="noopener" class="btn btn-primary btn-glow" data-i18n="pool_open_btn">
+          <i class="fas fa-chart-line"></i> View Pool Dashboard
+        </a>
+        <a href="pages/mining.html" class="btn btn-secondary" data-i18n="pool_guide_btn">
+          <i class="fas fa-book"></i> Mining Guide
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: port info -->
+    <div>
+      <h4 style="margin-bottom:16px;color:var(--text-muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700" data-i18n="pool_stratum_title">Stratum Connection Ports</h4>
+      <div class="port-grid">
+        <div class="port-row">
+          <div>
+            <div class="port-num">3333</div>
+            <div class="port-type" data-i18n="port_low">CPU / Low difficulty</div>
+          </div>
+          <span class="port-tag">5,000 diff</span>
+        </div>
+        <div class="port-row">
+          <div>
+            <div class="port-num">4444</div>
+            <div class="port-type" data-i18n="port_mid">GPU / Mid range</div>
+          </div>
+          <span class="port-tag">25,000 diff</span>
+        </div>
+        <div class="port-row">
+          <div>
+            <div class="port-num">5555</div>
+            <div class="port-type" data-i18n="port_high">GPU / High end</div>
+          </div>
+          <span class="port-tag">100,000 diff</span>
+        </div>
+      </div>
+      <div style="margin-top:20px;background:rgba(0,0,0,.3);border:1px solid var(--border-subtle);border-radius:var(--r-md);padding:14px 16px">
+        <div style="font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:8px;font-weight:700" data-i18n="pool_xmrig_label">XMRig Config Example</div>
+        <div style="font-family:var(--mono);font-size:.78rem;color:var(--text-secondary);line-height:1.9">
+          <span style="color:#6A9955">// pools entry</span><br>
+          <span style="color:#569CD6">"url"</span>: <span style="color:#CE9178">"stratum.nethxeum.com:3333"</span>,<br>
+          <span style="color:#569CD6">"user"</span>: <span style="color:#CE9178">"YOUR_NTU_ADDRESS"</span>,<br>
+          <span style="color:#569CD6">"pass"</span>: <span style="color:#CE9178">"x"</span>,<br>
+          <span style="color:#569CD6">"coin"</span>: <span style="color:#CE9178">"monero"</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </section>
-<!-- Halving Schedule Section -->
+
+<!-- ═══════════════════════════════════════ COMPARISON -->
 <section class="section section-alt">
 <div class="container">
-<div class="section-header">
-<span class="section-label" data-i18n="home_tokenomics">Tokenomics</span>
-<h2 class="section-title gradient-text" data-i18n="home_halving_schedule_1">Halving Schedule</h2>
-<p class="section-desc" data-i18n="home_nethxeum_follows_a_bitcoin_inspired">
-          Nethxeum follows a Bitcoin-inspired halving schedule. Every 420,000 blocks (~4 years), the block reward is cut in half. The total supply converges precisely to 42,000,000 NTU.
-        </p>
-</div>
-<div class="halving-chart">
-<div class="halving-bar-container">
-<div class="halving-bar-label" data-i18n-html="home_epoch_1_blocks_0_419_1">
-<span data-i18n-html="home_epoch_1_blocks_0_419_2"><strong data-i18n="home_epoch_1">Epoch 1</strong> — Blocks 0-419,999 (50 NTU/block)</span>
-<span data-i18n="home_21_000_000_ntu_50">21,000,000 NTU (50%)</span>
-</div>
-<div class="halving-bar">
-<div class="halving-bar-fill" style="width: 50%;"></div>
-</div>
-</div>
-<div class="halving-bar-container">
-<div class="halving-bar-label" data-i18n-html="home_epoch_2_blocks_420_000">
-<span data-i18n-html="home_epoch_2_blocks_420_000_1"><strong data-i18n="home_epoch_2">Epoch 2</strong> — Blocks 420,000-839,999 (25 NTU/block)</span>
-<span data-i18n="home_10_500_000_ntu_75">10,500,000 NTU (75% cumulative)</span>
-</div>
-<div class="halving-bar">
-<div class="halving-bar-fill" style="width: 25%; opacity: 0.8;"></div>
-</div>
-</div>
-<div class="halving-bar-container">
-<div class="halving-bar-label" data-i18n-html="home_epoch_3_blocks_840_000">
-<span data-i18n-html="home_epoch_3_blocks_840_000_1"><strong data-i18n="home_epoch_3">Epoch 3</strong> — Blocks 840,000-1,259,999 (12.5 NTU/block)</span>
-<span data-i18n="home_5_250_000_ntu_87">5,250,000 NTU (87.5% cumulative)</span>
-</div>
-<div class="halving-bar">
-<div class="halving-bar-fill" style="width: 12.5%; opacity: 0.65;"></div>
-</div>
-</div>
-<div class="halving-bar-container">
-<div class="halving-bar-label" data-i18n-html="home_epoch_4_blocks_1_260">
-<span data-i18n-html="home_epoch_4_blocks_1_260_1"><strong data-i18n="home_epoch_4">Epoch 4</strong> — Blocks 1,260,000-1,679,999 (6.25 NTU/block)</span>
-<span data-i18n="home_2_625_000_ntu_93">2,625,000 NTU (93.75% cumulative)</span>
-</div>
-<div class="halving-bar">
-<div class="halving-bar-fill" style="width: 6.25%; opacity: 0.5;"></div>
-</div>
-</div>
-<div class="halving-bar-container">
-<div class="halving-bar-label" data-i18n-html="home_epoch_5_continuing_halvings_until">
-<span data-i18n-html="home_epoch_5_continuing_halvings_until_1"><strong data-i18n="home_epoch_5">Epoch 5+</strong> — Continuing halvings until 0</span>
-<span data-i18n="home_2_625_000_ntu_100">~2,625,000+ NTU (100% at ~160 years)</span>
-</div>
-<div class="halving-bar">
-<div class="halving-bar-fill" style="width: 3%; opacity: 0.35;"></div>
-</div>
-</div>
-</div>
-<div class="grid-3" style="margin-top: 48px;">
-<div class="glass-card" style="text-align: center;">
-<i class="fas fa-check-circle" style="font-size: 2rem; color: #4CAF50; margin-bottom: 16px;"></i>
-<h4 data-i18n="home_no_premine">No Premine</h4>
-<p data-i18n="home_zero_coins_pre_allocated_fair" style="color: var(--text-secondary); font-size: 0.9rem;">Zero coins pre-allocated. Fair launch from block 0.</p>
-</div>
-<div class="glass-card" style="text-align: center;">
-<i class="fas fa-check-circle" style="font-size: 2rem; color: #4CAF50; margin-bottom: 16px;"></i>
-<h4 data-i18n="home_no_ico">No ICO</h4>
-<p data-i18n="home_no_initial_coin_offering_no" style="color: var(--text-secondary); font-size: 0.9rem;">No initial coin offering. No venture capital allocation.</p>
-</div>
-<div class="glass-card" style="text-align: center;">
-<i class="fas fa-check-circle" style="font-size: 2rem; color: #4CAF50; margin-bottom: 16px;"></i>
-<h4 data-i18n="home_no_developer_tax">No Developer Tax</h4>
-<p data-i18n="home_no_percentage_of_block_rewards" style="color: var(--text-secondary); font-size: 0.9rem;">No percentage of block rewards goes to developers.</p>
-</div>
-</div>
+  <div class="section-header">
+    <span class="section-label" data-i18n="compare_label">Comparison</span>
+    <h2 class="section-title" data-i18n="compare_title">How Nethxeum Compares</h2>
+    <p class="section-desc" data-i18n="compare_desc">The only cryptocurrency combining a hard supply cap with mandatory full privacy.</p>
+  </div>
+  <div class="comparison-wrapper">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th data-i18n="home_feature">Feature</th>
+          <th data-i18n="home_bitcoin_btc">Bitcoin (BTC)</th>
+          <th data-i18n="home_monero_xmr">Monero (XMR)</th>
+          <th data-i18n="home_nethxeum_ntu">Nethxeum (NTU)</th>
+          <th data-i18n="home_zcash_zec">Zcash (ZEC)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong data-i18n="home_hard_supply_cap_label">Hard Supply Cap</strong></td>
+          <td data-i18n="home_21m">21M</td>
+          <td><span class="cross" data-i18n="home_unlimited">Unlimited</span></td>
+          <td data-i18n="home_42m_1">42M</td>
+          <td data-i18n="home_21m_1">21M</td>
+        </tr>
+        <tr>
+          <td><strong data-i18n="home_halving_schedule_label">Halving Schedule</strong></td>
+          <td><span class="check" data-i18n="home_every_210k_blocks">Every 210K blocks</span></td>
+          <td><span class="cross" data-i18n="home_none_smooth_emission">None (smooth emission)</span></td>
+          <td><span class="check" data-i18n="home_every_420k_blocks">Every 420K blocks</span></td>
+          <td><span class="check" data-i18n="home_every_840k_blocks">Every 840K blocks</span></td>
+        </tr>
+        <tr>
+          <td><strong data-i18n="home_tail_emission_label">Tail Emission</strong></td>
+          <td><span class="check" data-i18n="home_none">None</span></td>
+          <td><span class="cross" data-i18n="home_0_6_xmr_min_forever">0.6 XMR/min forever</span></td>
+          <td><span class="check" data-i18n="home_none_0_ntu">None (0 NTU)</span></td>
+          <td><span class="check" data-i18n="home_none_1">None</span></td>
+        </tr>
+        <tr>
+          <td><strong data-i18n="home_default_privacy_label">Default Privacy</strong></td>
+          <td><span class="cross" data-i18n="home_public_ledger">Public ledger</span></td>
+          <td><span class="check" data-i18n="home_mandatory">Mandatory</span></td>
+          <td><span class="check" data-i18n="home_mandatory_1">Mandatory</span></td>
+          <td><span class="partial" data-i18n="home_opt_in_shielded">Opt-in (shielded)</span></td>
+        </tr>
+        <tr>
+          <td><strong data-i18n="home_sender_hidden_label">Sender Hidden</strong></td>
+          <td><span class="cross" data-i18n="home_visible">Visible</span></td>
+          <td><span class="check" data-i18n="home_ring_signatures">Ring signatures</span></td>
+          <td><span class="check" data-i18n="home_ring_signatures_1">Ring signatures</span></td>
+          <td><span class="partial" data-i18n="home_zk_snarks_shielded">zk-SNARKs (shielded)</span></td>
+        </tr>
+        <tr>
+          <td><strong data-i18n="home_amount_hidden_label">Amount Hidden</strong></td>
+          <td><span class="cross" data-i18n="home_visible_1">Visible</span></td>
+          <td><span class="check" data-i18n="home_ringct">RingCT</span></td>
+          <td><span class="check" data-i18n="home_ringct_1">RingCT</span></td>
+          <td><span class="partial" data-i18n="home_zk_snarks_shielded_1">zk-SNARKs (shielded)</span></td>
+        </tr>
+        <tr>
+          <td><strong data-i18n="home_fungible_label">Fungible</strong></td>
+          <td><span class="cross" data-i18n="home_tainted_coins_exist">Tainted coins exist</span></td>
+          <td><span class="check" data-i18n="home_perfect">Perfect</span></td>
+          <td><span class="check" data-i18n="home_perfect_1">Perfect</span></td>
+          <td><span class="partial" data-i18n="home_partial">Partial</span></td>
+        </tr>
+        <tr>
+          <td><strong data-i18n="home_asic_resistant_label">ASIC-Resistant</strong></td>
+          <td><span class="cross" data-i18n="home_sha_256_asic_dominated">SHA-256 (ASIC-dominated)</span></td>
+          <td><span class="check" data-i18n="home_randomx_cpu">RandomX (CPU)</span></td>
+          <td><span class="check" data-i18n="home_randomx_cpu_1">RandomX (CPU)</span></td>
+          <td><span class="cross" data-i18n="home_equihash_asic">Equihash (ASIC)</span></td>
+        </tr>
+        <tr>
+          <td><strong data-i18n="home_fair_launch_label">Fair Launch</strong></td>
+          <td><span class="check" data-i18n="home_yes_3">Yes</span></td>
+          <td><span class="check" data-i18n="home_yes_4">Yes</span></td>
+          <td><span class="check" data-i18n="home_yes_no_premine">Yes (No premine)</span></td>
+          <td><span class="cross" data-i18n="home_founders_reward">Founders reward</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 </section>
-<!-- Privacy Technology Section -->
+
+<!-- ═══════════════════════════════════════ TECHNICAL SPECS -->
 <section class="section">
 <div class="container">
-<div class="section-header">
-<span class="section-label" data-i18n="home_privacy_stack">Privacy Stack</span>
-<h2 class="section-title gradient-text" data-i18n="home_three_layer_privacy">Three-Layer Privacy</h2>
-<p class="section-desc" data-i18n="home_nethxeum_inherits_monero_s_cryptographi">
-          Nethxeum inherits Monero's cryptographic privacy stack — the most proven privacy technology in production cryptocurrency, tested for over a decade under adversarial conditions.
-        </p>
-</div>
-<div class="grid-3">
-<div class="feature-card reveal">
-<div class="feature-icon"><i class="fas fa-signature"></i></div>
-<h3 data-i18n="home_ring_signatures_2">Ring Signatures</h3>
-<p data-i18n="home_your_transaction_is_co_signed">Your transaction is co-signed alongside decoy outputs from the blockchain. An observer cannot determine which member of the ring is the actual sender. Minimum ring size enforced at protocol level.</p>
-</div>
-<div class="feature-card reveal">
-<div class="feature-icon" style="background: linear-gradient(135deg, #7B2FF7, #E040FB);"><i class="fas fa-eye-slash"></i></div>
-<h3 data-i18n="home_ringct_2">RingCT</h3>
-<p data-i18n="home_ring_confidential_transactions_hide_the">Ring Confidential Transactions hide the value of every input and output using Pedersen Commitments. Bulletproofs provide compact range proofs. No transaction amount is visible to any third party.</p>
-</div>
-<div class="feature-card reveal">
-<div class="feature-icon" style="background: linear-gradient(135deg, #E040FB, #FF4081);"><i class="fas fa-mask"></i></div>
-<h3 data-i18n="home_stealth_addresses">Stealth Addresses</h3>
-<p data-i18n="home_each_transaction_generates_a_unique">Each transaction generates a unique one-time address. Your published address never appears on the blockchain. Multiple payments cannot be linked to the same recipient.</p>
-</div>
-</div>
+  <div class="section-header">
+    <span class="section-label" data-i18n="tech_label">Technical Architecture</span>
+    <h2 class="section-title" data-i18n="tech_title">Built for Security &amp; Scale</h2>
+    <p class="section-desc" data-i18n="tech_desc">Forked from Monero v0.18.3.3 with Bitcoin-inspired parameters. Battle-tested cryptography meets sound money.</p>
+  </div>
+  <div class="specs-grid">
+    <div class="spec-card reveal"><div class="spec-label" data-i18n="home_codebase">Codebase</div><div class="spec-value" data-i18n="home_monero_v0_18_3_3">Monero v0.18.3.3</div><div class="spec-detail" data-i18n="home_fork_with_bitcoin_like_modification">Fork with Bitcoin-like modifications</div></div>
+    <div class="spec-card reveal"><div class="spec-label" data-i18n="home_consensus">Consensus</div><div class="spec-value" data-i18n="home_proof_of_work">Proof-of-Work</div><div class="spec-detail" data-i18n="home_randomx_algorithm_cpu_optimized">RandomX algorithm, CPU-optimized</div></div>
+    <div class="spec-card reveal"><div class="spec-label" data-i18n="home_block_time">Block Time</div><div class="spec-value" data-i18n="home_5_minutes_300s">5 minutes (300s)</div><div class="spec-detail" data-i18n="home_difficulty_target_v2">DIFFICULTY_TARGET_V2</div></div>
+    <div class="spec-card reveal"><div class="spec-label" data-i18n="home_max_supply">Max Supply</div><div class="spec-value" data-i18n="home_42_000_000_ntu">42,000,000 NTU</div><div class="spec-detail" data-i18n="home_hard_cap_never_exceeded">Hard cap — never exceeded</div></div>
+    <div class="spec-card reveal"><div class="spec-label" data-i18n="home_decimal_places">Decimal Places</div><div class="spec-value" data-i18n="home_8_pickatie">8 (picKatie)</div><div class="spec-detail" data-i18n="home_1_ntu_10_8_atomic">1 NTU = 10^8 atomic units</div></div>
+    <div class="spec-card reveal"><div class="spec-label" data-i18n="home_initial_block_reward">Initial Block Reward</div><div class="spec-value" data-i18n="home_50_ntu_per_block">50 NTU per block</div><div class="spec-detail" data-i18n="home_epoch_1_blocks_0_419">Epoch 1 (blocks 0–419,999)</div></div>
+    <div class="spec-card reveal"><div class="spec-label" data-i18n="home_halving_interval">Halving Interval</div><div class="spec-value" data-i18n="home_420_000_blocks">420,000 blocks</div><div class="spec-detail" data-i18n="home_4_years_at_5_min">~4 years at 5 min/block</div></div>
+    <div class="spec-card reveal"><div class="spec-label" data-i18n="home_tail_emission_1">Tail Emission</div><div class="spec-value" data-i18n="home_0_ntu">0 NTU</div><div class="spec-detail" data-i18n="home_hard_stop_at_42m_no">Hard stop at 42M — no inflation</div></div>
+    <div class="spec-card reveal"><div class="spec-label" data-i18n="home_block_maturity">Block Maturity</div><div class="spec-value" data-i18n="home_100_blocks">100 blocks</div><div class="spec-detail" data-i18n="home_bitcoin_like_confirmation">Bitcoin-like confirmation</div></div>
+    <div class="spec-card reveal"><div class="spec-label" data-i18n="home_p2p_port_mainnet">P2P Port</div><div class="spec-value" data-i18n="home_18333">18333</div><div class="spec-detail" data-i18n="home_peer_to_peer_network">Peer-to-peer network</div></div>
+    <div class="spec-card reveal"><div class="spec-label" data-i18n="home_rpc_port_mainnet">RPC Port</div><div class="spec-value" data-i18n="home_18331">18331</div><div class="spec-detail" data-i18n="home_json_rpc_api_endpoint">JSON-RPC API endpoint</div></div>
+    <div class="spec-card reveal"><div class="spec-label" data-i18n="home_address_prefix">Address Prefix</div><div class="spec-value" data-i18n="home_130_standard">130 (Standard)</div><div class="spec-detail" data-i18n="home_base58_encoded_addresses">Base58 encoded addresses</div></div>
+    <div class="spec-card reveal"><div class="spec-label" data-i18n="home_genesis_date">Genesis Date</div><div class="spec-value" data-i18n="home_may_31_2026">May 31, 2026</div><div class="spec-detail" data-i18n="home_founded_by_rony_katie">Founded by Rony Katie</div></div>
+  </div>
+  <div style="text-align:center;margin-top:44px">
+    <a class="btn btn-outline" href="pages/docs.html">View Full Documentation <i class="fas fa-arrow-right"></i></a>
+  </div>
 </div>
 </section>
-<!-- CTA Section -->
+
+<!-- ═══════════════════════════════════════ TOKENOMICS -->
 <section class="section section-alt">
-<div class="container" style="text-align: center;">
-<h2 class="section-title" data-i18n="cta_title" style="margin-bottom: 16px;">Join the Private Financial Network</h2>
-<p class="section-desc" data-i18n="cta_desc" style="margin-bottom: 40px;">Download the wallet, run a node, or start mining. Be part of the future of private finance.</p>
-<div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-<a class="btn btn-primary btn-glow" data-i18n="cta_download" href="pages/download.html">
-<i class="fas fa-download"></i> Download Wallet
-        </a>
-<a class="btn btn-secondary" href="https://pool.nethxeum.com" target="_blank" rel="noopener" data-i18n="cta_mine">
-<i class="fas fa-network-wired"></i> Start Mining
-        </a>
-<a class="btn btn-outline" data-i18n="cta_docs" href="pages/docs.html">
-<i class="fas fa-book"></i> Documentation
-        </a>
-</div>
+<div class="container">
+  <div class="section-header">
+    <span class="section-label" data-i18n="home_tokenomics">Tokenomics</span>
+    <h2 class="section-title gradient-text" data-i18n="home_halving_schedule_1">Halving Schedule</h2>
+    <p class="section-desc" data-i18n="home_nethxeum_follows_a_bitcoin_inspired">
+      Nethxeum follows a Bitcoin-inspired halving schedule. Every 420,000 blocks (~4 years), the block reward is cut in half. The total supply converges precisely to 42,000,000 NTU.
+    </p>
+  </div>
+  <div class="halving-chart">
+    <div class="halving-bar-container">
+      <div class="halving-bar-label">
+        <span><strong data-i18n="home_epoch_1">Epoch 1</strong> — Blocks 0–419,999 (50 NTU/block)</span>
+        <span data-i18n="home_21_000_000_ntu_50">21,000,000 NTU (50%)</span>
+      </div>
+      <div class="halving-bar"><div class="halving-bar-fill" style="width:50%"></div></div>
+    </div>
+    <div class="halving-bar-container">
+      <div class="halving-bar-label">
+        <span><strong data-i18n="home_epoch_2">Epoch 2</strong> — Blocks 420,000–839,999 (25 NTU/block)</span>
+        <span data-i18n="home_10_500_000_ntu_75">10,500,000 NTU (75% cumulative)</span>
+      </div>
+      <div class="halving-bar"><div class="halving-bar-fill" style="width:25%;opacity:.8"></div></div>
+    </div>
+    <div class="halving-bar-container">
+      <div class="halving-bar-label">
+        <span><strong data-i18n="home_epoch_3">Epoch 3</strong> — Blocks 840,000–1,259,999 (12.5 NTU/block)</span>
+        <span data-i18n="home_5_250_000_ntu_87">5,250,000 NTU (87.5% cumulative)</span>
+      </div>
+      <div class="halving-bar"><div class="halving-bar-fill" style="width:12.5%;opacity:.65"></div></div>
+    </div>
+    <div class="halving-bar-container">
+      <div class="halving-bar-label">
+        <span><strong data-i18n="home_epoch_4">Epoch 4</strong> — Blocks 1,260,000–1,679,999 (6.25 NTU/block)</span>
+        <span data-i18n="home_2_625_000_ntu_93">2,625,000 NTU (93.75% cumulative)</span>
+      </div>
+      <div class="halving-bar"><div class="halving-bar-fill" style="width:6.25%;opacity:.5"></div></div>
+    </div>
+    <div class="halving-bar-container" style="margin-bottom:0">
+      <div class="halving-bar-label">
+        <span><strong data-i18n="home_epoch_5">Epoch 5+</strong> — Continuing halvings until 0</span>
+        <span data-i18n="home_2_625_000_ntu_100">~2,625,000+ NTU (100% at ~160 years)</span>
+      </div>
+      <div class="halving-bar"><div class="halving-bar-fill" style="width:3%;opacity:.35"></div></div>
+    </div>
+  </div>
+  <div class="grid-3" style="margin-top:40px">
+    <div class="glass-card" style="text-align:center">
+      <i class="fas fa-check-circle" style="font-size:2rem;color:var(--success);margin-bottom:14px"></i>
+      <h4 style="margin-bottom:8px" data-i18n="home_no_premine">No Premine</h4>
+      <p style="color:var(--text-secondary);font-size:.875rem" data-i18n="home_zero_coins_pre_allocated_fair">Zero coins pre-allocated. Fair launch from block 0.</p>
+    </div>
+    <div class="glass-card" style="text-align:center">
+      <i class="fas fa-check-circle" style="font-size:2rem;color:var(--success);margin-bottom:14px"></i>
+      <h4 style="margin-bottom:8px" data-i18n="home_no_ico">No ICO</h4>
+      <p style="color:var(--text-secondary);font-size:.875rem" data-i18n="home_no_initial_coin_offering_no">No initial coin offering. No venture capital allocation.</p>
+    </div>
+    <div class="glass-card" style="text-align:center">
+      <i class="fas fa-check-circle" style="font-size:2rem;color:var(--success);margin-bottom:14px"></i>
+      <h4 style="margin-bottom:8px" data-i18n="home_no_developer_tax">No Developer Tax</h4>
+      <p style="color:var(--text-secondary);font-size:.875rem" data-i18n="home_no_percentage_of_block_rewards">No percentage of block rewards goes to developers.</p>
+    </div>
+  </div>
 </div>
 </section>
-<!-- Footer -->
+
+<!-- ═══════════════════════════════════════ PRIVACY TECH -->
+<section class="section">
+<div class="container">
+  <div class="section-header">
+    <span class="section-label" data-i18n="home_privacy_stack">Privacy Stack</span>
+    <h2 class="section-title gradient-text" data-i18n="home_three_layer_privacy">Three-Layer Privacy</h2>
+    <p class="section-desc" data-i18n="home_nethxeum_inherits_monero_s_cryptographi">
+      Nethxeum inherits Monero's cryptographic privacy stack — the most proven privacy technology in production cryptocurrency, tested for over a decade under adversarial conditions.
+    </p>
+  </div>
+  <div class="grid-3">
+    <div class="feature-card reveal">
+      <div class="feature-icon"><i class="fas fa-signature"></i></div>
+      <h3 style="margin-bottom:12px" data-i18n="home_ring_signatures_2">Ring Signatures</h3>
+      <p style="color:var(--text-secondary);font-size:.9rem;line-height:1.7" data-i18n="home_your_transaction_is_co_signed">Your transaction is co-signed alongside decoy outputs from the blockchain. An observer cannot determine which member of the ring is the actual sender. Minimum ring size enforced at protocol level.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon" style="background:var(--grad-vm)"><i class="fas fa-eye-slash"></i></div>
+      <h3 style="margin-bottom:12px" data-i18n="home_ringct_2">RingCT</h3>
+      <p style="color:var(--text-secondary);font-size:.9rem;line-height:1.7" data-i18n="home_ring_confidential_transactions_hide_the">Ring Confidential Transactions hide the value of every input and output using Pedersen Commitments. Bulletproofs provide compact range proofs. No transaction amount is visible to any third party.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon" style="background:linear-gradient(135deg,#E040FB,#FF4081)"><i class="fas fa-mask"></i></div>
+      <h3 style="margin-bottom:12px" data-i18n="home_stealth_addresses">Stealth Addresses</h3>
+      <p style="color:var(--text-secondary);font-size:.9rem;line-height:1.7" data-i18n="home_each_transaction_generates_a_unique">Each transaction generates a unique one-time address. Your published address never appears on the blockchain. Multiple payments cannot be linked to the same recipient.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════ CTA -->
+<section class="section cta-section">
+<div class="container" style="text-align:center;position:relative;z-index:1">
+  <h2 class="section-title" style="margin-bottom:16px" data-i18n="cta_title">Join the Private Financial Network</h2>
+  <p class="section-desc" style="margin-bottom:44px" data-i18n="cta_desc">Download the wallet, run a node, or start mining. Be part of the future of private finance.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <a class="btn btn-primary btn-glow" href="pages/download.html" data-i18n="cta_download">
+      <i class="fas fa-download"></i> Download Wallet
+    </a>
+    <a class="btn btn-secondary" href="https://pool.nethxeum.com" target="_blank" rel="noopener" data-i18n="cta_mine">
+      <i class="fas fa-network-wired"></i> Start Mining
+    </a>
+    <a class="btn btn-outline" href="pages/docs.html" data-i18n="cta_docs">
+      <i class="fas fa-book"></i> Documentation
+    </a>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════ FOOTER -->
 <footer class="main-footer">
 <div class="container">
-<div class="footer-grid">
-<div class="footer-brand">
-<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-<div class="logo-icon"><img alt="Nethxeum" src="images/logo.png"/></div>
-<span class="logo-text">Nethxeum</span>
-</div>
-<p data-i18n="footer_desc">Nethxeum (NTU) - A decentralized, privacy-preserving cryptocurrency. Founded by Rony Katie.</p>
-<div class="social-links" style="margin-top: 24px;">
-<a href="https://discord.gg/bwYwsyd4u" rel="noopener" target="_blank"><i class="fab fa-discord"></i></a>
-<a href="https://t.me/nethxeum_community" rel="noopener" target="_blank"><i class="fab fa-telegram"></i></a>
-<a href="https://x.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-x-twitter"></i></a>
-<a href="https://github.com/nethxeum" rel="noopener" target="_blank"><i class="fab fa-github"></i></a>
-</div>
-</div>
-<div class="footer-links">
-<h4 data-i18n="footer_getting_started">Getting Started</h4>
-<ul>
-<li><a data-i18n="nav_what_is" href="pages/what-is-nethxeum.html">What is Nethxeum?</a></li>
-<li><a data-i18n="nav_contribute" href="pages/contribute.html">Contribute</a></li>
-<li><a data-i18n="nav_mining" href="pages/mining.html">Mining</a></li>
-<li><a data-i18n="nav_faq" href="pages/faq.html">FAQ</a></li>
-</ul>
-</div>
-<div class="footer-links">
-<h4 data-i18n="footer_resources">Resources</h4>
-<ul>
-<li><a data-i18n="nav_about" href="pages/about.html">About</a></li>
-<li><a data-i18n="nav_whitepaper" href="whitepaper/Nethxeum_Whitepaper.pdf">Whitepaper</a></li>
-<li><a data-i18n="nav_vocab" href="pages/vocabulary.html">Vocabulary</a></li>
-<li><a data-i18n="nav_user_guides" href="pages/user-guides.html">User Guides</a></li>
-<li><a data-i18n="nav_dev_guides" href="pages/dev-guides.html">Developer Guides</a></li>
-</ul>
-</div>
-<div class="footer-links">
-<h4 data-i18n="footer_mining">Mining</h4>
-<ul>
-<li><a data-i18n="nav_pool" href="https://pool.nethxeum.com" target="_blank" rel="noopener">Mining Pool</a></li>
-<li><a data-i18n="nav_mining" href="pages/mining.html">Mining Guide</a></li>
-<li><a href="https://pool.nethxeum.com" target="_blank" rel="noopener" data-i18n="footer_pool_stats">Pool Stats</a></li>
-<li><a href="pages/getting-started.html" data-i18n="footer_start_mining">Start Mining</a></li>
-</ul>
-</div>
-<div class="footer-links">
-<h4 data-i18n="footer_other">Other</h4>
-<ul>
-<li><a data-i18n="nav_scams" href="pages/avoid-scams.html">Avoid Scams</a></li>
-<li><a data-i18n="nav_legal" href="pages/legal.html">Legal</a></li>
-<li><a data-i18n="nav_privacy" href="pages/privacy-policy.html">Privacy Policy</a></li>
-<li><a data-i18n="nav_blog" href="pages/blog.html">Blog</a></li>
-</ul>
-</div>
-</div>
-<div class="footer-bottom">
-<p data-i18n="footer_copyright"> Nethxeum Project 2026. Released under the MIT license.</p>
-<p style="color: var(--text-muted); font-size: 0.8rem;"> explorer.nethxeum.com (coming soon)</p>
-</div>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="nav-logo" href="index.html" style="text-decoration:none">
+        <div class="logo-icon"><img alt="Nethxeum" src="images/logo.png"/></div>
+        <span class="logo-text">Nethxeum</span>
+      </a>
+      <p data-i18n="footer_desc">Nethxeum (NTU) — A decentralized, privacy-preserving cryptocurrency. Founded by Rony Katie.</p>
+      <div class="social-links">
+        <a href="https://discord.gg/bwYwsyd4u" rel="noopener" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+        <a href="https://t.me/nethxeum_community" rel="noopener" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+        <a href="https://x.com/nethxeum" rel="noopener" target="_blank" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://github.com/nethxeum" rel="noopener" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <h4 data-i18n="footer_getting_started">Getting Started</h4>
+      <ul>
+        <li><a href="pages/what-is-nethxeum.html" data-i18n="nav_what_is">What is Nethxeum?</a></li>
+        <li><a href="pages/contribute.html" data-i18n="nav_contribute">Contribute</a></li>
+        <li><a href="pages/mining.html" data-i18n="nav_mining">Mining</a></li>
+        <li><a href="pages/faq.html" data-i18n="nav_faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4 data-i18n="footer_resources">Resources</h4>
+      <ul>
+        <li><a href="pages/about.html" data-i18n="nav_about">About</a></li>
+        <li><a href="whitepaper/Nethxeum_Whitepaper.pdf" data-i18n="nav_whitepaper">Whitepaper</a></li>
+        <li><a href="pages/vocabulary.html" data-i18n="nav_vocab">Vocabulary</a></li>
+        <li><a href="pages/user-guides.html" data-i18n="nav_user_guides">User Guides</a></li>
+        <li><a href="pages/dev-guides.html" data-i18n="nav_dev_guides">Developer Guides</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4 data-i18n="footer_mining">Mining</h4>
+      <ul>
+        <li><a href="https://pool.nethxeum.com" target="_blank" rel="noopener" data-i18n="nav_pool">Mining Pool</a></li>
+        <li><a href="pages/mining.html" data-i18n="nav_mining">Mining Guide</a></li>
+        <li><a href="https://pool.nethxeum.com" target="_blank" rel="noopener" data-i18n="footer_pool_stats">Pool Stats</a></li>
+        <li><a href="pages/getting-started.html" data-i18n="footer_start_mining">Start Mining</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4 data-i18n="footer_other">Other</h4>
+      <ul>
+        <li><a href="pages/avoid-scams.html" data-i18n="nav_scams">Avoid Scams</a></li>
+        <li><a href="pages/legal.html" data-i18n="nav_legal">Legal</a></li>
+        <li><a href="pages/privacy-policy.html" data-i18n="nav_privacy">Privacy Policy</a></li>
+        <li><a href="pages/blog.html" data-i18n="nav_blog">Blog</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-i18n="footer_copyright">Nethxeum Project 2026. Released under the MIT license.</p>
+    <p style="color:var(--text-muted);font-size:.78rem">explorer.nethxeum.com — <span data-i18n="footer_explorer_soon">coming soon</span></p>
+  </div>
 </div>
 </footer>
+
 <script src="js/main.js"></script>
 </body>
 </html>
