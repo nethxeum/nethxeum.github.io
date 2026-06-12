@@ -31,8 +31,8 @@
 <ul class="nav-links">
 <li><a data-i18n="nav_getting_started" href="pages/getting-started.html">Getting Started</a></li>
 <li><a data-i18n="nav_download" href="pages/download.html">Downloads</a></li>
-<li><a data-i18n="nav_library" href="pages/library.html">Library</a></li>
-<li><a data-i18n="nav_blog" href="pages/blog.html">Blog</a></li>
+<li><a data-i18n="nav_mining" href="pages/mining.html">Mining</a></li>
+<li><a data-i18n="nav_pool" href="https://pool.nethxeum.com" target="_blank" rel="noopener" style="color:var(--ntu-cyan)">Mining Pool <i class="fas fa-external-link-alt" style="font-size:0.65rem;vertical-align:middle"></i></a></li>
 <li><a data-i18n="nav_community" href="pages/community.html">Community</a></li>
 <li><a data-i18n="nav_resources" href="pages/resources.html">Resources</a></li>
 </ul>
@@ -97,6 +97,7 @@
 <li><a data-i18n="nav_library" href="pages/library.html">Library</a></li>
 <li><a data-i18n="nav_blog" href="pages/blog.html">Blog</a></li>
 <li><a data-i18n="nav_community" href="pages/community.html">Community</a></li>
+<li><a data-i18n="nav_pool" href="https://pool.nethxeum.com" target="_blank" rel="noopener" style="color:var(--ntu-cyan)">Mining Pool</a></li>
 </ul>
 <div class="mobile-menu-category" data-i18n="nav_resources">Resources</div>
 <ul class="mobile-menu-links">
@@ -122,12 +123,15 @@
 <p class="hero-subtitle" data-i18n="hero_subtitle">
           Nethxeum combines Bitcoin-like scarcity with Monero-grade privacy. 42 million coins. No premine. No ICO. Pure privacy by design.
         </p>
-<div class="hero-buttons" data-i18n-html="home_about_nethxeumjoin_community">
-<a class="btn btn-primary btn-glow" data-i18n="btn_about" href="pages/about.html">
-<i class="fas fa-info-circle"></i> About Nethxeum
+<div class="hero-buttons">
+<a class="btn btn-primary btn-glow" data-i18n="cta_download" href="pages/download.html">
+<i class="fas fa-download"></i> Download Wallet
           </a>
-<a class="btn btn-secondary" data-i18n="btn_community" href="pages/community.html">
-<i class="fas fa-users"></i> Join Community
+<a class="btn btn-secondary" href="https://pool.nethxeum.com" target="_blank" rel="noopener" data-i18n="cta_mine">
+<i class="fas fa-network-wired"></i> Start Mining
+          </a>
+<a class="btn btn-outline" data-i18n="btn_about" href="pages/about.html">
+<i class="fas fa-info-circle"></i> About
           </a>
 </div>
 <!-- Stats Bar -->
@@ -209,6 +213,59 @@
 <div class="feature-icon" style="background: linear-gradient(135deg, #00D4FF, #0077FF);"><i class="fas fa-microchip"></i></div>
 <h3 data-i18n="feature_mining_title">Democratic Mining</h3>
 <p data-i18n="feature_mining_desc">RandomX algorithm optimized for CPUs. Mine with any computer. No ASICs. No industrial farms needed.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Get Started Section -->
+<section class="section section-alt">
+<div class="container">
+<div class="section-header">
+<span class="section-label" data-i18n="start_label">Start Now</span>
+<h2 class="section-title" data-i18n="start_title">Get Started in 3 Steps</h2>
+<p class="section-desc" data-i18n="start_desc">From zero to mining in minutes. Everything you need is free and open source.</p>
+</div>
+<div class="grid-3" style="margin-top:0">
+<div class="glass-card reveal" style="text-align:center;position:relative;">
+<div style="width:48px;height:48px;background:var(--gradient-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:1.4rem;font-weight:900;color:#fff">1</div>
+<h3 data-i18n="start_step1_title" style="margin-bottom:12px">Download Wallet</h3>
+<p data-i18n="start_step1_desc" style="color:var(--text-secondary);margin-bottom:24px">Download the GUI or CLI wallet to store and manage your NTU securely on your computer.</p>
+<a class="btn btn-outline" href="pages/download.html" data-i18n="start_step1_btn"><i class="fas fa-download"></i> Download</a>
+</div>
+<div class="glass-card reveal" style="text-align:center;border-color:rgba(0,212,255,0.25);">
+<div style="width:48px;height:48px;background:var(--gradient-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:1.4rem;font-weight:900;color:#fff">2</div>
+<h3 data-i18n="start_step2_title" style="margin-bottom:12px">Join the Pool</h3>
+<p data-i18n="start_step2_desc" style="color:var(--text-secondary);margin-bottom:24px">Connect your miner to pool.nethxeum.com — PPLNS rewards, 1% fee, instant payouts as blocks unlock.</p>
+<a class="btn btn-primary btn-glow" href="https://pool.nethxeum.com" target="_blank" rel="noopener" data-i18n="start_step2_btn"><i class="fas fa-network-wired"></i> Open Pool</a>
+</div>
+<div class="glass-card reveal" style="text-align:center;">
+<div style="width:48px;height:48px;background:var(--gradient-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:1.4rem;font-weight:900;color:#fff">3</div>
+<h3 data-i18n="start_step3_title" style="margin-bottom:12px">Start Mining</h3>
+<p data-i18n="start_step3_desc" style="color:var(--text-secondary);margin-bottom:24px">Point XMRig or any RandomX miner at stratum.nethxeum.com:3333. CPU mining — no GPU or ASIC needed.</p>
+<a class="btn btn-outline" href="pages/mining.html" data-i18n="start_step3_btn"><i class="fas fa-microchip"></i> Mining Guide</a>
+</div>
+</div>
+<!-- Pool stats bar -->
+<div style="margin-top:48px;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:20px;padding:32px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px;text-align:center">
+<div>
+<div style="font-size:1.5rem;font-weight:800;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" data-i18n="pool_stat_fee">1%</div>
+<div style="font-size:0.85rem;color:var(--text-muted);margin-top:4px" data-i18n="pool_stat_fee_label">Pool Fee</div>
+</div>
+<div>
+<div style="font-size:1.5rem;font-weight:800;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" data-i18n="pool_stat_payout">1 NTU</div>
+<div style="font-size:0.85rem;color:var(--text-muted);margin-top:4px" data-i18n="pool_stat_payout_label">Min Payout</div>
+</div>
+<div>
+<div style="font-size:1.5rem;font-weight:800;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" data-i18n="pool_stat_method">PPLNS</div>
+<div style="font-size:0.85rem;color:var(--text-muted);margin-top:4px" data-i18n="pool_stat_method_label">Reward Method</div>
+</div>
+<div>
+<div style="font-size:1.5rem;font-weight:800;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" data-i18n="pool_stat_algo">RandomX</div>
+<div style="font-size:0.85rem;color:var(--text-muted);margin-top:4px" data-i18n="pool_stat_algo_label">Algorithm</div>
+</div>
+<div>
+<div style="font-size:1.5rem;font-weight:800;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" data-i18n="pool_stat_reward">50 NTU</div>
+<div style="font-size:0.85rem;color:var(--text-muted);margin-top:4px" data-i18n="pool_stat_reward_label">Block Reward</div>
 </div>
 </div>
 </div>
@@ -513,12 +570,15 @@
 <div class="container" style="text-align: center;">
 <h2 class="section-title" data-i18n="cta_title" style="margin-bottom: 16px;">Join the Private Financial Network</h2>
 <p class="section-desc" data-i18n="cta_desc" style="margin-bottom: 40px;">Download the wallet, run a node, or start mining. Be part of the future of private finance.</p>
-<div data-i18n-html="home_download_walletread_documentatio" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+<div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
 <a class="btn btn-primary btn-glow" data-i18n="cta_download" href="pages/download.html">
 <i class="fas fa-download"></i> Download Wallet
         </a>
-<a class="btn btn-secondary" data-i18n="cta_docs" href="pages/docs.html">
-<i class="fas fa-book"></i> Read Documentation
+<a class="btn btn-secondary" href="https://pool.nethxeum.com" target="_blank" rel="noopener" data-i18n="cta_mine">
+<i class="fas fa-network-wired"></i> Start Mining
+        </a>
+<a class="btn btn-outline" data-i18n="cta_docs" href="pages/docs.html">
+<i class="fas fa-book"></i> Documentation
         </a>
 </div>
 </div>
@@ -557,6 +617,15 @@
 <li><a data-i18n="nav_vocab" href="pages/vocabulary.html">Vocabulary</a></li>
 <li><a data-i18n="nav_user_guides" href="pages/user-guides.html">User Guides</a></li>
 <li><a data-i18n="nav_dev_guides" href="pages/dev-guides.html">Developer Guides</a></li>
+</ul>
+</div>
+<div class="footer-links">
+<h4 data-i18n="footer_mining">Mining</h4>
+<ul>
+<li><a data-i18n="nav_pool" href="https://pool.nethxeum.com" target="_blank" rel="noopener">Mining Pool</a></li>
+<li><a data-i18n="nav_mining" href="pages/mining.html">Mining Guide</a></li>
+<li><a href="https://pool.nethxeum.com" target="_blank" rel="noopener" data-i18n="footer_pool_stats">Pool Stats</a></li>
+<li><a href="pages/getting-started.html" data-i18n="footer_start_mining">Start Mining</a></li>
 </ul>
 </div>
 <div class="footer-links">

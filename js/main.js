@@ -73,10 +73,45 @@ const translations = {
     cta_download: "Download Wallet",
     cta_docs: "Read Documentation",
     
+    // Navigation extra
+    nav_pool: "Mining Pool",
+
+    // Get Started Section
+    start_label: "Start Now",
+    start_title: "Get Started in 3 Steps",
+    start_desc: "From zero to mining in minutes. Everything you need is free and open source.",
+    start_step1_title: "Download Wallet",
+    start_step1_desc: "Download the GUI or CLI wallet to store and manage your NTU securely on your computer.",
+    start_step1_btn: "Download",
+    start_step2_title: "Join the Pool",
+    start_step2_desc: "Connect your miner to pool.nethxeum.com — PPLNS rewards, 1% fee, instant payouts as blocks unlock.",
+    start_step2_btn: "Open Pool",
+    start_step3_title: "Start Mining",
+    start_step3_desc: "Point XMRig or any RandomX miner at stratum.nethxeum.com:3333. CPU mining — no GPU or ASIC needed.",
+    start_step3_btn: "Mining Guide",
+
+    // Pool stats
+    pool_stat_fee: "1%",
+    pool_stat_fee_label: "Pool Fee",
+    pool_stat_payout: "1 NTU",
+    pool_stat_payout_label: "Min Payout",
+    pool_stat_method: "PPLNS",
+    pool_stat_method_label: "Reward Method",
+    pool_stat_algo: "RandomX",
+    pool_stat_algo_label: "Algorithm",
+    pool_stat_reward: "50 NTU",
+    pool_stat_reward_label: "Block Reward",
+
+    // CTA extra
+    cta_mine: "Start Mining",
+
     // Footer
     footer_desc: "Nethxeum (NTU) - A decentralized, privacy-preserving cryptocurrency. Founded by Rony Katie.",
     footer_getting_started: "GETTING STARTED",
     footer_resources: "RESOURCES",
+    footer_mining: "MINING",
+    footer_pool_stats: "Pool Stats",
+    footer_start_mining: "Start Mining",
     footer_other: "OTHER",
     footer_copyright: "Nethxeum Project 2026. Released under the MIT license.",
   },
@@ -146,10 +181,45 @@ const translations = {
     cta_download: "Télécharger le Portefeuille",
     cta_docs: "Lire la Documentation",
     
+    // Navigation extra
+    nav_pool: "Pool de Minage",
+
+    // Get Started Section
+    start_label: "Commencer",
+    start_title: "Démarrez en 3 Étapes",
+    start_desc: "Du zéro au minage en quelques minutes. Tout ce dont vous avez besoin est gratuit et open source.",
+    start_step1_title: "Télécharger le Portefeuille",
+    start_step1_desc: "Téléchargez le portefeuille GUI ou CLI pour stocker et gérer vos NTU en toute sécurité.",
+    start_step1_btn: "Télécharger",
+    start_step2_title: "Rejoindre le Pool",
+    start_step2_desc: "Connectez votre mineur à pool.nethxeum.com — récompenses PPLNS, frais 1%, paiements instantanés.",
+    start_step2_btn: "Ouvrir le Pool",
+    start_step3_title: "Commencer à Miner",
+    start_step3_desc: "Pointez XMRig ou tout mineur RandomX vers stratum.nethxeum.com:3333. Minage CPU — pas de GPU ni d'ASIC.",
+    start_step3_btn: "Guide de Minage",
+
+    // Pool stats
+    pool_stat_fee: "1%",
+    pool_stat_fee_label: "Frais du Pool",
+    pool_stat_payout: "1 NTU",
+    pool_stat_payout_label: "Paiement Min",
+    pool_stat_method: "PPLNS",
+    pool_stat_method_label: "Méthode de Récompense",
+    pool_stat_algo: "RandomX",
+    pool_stat_algo_label: "Algorithme",
+    pool_stat_reward: "50 NTU",
+    pool_stat_reward_label: "Récompense de Bloc",
+
+    // CTA extra
+    cta_mine: "Commencer à Miner",
+
     // Footer
     footer_desc: "Nethxeum (NTU) - Une cryptomonnaie décentralisée préservant la confidentialité. Fondée par Rony Katie.",
     footer_getting_started: "COMMENCER",
     footer_resources: "RESSOURCES",
+    footer_mining: "MINAGE",
+    footer_pool_stats: "Stats du Pool",
+    footer_start_mining: "Commencer à Miner",
     footer_other: "AUTRE",
     footer_copyright: "Projet Nethxeum 2026. Publié sous licence MIT.",
   },
