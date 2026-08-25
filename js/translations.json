@@ -716,7 +716,7 @@
     "vocab_key_terms_and_definitions_for": "Key terms and definitions for understanding Nethxeum.",
     "vocab_a_f": "A-F",
     "vocab_address": "Address",
-    "vocab_a_string_of_characters_used": "A string of characters used to receive NTU. Starts with \"NTU\" followed by encoded public keys.",
+    "vocab_a_string_of_characters_used": "A string of characters used to receive NTU. Starts with \"Nk\" followed by encoded public keys.",
     "vocab_atomic_unit": "Atomic Unit",
     "vocab_the_smallest_denomination_of_ntu": "The smallest denomination of NTU. 1 NTU = 10^8 atomic units (8 decimal places).",
     "vocab_block": "Block",
