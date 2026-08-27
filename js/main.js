@@ -1498,8 +1498,13 @@ function initHeroAnimation() {
 // ============================================
 
 function initNetworkAnimation() {
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
+  let canvas = document.getElementById('network-canvas');
+  if (!canvas) {
+    canvas = document.createElement('canvas');
+    canvas.id = 'network-canvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    document.body.insertBefore(canvas, document.body.firstChild);
+  }
 
   const context = canvas.getContext('2d');
   if (!context) return;
@@ -1517,6 +1522,7 @@ function initNetworkAnimation() {
   let dpr = 1;
   let nodes = [];
   let packets = [];
+  let arrivalBursts = [];
   let lastFrame = 0;
   let lastPacketSpawn = 0;
 
@@ -1531,17 +1537,21 @@ function initNetworkAnimation() {
     canvas.style.height = `${height}px`;
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const count = width < 700 ? 26 : 58;
+    const count = width < 700 ? 24 : 58;
     nodes = Array.from({ length: count }, (_, index) => ({
       x: width * (.49 + Math.random() * .49),
       y: height * (.18 + Math.random() * .63),
+      homeX: width * (.49 + Math.random() * .49),
+      homeY: height * (.18 + Math.random() * .63),
       vx: (Math.random() - .5) * .035,
       vy: (Math.random() - .5) * .035,
       radius: index % 9 === 0 ? 3.6 : 2 + Math.random() * 1.5,
       phase: Math.random() * Math.PI * 2,
-      accent: index % 3 === 0 ? palette.violet : palette.cyan
+      accent: index % 3 === 0 ? palette.violet : palette.cyan,
+      cluster: index % 3
     }));
     packets = [];
+    arrivalBursts = [];
   }
 
   function drawGrid() {
@@ -1617,6 +1627,34 @@ function initNetworkAnimation() {
     context.restore();
   }
 
+  function drawNetworkCore(timestamp) {
+    const coreX = width * .78;
+    const coreY = height * .58;
+    const rotation = timestamp * .00012;
+    context.save();
+    context.translate(coreX, coreY);
+    context.rotate(rotation);
+    context.setLineDash([2, 7]);
+    context.lineWidth = 1;
+    for (let ring = 0; ring < 3; ring++) {
+      context.strokeStyle = ring % 2
+        ? 'rgba(123,47,247,.13)'
+        : 'rgba(0,212,255,.13)';
+      context.beginPath();
+      context.ellipse(0, 0, 92 + ring * 24, 34 + ring * 13, ring * .35, 0, Math.PI * 2);
+      context.stroke();
+    }
+    context.setLineDash([]);
+    const coreGlow = context.createRadialGradient(0, 0, 0, 0, 0, 70);
+    coreGlow.addColorStop(0, 'rgba(0,212,255,.14)');
+    coreGlow.addColorStop(1, 'rgba(0,212,255,0)');
+    context.fillStyle = coreGlow;
+    context.beginPath();
+    context.arc(0, 0, 70, 0, Math.PI * 2);
+    context.fill();
+    context.restore();
+  }
+
   function getEdges() {
     const edges = [];
     nodes.forEach((node, sourceIndex) => {
@@ -1635,6 +1673,7 @@ function initNetworkAnimation() {
     context.clearRect(0, 0, width, height);
     drawGrid();
     drawBlockchain(timestamp);
+    drawNetworkCore(timestamp);
 
     nodes.forEach(node => {
       if (!prefersReducedMotion) {
@@ -1642,6 +1681,8 @@ function initNetworkAnimation() {
         node.y += node.vy;
         if (node.x < width * .49 || node.x > width * .99) node.vx *= -1;
         if (node.y < height * .17 || node.y > height * .86) node.vy *= -1;
+        node.x += (node.homeX - node.x) * .0007;
+        node.y += (node.homeY - node.y) * .0007;
       }
     });
 
@@ -1655,36 +1696,72 @@ function initNetworkAnimation() {
       gradient.addColorStop(1, 'rgba(0,212,255,.08)');
       context.strokeStyle = gradient;
       context.lineWidth = 1;
+      context.globalAlpha = .72 + Math.sin(timestamp * .001 + edge.source) * .12;
       context.beginPath();
       context.moveTo(source.x, source.y);
       context.lineTo(target.x, target.y);
       context.stroke();
+      context.globalAlpha = 1;
     });
 
     if (!prefersReducedMotion && timestamp - lastPacketSpawn > 700 && edges.length) {
       const edge = edges[Math.floor(Math.random() * edges.length)];
-      packets.push({ edge, progress: 0, speed: .00055 + Math.random() * .00045 });
+      packets.push({
+        edge,
+        progress: 0,
+        previousProgress: 0,
+        speed: .00055 + Math.random() * .00045,
+        hue: Math.random() > .25 ? palette.cyan : palette.magenta
+      });
       lastPacketSpawn = timestamp;
     }
 
     packets = packets.filter(packet => {
+      packet.previousProgress = packet.progress;
       packet.progress += packet.speed * Math.max(16, timestamp - lastFrame);
       const source = nodes[packet.edge.source];
       const target = nodes[packet.edge.target];
       const x = source.x + (target.x - source.x) * packet.progress;
       const y = source.y + (target.y - source.y) * packet.progress;
+      const trailProgress = Math.max(0, packet.progress - .12);
+      const trailX = source.x + (target.x - source.x) * trailProgress;
+      const trailY = source.y + (target.y - source.y) * trailProgress;
+      context.strokeStyle = packet.hue === palette.magenta
+        ? 'rgba(224,64,251,.52)'
+        : 'rgba(0,212,255,.58)';
+      context.lineWidth = 1.5;
+      context.beginPath();
+      context.moveTo(trailX, trailY);
+      context.lineTo(x, y);
+      context.stroke();
       const glow = context.createRadialGradient(x, y, 0, x, y, 13);
-      glow.addColorStop(0, 'rgba(0,212,255,.65)');
-      glow.addColorStop(1, 'rgba(0,212,255,0)');
+      glow.addColorStop(0, packet.hue === palette.magenta ? 'rgba(224,64,251,.72)' : 'rgba(0,212,255,.72)');
+      glow.addColorStop(1, packet.hue === palette.magenta ? 'rgba(224,64,251,0)' : 'rgba(0,212,255,0)');
       context.fillStyle = glow;
       context.beginPath();
       context.arc(x, y, 13, 0, Math.PI * 2);
       context.fill();
-      context.fillStyle = palette.cyan;
+      context.fillStyle = packet.hue;
       context.beginPath();
       context.arc(x, y, 2.2, 0, Math.PI * 2);
       context.fill();
+      if (packet.progress >= 1) {
+        arrivalBursts.push({ x: target.x, y: target.y, progress: 0, color: packet.hue });
+      }
       return packet.progress < 1;
+    });
+
+    arrivalBursts = arrivalBursts.filter(burst => {
+      burst.progress += Math.max(16, timestamp - lastFrame) * .0024;
+      const radius = 4 + burst.progress * 24;
+      context.strokeStyle = burst.color === palette.magenta
+        ? `rgba(224,64,251,${Math.max(0, .7 - burst.progress)})`
+        : `rgba(0,212,255,${Math.max(0, .7 - burst.progress)})`;
+      context.lineWidth = 1.5;
+      context.beginPath();
+      context.arc(burst.x, burst.y, radius, 0, Math.PI * 2);
+      context.stroke();
+      return burst.progress < 1;
     });
 
     nodes.forEach((node, index) => {
