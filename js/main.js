@@ -1137,6 +1137,12 @@ const nav = document.querySelector('.main-nav');
 const announceBar = document.getElementById('announce-bar');
 const ANN_H = 38; // must match --ann-h in CSS
 
+function updateScrollProgress() {
+  const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0;
+  document.documentElement.style.setProperty('--scroll-progress', `${progress}%`);
+}
+
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
 
@@ -1156,7 +1162,9 @@ window.addEventListener('scroll', () => {
       nav.classList.remove('scrolled');
     }
   }
+  updateScrollProgress();
 });
+window.addEventListener('resize', updateScrollProgress);
 
 // ============================================
 // MOBILE MENU
@@ -1208,6 +1216,26 @@ function markCurrentPage() {
       link.setAttribute('aria-current', 'page');
     }
   });
+}
+
+function initAmbientInterface() {
+  const progress = document.createElement('div');
+  progress.id = 'scroll-progress';
+  progress.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(progress);
+
+  const pointerGlow = document.createElement('div');
+  pointerGlow.className = 'pointer-glow';
+  pointerGlow.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(pointerGlow);
+
+  if (window.matchMedia('(pointer: fine)').matches) {
+    window.addEventListener('pointermove', (e) => {
+      document.body.style.setProperty('--pointer-x', `${e.clientX}px`);
+      document.body.style.setProperty('--pointer-y', `${e.clientY}px`);
+    }, { passive: true });
+  }
+  updateScrollProgress();
 }
 
 // ============================================
@@ -1472,6 +1500,7 @@ function initHeroAnimation() {
 document.addEventListener('DOMContentLoaded', () => {
   setLanguage(currentLang);
   markCurrentPage();
+  initAmbientInterface();
   if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
   
   // Initialize Three.js if available
