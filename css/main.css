@@ -312,7 +312,15 @@ h4 { font-size: clamp(.95rem, 2vw, 1.2rem); }
     radial-gradient(ellipse 55% 70% at 82% 28%, rgba(123,47,247,.09) 0%, transparent 55%),
     radial-gradient(ellipse 35% 45% at 58% 82%, rgba(224,64,251,.06) 0%, transparent 55%);
 }
-#hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: .92;
+  mix-blend-mode: screen;
+}
 
 .hero-grid {
   position: relative; z-index: 1;

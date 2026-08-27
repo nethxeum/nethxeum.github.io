@@ -1494,6 +1494,229 @@ function initHeroAnimation() {
 }
 
 // ============================================
+// 2D NETWORK / TRANSACTION / BLOCKCHAIN ANIMATION
+// ============================================
+
+function initNetworkAnimation() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+
+  const context = canvas.getContext('2d');
+  if (!context) return;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const palette = {
+    cyan: '#00D4FF',
+    violet: '#7B2FF7',
+    magenta: '#E040FB',
+    text: 'rgba(238,242,255,.62)',
+    faint: 'rgba(238,242,255,.16)'
+  };
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+  let nodes = [];
+  let packets = [];
+  let lastFrame = 0;
+  let lastPacketSpawn = 0;
+
+  function resize() {
+    const bounds = canvas.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = Math.max(1, bounds.width);
+    height = Math.max(1, bounds.height);
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    context.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const count = width < 700 ? 26 : 58;
+    nodes = Array.from({ length: count }, (_, index) => ({
+      x: width * (.49 + Math.random() * .49),
+      y: height * (.18 + Math.random() * .63),
+      vx: (Math.random() - .5) * .035,
+      vy: (Math.random() - .5) * .035,
+      radius: index % 9 === 0 ? 3.6 : 2 + Math.random() * 1.5,
+      phase: Math.random() * Math.PI * 2,
+      accent: index % 3 === 0 ? palette.violet : palette.cyan
+    }));
+    packets = [];
+  }
+
+  function drawGrid() {
+    context.lineWidth = 1;
+    context.strokeStyle = 'rgba(0,212,255,.035)';
+    const size = 42;
+    for (let x = width * .48; x < width; x += size) {
+      context.beginPath();
+      context.moveTo(x, height * .12);
+      context.lineTo(x, height * .88);
+      context.stroke();
+    }
+    for (let y = height * .12; y < height * .88; y += size) {
+      context.beginPath();
+      context.moveTo(width * .48, y);
+      context.lineTo(width, y);
+      context.stroke();
+    }
+  }
+
+  function drawBlockchain(timestamp) {
+    const blockCount = 5;
+    const blockWidth = Math.min(72, width * .07);
+    const gap = 14;
+    const startX = Math.max(width * .51, width - (blockCount * blockWidth + (blockCount - 1) * gap) - 34);
+    const y = Math.max(148, height * .18);
+
+    context.save();
+    context.font = '600 8px "JetBrains Mono", "Fira Code", monospace';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+
+    for (let index = 0; index < blockCount; index++) {
+      const x = startX + index * (blockWidth + gap);
+      const pulse = (Math.sin(timestamp * .0018 + index * 1.2) + 1) / 2;
+      const blockGradient = context.createLinearGradient(x, y, x + blockWidth, y + 38);
+      blockGradient.addColorStop(0, index === blockCount - 1 ? 'rgba(0,212,255,.2)' : 'rgba(123,47,247,.12)');
+      blockGradient.addColorStop(1, 'rgba(8,8,25,.8)');
+      context.fillStyle = blockGradient;
+      context.strokeStyle = index === blockCount - 1
+        ? `rgba(0,212,255,${.42 + pulse * .25})`
+        : 'rgba(123,47,247,.26)';
+      context.lineWidth = 1;
+      context.beginPath();
+      context.roundRect(x, y, blockWidth, 38, 8);
+      context.fill();
+      context.stroke();
+
+      context.fillStyle = index === blockCount - 1 ? palette.cyan : palette.text;
+      context.fillText(index === blockCount - 1 ? 'LIVE' : `#${420 + index}`, x + blockWidth / 2, y + 14);
+      context.fillStyle = 'rgba(238,242,255,.34)';
+      context.fillText(index === blockCount - 1 ? 'MINING' : 'VERIFIED', x + blockWidth / 2, y + 27);
+
+      if (index < blockCount - 1) {
+        const lineStart = x + blockWidth + 4;
+        const lineEnd = x + blockWidth + gap - 4;
+        context.strokeStyle = 'rgba(0,212,255,.28)';
+        context.beginPath();
+        context.moveTo(lineStart, y + 19);
+        context.lineTo(lineEnd, y + 19);
+        context.stroke();
+        context.fillStyle = palette.cyan;
+        context.beginPath();
+        context.arc(lineStart + ((timestamp * .025 + index * 11) % Math.max(1, lineEnd - lineStart)), y + 19, 1.5, 0, Math.PI * 2);
+        context.fill();
+      }
+    }
+
+    context.textAlign = 'left';
+    context.fillStyle = 'rgba(0,212,255,.5)';
+    context.font = '700 8px "JetBrains Mono", "Fira Code", monospace';
+    context.fillText('BLOCKCHAIN / CONSENSUS', startX, y - 11);
+    context.restore();
+  }
+
+  function getEdges() {
+    const edges = [];
+    nodes.forEach((node, sourceIndex) => {
+      nodes.slice(sourceIndex + 1).forEach((target, offset) => {
+        const targetIndex = sourceIndex + offset + 1;
+        const distance = Math.hypot(node.x - target.x, node.y - target.y);
+        if (distance < Math.min(190, width * .16)) {
+          edges.push({ source: sourceIndex, target: targetIndex, distance });
+        }
+      });
+    });
+    return edges;
+  }
+
+  function drawFrame(timestamp) {
+    context.clearRect(0, 0, width, height);
+    drawGrid();
+    drawBlockchain(timestamp);
+
+    nodes.forEach(node => {
+      if (!prefersReducedMotion) {
+        node.x += node.vx;
+        node.y += node.vy;
+        if (node.x < width * .49 || node.x > width * .99) node.vx *= -1;
+        if (node.y < height * .17 || node.y > height * .86) node.vy *= -1;
+      }
+    });
+
+    const edges = getEdges();
+    edges.forEach(edge => {
+      const source = nodes[edge.source];
+      const target = nodes[edge.target];
+      const gradient = context.createLinearGradient(source.x, source.y, target.x, target.y);
+      gradient.addColorStop(0, 'rgba(0,212,255,.16)');
+      gradient.addColorStop(.5, 'rgba(123,47,247,.2)');
+      gradient.addColorStop(1, 'rgba(0,212,255,.08)');
+      context.strokeStyle = gradient;
+      context.lineWidth = 1;
+      context.beginPath();
+      context.moveTo(source.x, source.y);
+      context.lineTo(target.x, target.y);
+      context.stroke();
+    });
+
+    if (!prefersReducedMotion && timestamp - lastPacketSpawn > 700 && edges.length) {
+      const edge = edges[Math.floor(Math.random() * edges.length)];
+      packets.push({ edge, progress: 0, speed: .00055 + Math.random() * .00045 });
+      lastPacketSpawn = timestamp;
+    }
+
+    packets = packets.filter(packet => {
+      packet.progress += packet.speed * Math.max(16, timestamp - lastFrame);
+      const source = nodes[packet.edge.source];
+      const target = nodes[packet.edge.target];
+      const x = source.x + (target.x - source.x) * packet.progress;
+      const y = source.y + (target.y - source.y) * packet.progress;
+      const glow = context.createRadialGradient(x, y, 0, x, y, 13);
+      glow.addColorStop(0, 'rgba(0,212,255,.65)');
+      glow.addColorStop(1, 'rgba(0,212,255,0)');
+      context.fillStyle = glow;
+      context.beginPath();
+      context.arc(x, y, 13, 0, Math.PI * 2);
+      context.fill();
+      context.fillStyle = palette.cyan;
+      context.beginPath();
+      context.arc(x, y, 2.2, 0, Math.PI * 2);
+      context.fill();
+      return packet.progress < 1;
+    });
+
+    nodes.forEach((node, index) => {
+      const pulse = (Math.sin(timestamp * .0022 + node.phase) + 1) / 2;
+      context.fillStyle = node.accent === palette.violet ? 'rgba(123,47,247,.16)' : 'rgba(0,212,255,.16)';
+      context.beginPath();
+      context.arc(node.x, node.y, node.radius + 8 + pulse * 3, 0, Math.PI * 2);
+      context.fill();
+      context.fillStyle = node.accent;
+      context.beginPath();
+      context.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+      context.fill();
+      if (index % 9 === 0) {
+        context.fillStyle = 'rgba(238,242,255,.38)';
+        context.font = '600 7px "JetBrains Mono", "Fira Code", monospace';
+        context.fillText(index === 0 ? 'TX RELAY' : 'NODE ONLINE', node.x + 8, node.y - 7);
+      }
+    });
+  }
+
+  function animate(timestamp) {
+    drawFrame(timestamp);
+    lastFrame = timestamp;
+    if (!prefersReducedMotion) requestAnimationFrame(animate);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  requestAnimationFrame(animate);
+}
+
+// ============================================
 // INITIALIZATION
 // ============================================
 
@@ -1503,16 +1726,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAmbientInterface();
   if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
   
-  // Initialize Three.js if available
-  if (typeof THREE !== 'undefined') {
-    initHeroAnimation();
-  } else {
-    // CSS fallback
-    const canvas = document.getElementById('hero-canvas');
-    if (canvas) {
-      canvas.style.background = 'radial-gradient(ellipse at 30% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 70% 50%, rgba(123, 47, 247, 0.15) 0%, transparent 50%)';
-    }
-  }
+  initNetworkAnimation();
 });
 
 // Export for inline scripts
