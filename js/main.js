@@ -1168,14 +1168,47 @@ const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
 const mobileMenuClose = document.querySelector('.mobile-menu-close');
 
 function toggleMobileMenu() {
+  if (!mobileMenu || !mobileMenuOverlay) return;
   mobileMenu.classList.toggle('active');
   mobileMenuOverlay.classList.toggle('active');
   document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+  if (mobileMenuBtn) {
+    mobileMenuBtn.setAttribute('aria-expanded', String(mobileMenu.classList.contains('active')));
+  }
 }
 
 if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 if (mobileMenuClose) mobileMenuClose.addEventListener('click', toggleMobileMenu);
 if (mobileMenuOverlay) mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+document.querySelectorAll('.mobile-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (mobileMenu && mobileMenu.classList.contains('active')) toggleMobileMenu();
+  });
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('active')) {
+    toggleMobileMenu();
+  }
+});
+
+// Give every page a clear location marker in the shared navigation.
+function markCurrentPage() {
+  const currentPath = window.location.pathname.replace(/\/index\.html$/, '/').replace(/\/$/, '');
+  document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('http')) return;
+
+    const linkPath = new URL(href, window.location.href).pathname
+      .replace(/\/index\.html$/, '/')
+      .replace(/\/$/, '');
+    const isCurrent = linkPath === currentPath ||
+      (linkPath.endsWith('/getting-started') && currentPath.endsWith('/getting-started.html'));
+    if (isCurrent) {
+      link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
+    }
+  });
+}
 
 // ============================================
 // SMOOTH SCROLL
@@ -1320,10 +1353,18 @@ function initHeroAnimation() {
     canvas.style.background = 'radial-gradient(ellipse at 30% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 70% 50%, rgba(123, 47, 247, 0.15) 0%, transparent 50%)';
     return;
   }
+
+  // Some preview browsers disable WebGL. Fall back quietly instead of
+  // letting Three.js emit a renderer error and leaving the hero blank.
+  const webglContext = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!webglContext) {
+    canvas.style.background = 'radial-gradient(ellipse at 30% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 70% 50%, rgba(123, 47, 247, 0.15) 0%, transparent 50%)';
+    return;
+  }
   
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  const renderer = new THREE.WebGLRenderer({ canvas, context: webglContext, alpha: true, antialias: true });
   
   renderer.setSize(canvas.clientWidth, canvas.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -1430,6 +1471,8 @@ function initHeroAnimation() {
 
 document.addEventListener('DOMContentLoaded', () => {
   setLanguage(currentLang);
+  markCurrentPage();
+  if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
   
   // Initialize Three.js if available
   if (typeof THREE !== 'undefined') {
