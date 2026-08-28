@@ -1511,9 +1511,9 @@ function initNetworkAnimation() {
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const palette = {
-    cyan: '#00D4FF',
-    violet: '#7B2FF7',
-    magenta: '#E040FB',
+    cyan: '#62D3E3',
+    violet: '#8D79D6',
+    magenta: '#C48BDE',
     text: 'rgba(238,242,255,.62)',
     faint: 'rgba(238,242,255,.16)'
   };
@@ -1537,18 +1537,18 @@ function initNetworkAnimation() {
     canvas.style.height = `${height}px`;
     context.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const count = width < 700 ? 24 : 58;
+    const count = width < 700 ? 18 : 46;
     nodes = Array.from({ length: count }, (_, index) => ({
-      x: width * (.49 + Math.random() * .49),
-      y: height * (.18 + Math.random() * .63),
-      homeX: width * (.49 + Math.random() * .49),
-      homeY: height * (.18 + Math.random() * .63),
-      vx: (Math.random() - .5) * .035,
-      vy: (Math.random() - .5) * .035,
-      radius: index % 9 === 0 ? 3.6 : 2 + Math.random() * 1.5,
+      x: width * (.08 + Math.random() * .84),
+      y: height * (.16 + Math.random() * .68),
+      homeX: width * (.08 + Math.random() * .84),
+      homeY: height * (.16 + Math.random() * .68),
+      vx: (Math.random() - .5) * .022,
+      vy: (Math.random() - .5) * .022,
+      radius: index % 11 === 0 ? 3.2 : 1.6 + Math.random() * 1.2,
       phase: Math.random() * Math.PI * 2,
       accent: index % 3 === 0 ? palette.violet : palette.cyan,
-      cluster: index % 3
+      cluster: index % 4
     }));
     packets = [];
     arrivalBursts = [];
@@ -1556,28 +1556,64 @@ function initNetworkAnimation() {
 
   function drawGrid() {
     context.lineWidth = 1;
-    context.strokeStyle = 'rgba(0,212,255,.035)';
-    const size = 42;
-    for (let x = width * .48; x < width; x += size) {
+    context.strokeStyle = 'rgba(98,211,227,.022)';
+    const size = width < 700 ? 58 : 84;
+    for (let x = -size; x < width + size; x += size) {
       context.beginPath();
-      context.moveTo(x, height * .12);
-      context.lineTo(x, height * .88);
+      context.moveTo(x, 0);
+      context.lineTo(x + height * .08, height);
       context.stroke();
     }
-    for (let y = height * .12; y < height * .88; y += size) {
+    for (let y = -size; y < height + size; y += size) {
       context.beginPath();
-      context.moveTo(width * .48, y);
-      context.lineTo(width, y);
+      context.moveTo(0, y);
+      context.lineTo(width, y - width * .04);
       context.stroke();
     }
   }
 
+  function drawSignalRoutes(timestamp) {
+    const routes = [
+      { y: .27, bend: -.07, color: 'rgba(98,211,227,.11)', speed: .00012 },
+      { y: .52, bend: .08, color: 'rgba(141,121,214,.10)', speed: -.0001 },
+      { y: .75, bend: -.05, color: 'rgba(98,211,227,.08)', speed: .00008 }
+    ];
+
+    context.save();
+    context.lineWidth = 1;
+    routes.forEach((route, index) => {
+      const y = height * route.y;
+      const bend = height * route.bend;
+      const offset = Math.sin(timestamp * .00035 + index * 1.7) * 10;
+      context.strokeStyle = route.color;
+      context.beginPath();
+      context.moveTo(-40, y + offset);
+      context.bezierCurveTo(
+        width * .25, y - bend + offset,
+        width * .68, y + bend - offset,
+        width + 40, y - offset
+      );
+      context.stroke();
+
+      const progress = (timestamp * route.speed + index * .28) % 1;
+      const normalizedProgress = progress < 0 ? progress + 1 : progress;
+      const x = width * normalizedProgress;
+      const markerY = y + Math.sin(normalizedProgress * Math.PI * 2) * bend;
+      context.fillStyle = route.color.replace(/[\d.]+\)$/, '.7)');
+      context.beginPath();
+      context.arc(x, markerY, 1.8, 0, Math.PI * 2);
+      context.fill();
+    });
+    context.restore();
+  }
+
   function drawBlockchain(timestamp) {
     const blockCount = 5;
-    const blockWidth = Math.min(72, width * .07);
+    const blockWidth = Math.min(74, Math.max(46, width * .09));
     const gap = 14;
-    const startX = Math.max(width * .51, width - (blockCount * blockWidth + (blockCount - 1) * gap) - 34);
-    const y = Math.max(148, height * .18);
+    const chainWidth = blockCount * blockWidth + (blockCount - 1) * gap;
+    const startX = Math.max(18, (width - chainWidth) / 2);
+    const y = Math.max(112, height * .14);
 
     context.save();
     context.font = '600 8px "JetBrains Mono", "Fira Code", monospace';
@@ -1588,12 +1624,12 @@ function initNetworkAnimation() {
       const x = startX + index * (blockWidth + gap);
       const pulse = (Math.sin(timestamp * .0018 + index * 1.2) + 1) / 2;
       const blockGradient = context.createLinearGradient(x, y, x + blockWidth, y + 38);
-      blockGradient.addColorStop(0, index === blockCount - 1 ? 'rgba(0,212,255,.2)' : 'rgba(123,47,247,.12)');
+      blockGradient.addColorStop(0, index === blockCount - 1 ? 'rgba(98,211,227,.16)' : 'rgba(141,121,214,.10)');
       blockGradient.addColorStop(1, 'rgba(8,8,25,.8)');
       context.fillStyle = blockGradient;
       context.strokeStyle = index === blockCount - 1
-        ? `rgba(0,212,255,${.42 + pulse * .25})`
-        : 'rgba(123,47,247,.26)';
+        ? `rgba(98,211,227,${.30 + pulse * .16})`
+        : 'rgba(141,121,214,.20)';
       context.lineWidth = 1;
       context.beginPath();
       context.roundRect(x, y, blockWidth, 38, 8);
@@ -1608,7 +1644,7 @@ function initNetworkAnimation() {
       if (index < blockCount - 1) {
         const lineStart = x + blockWidth + 4;
         const lineEnd = x + blockWidth + gap - 4;
-        context.strokeStyle = 'rgba(0,212,255,.28)';
+        context.strokeStyle = 'rgba(98,211,227,.20)';
         context.beginPath();
         context.moveTo(lineStart, y + 19);
         context.lineTo(lineEnd, y + 19);
@@ -1621,15 +1657,15 @@ function initNetworkAnimation() {
     }
 
     context.textAlign = 'left';
-    context.fillStyle = 'rgba(0,212,255,.5)';
+    context.fillStyle = 'rgba(98,211,227,.38)';
     context.font = '700 8px "JetBrains Mono", "Fira Code", monospace';
     context.fillText('BLOCKCHAIN / CONSENSUS', startX, y - 11);
     context.restore();
   }
 
   function drawNetworkCore(timestamp) {
-    const coreX = width * .78;
-    const coreY = height * .58;
+    const coreX = width * .5;
+    const coreY = height * .52;
     const rotation = timestamp * .00012;
     context.save();
     context.translate(coreX, coreY);
@@ -1641,7 +1677,7 @@ function initNetworkAnimation() {
         ? 'rgba(123,47,247,.13)'
         : 'rgba(0,212,255,.13)';
       context.beginPath();
-      context.ellipse(0, 0, 92 + ring * 24, 34 + ring * 13, ring * .35, 0, Math.PI * 2);
+      context.ellipse(0, 0, 92 + ring * 28, 34 + ring * 13, ring * .35, 0, Math.PI * 2);
       context.stroke();
     }
     context.setLineDash([]);
@@ -1661,7 +1697,7 @@ function initNetworkAnimation() {
       nodes.slice(sourceIndex + 1).forEach((target, offset) => {
         const targetIndex = sourceIndex + offset + 1;
         const distance = Math.hypot(node.x - target.x, node.y - target.y);
-        if (distance < Math.min(190, width * .16)) {
+        if (distance < Math.min(220, width * .18)) {
           edges.push({ source: sourceIndex, target: targetIndex, distance });
         }
       });
@@ -1672,6 +1708,7 @@ function initNetworkAnimation() {
   function drawFrame(timestamp) {
     context.clearRect(0, 0, width, height);
     drawGrid();
+    drawSignalRoutes(timestamp);
     drawBlockchain(timestamp);
     drawNetworkCore(timestamp);
 
@@ -1679,10 +1716,10 @@ function initNetworkAnimation() {
       if (!prefersReducedMotion) {
         node.x += node.vx;
         node.y += node.vy;
-        if (node.x < width * .49 || node.x > width * .99) node.vx *= -1;
-        if (node.y < height * .17 || node.y > height * .86) node.vy *= -1;
-        node.x += (node.homeX - node.x) * .0007;
-        node.y += (node.homeY - node.y) * .0007;
+        if (node.x < width * .06 || node.x > width * .94) node.vx *= -1;
+        if (node.y < height * .14 || node.y > height * .86) node.vy *= -1;
+        node.x += (node.homeX - node.x) * .0004;
+        node.y += (node.homeY - node.y) * .0004;
       }
     });
 
@@ -1691,12 +1728,12 @@ function initNetworkAnimation() {
       const source = nodes[edge.source];
       const target = nodes[edge.target];
       const gradient = context.createLinearGradient(source.x, source.y, target.x, target.y);
-      gradient.addColorStop(0, 'rgba(0,212,255,.16)');
-      gradient.addColorStop(.5, 'rgba(123,47,247,.2)');
-      gradient.addColorStop(1, 'rgba(0,212,255,.08)');
+      gradient.addColorStop(0, 'rgba(98,211,227,.11)');
+      gradient.addColorStop(.5, 'rgba(141,121,214,.13)');
+      gradient.addColorStop(1, 'rgba(98,211,227,.06)');
       context.strokeStyle = gradient;
       context.lineWidth = 1;
-      context.globalAlpha = .72 + Math.sin(timestamp * .001 + edge.source) * .12;
+      context.globalAlpha = .52 + Math.sin(timestamp * .001 + edge.source) * .08;
       context.beginPath();
       context.moveTo(source.x, source.y);
       context.lineTo(target.x, target.y);
@@ -1704,13 +1741,13 @@ function initNetworkAnimation() {
       context.globalAlpha = 1;
     });
 
-    if (!prefersReducedMotion && timestamp - lastPacketSpawn > 700 && edges.length) {
+    if (!prefersReducedMotion && timestamp - lastPacketSpawn > 1200 && edges.length && packets.length < 3) {
       const edge = edges[Math.floor(Math.random() * edges.length)];
       packets.push({
         edge,
         progress: 0,
         previousProgress: 0,
-        speed: .00055 + Math.random() * .00045,
+        speed: .00034 + Math.random() * .00025,
         hue: Math.random() > .25 ? palette.cyan : palette.magenta
       });
       lastPacketSpawn = timestamp;
@@ -1723,27 +1760,27 @@ function initNetworkAnimation() {
       const target = nodes[packet.edge.target];
       const x = source.x + (target.x - source.x) * packet.progress;
       const y = source.y + (target.y - source.y) * packet.progress;
-      const trailProgress = Math.max(0, packet.progress - .12);
+      const trailProgress = Math.max(0, packet.progress - .09);
       const trailX = source.x + (target.x - source.x) * trailProgress;
       const trailY = source.y + (target.y - source.y) * trailProgress;
       context.strokeStyle = packet.hue === palette.magenta
-        ? 'rgba(224,64,251,.52)'
-        : 'rgba(0,212,255,.58)';
-      context.lineWidth = 1.5;
+        ? 'rgba(196,139,222,.42)'
+        : 'rgba(98,211,227,.46)';
+      context.lineWidth = 1;
       context.beginPath();
       context.moveTo(trailX, trailY);
       context.lineTo(x, y);
       context.stroke();
-      const glow = context.createRadialGradient(x, y, 0, x, y, 13);
-      glow.addColorStop(0, packet.hue === palette.magenta ? 'rgba(224,64,251,.72)' : 'rgba(0,212,255,.72)');
-      glow.addColorStop(1, packet.hue === palette.magenta ? 'rgba(224,64,251,0)' : 'rgba(0,212,255,0)');
+      const glow = context.createRadialGradient(x, y, 0, x, y, 9);
+      glow.addColorStop(0, packet.hue === palette.magenta ? 'rgba(196,139,222,.48)' : 'rgba(98,211,227,.48)');
+      glow.addColorStop(1, packet.hue === palette.magenta ? 'rgba(196,139,222,0)' : 'rgba(98,211,227,0)');
       context.fillStyle = glow;
       context.beginPath();
-      context.arc(x, y, 13, 0, Math.PI * 2);
+      context.arc(x, y, 9, 0, Math.PI * 2);
       context.fill();
       context.fillStyle = packet.hue;
       context.beginPath();
-      context.arc(x, y, 2.2, 0, Math.PI * 2);
+      context.arc(x, y, 1.8, 0, Math.PI * 2);
       context.fill();
       if (packet.progress >= 1) {
         arrivalBursts.push({ x: target.x, y: target.y, progress: 0, color: packet.hue });
@@ -1755,8 +1792,8 @@ function initNetworkAnimation() {
       burst.progress += Math.max(16, timestamp - lastFrame) * .0024;
       const radius = 4 + burst.progress * 24;
       context.strokeStyle = burst.color === palette.magenta
-        ? `rgba(224,64,251,${Math.max(0, .7 - burst.progress)})`
-        : `rgba(0,212,255,${Math.max(0, .7 - burst.progress)})`;
+        ? `rgba(196,139,222,${Math.max(0, .52 - burst.progress * .7)})`
+        : `rgba(98,211,227,${Math.max(0, .52 - burst.progress * .7)})`;
       context.lineWidth = 1.5;
       context.beginPath();
       context.arc(burst.x, burst.y, radius, 0, Math.PI * 2);
@@ -1765,16 +1802,16 @@ function initNetworkAnimation() {
     });
 
     nodes.forEach((node, index) => {
-      const pulse = (Math.sin(timestamp * .0022 + node.phase) + 1) / 2;
-      context.fillStyle = node.accent === palette.violet ? 'rgba(123,47,247,.16)' : 'rgba(0,212,255,.16)';
+      const pulse = (Math.sin(timestamp * .0012 + node.phase) + 1) / 2;
+      context.fillStyle = node.accent === palette.violet ? 'rgba(141,121,214,.13)' : 'rgba(98,211,227,.13)';
       context.beginPath();
-      context.arc(node.x, node.y, node.radius + 8 + pulse * 3, 0, Math.PI * 2);
+      context.arc(node.x, node.y, node.radius + 5 + pulse * 2, 0, Math.PI * 2);
       context.fill();
       context.fillStyle = node.accent;
       context.beginPath();
       context.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
       context.fill();
-      if (index % 9 === 0) {
+      if (index % 14 === 0) {
         context.fillStyle = 'rgba(238,242,255,.38)';
         context.font = '600 7px "JetBrains Mono", "Fira Code", monospace';
         context.fillText(index === 0 ? 'TX RELAY' : 'NODE ONLINE', node.x + 8, node.y - 7);
@@ -1783,6 +1820,7 @@ function initNetworkAnimation() {
   }
 
   function animate(timestamp) {
+    if (!timestamp) timestamp = performance.now();
     drawFrame(timestamp);
     lastFrame = timestamp;
     if (!prefersReducedMotion) requestAnimationFrame(animate);
