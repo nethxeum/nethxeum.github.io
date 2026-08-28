@@ -118,6 +118,15 @@ const translations = {
     home_every_transaction_on_the_nethxeum: "Every transaction on the Nethxeum network is private by default. Sender identity, recipient identity, and transaction amounts are all cryptographically concealed through Ring Signatures, RingCT, and Stealth Addresses. Privacy is not optional — it is mandatory.",
     home_sound_money: "Sound Money",
     home_with_a_fixed_supply_of: "With a fixed supply of 42 million NTU and no tail emission, Nethxeum implements true digital scarcity. The halving every 420,000 blocks creates a predictable, transparent monetary policy that anyone can verify and trust. No central authority can inflate the supply.",
+    genesis_label: "Genesis Block / Block 0",
+    genesis_title: "The Genesis DNA",
+    genesis_intro: "The first block carries the principle that defines the network: privacy is a right.",
+    genesis_pinned: "Pinned origin",
+    genesis_coin_caption: "Genesis identity / NTU",
+    genesis_block_label: "Block",
+    genesis_timestamp_label: "Timestamp",
+    genesis_message_label: "Readable payload",
+    genesis_raw_summary: "View raw genesis DNA",
 
     // Other links
     home_learn_more_btn: "Learn More About Nethxeum",
@@ -331,6 +340,15 @@ const translations = {
     home_every_transaction_on_the_nethxeum: "Par défaut, chaque transaction sur le réseau Nethxeum est privée. L'identité de l'expéditeur, celle du destinataire et le montant de la transaction sont masqués cryptographiquement grâce aux signatures Ring, RingCT et aux adresses furtives. La confidentialité n'est pas une option : elle est obligatoire.",
     home_sound_money: "Sound Money",
     home_with_a_fixed_supply_of: "Avec une offre fixe de 42 millions de NTU et sans émission résiduelle, Nethxeum instaure une véritable rareté numérique. La réduction de moitié de l'offre tous les 420 000 blocs crée une politique monétaire prévisible et transparente, vérifiable et digne de confiance pour tous. Aucune autorité centrale ne peut augmenter artificiellement l'offre.",
+    genesis_label: "Bloc Genesis / Bloc 0",
+    genesis_title: "L'ADN du Genesis",
+    genesis_intro: "Le premier bloc porte le principe qui définit le réseau : la vie privée est un droit.",
+    genesis_pinned: "Origine épinglée",
+    genesis_coin_caption: "Identité Genesis / NTU",
+    genesis_block_label: "Bloc",
+    genesis_timestamp_label: "Horodatage",
+    genesis_message_label: "Contenu lisible",
+    genesis_raw_summary: "Voir l'ADN brut du Genesis",
 
     home_learn_more_btn: "En savoir plus sur Nethxeum",
     footer_explorer_soon: "bientôt disponible",
@@ -1234,6 +1252,21 @@ function initAmbientInterface() {
       document.body.style.setProperty('--pointer-x', `${e.clientX}px`);
       document.body.style.setProperty('--pointer-y', `${e.clientY}px`);
     }, { passive: true });
+
+    const genesisCoin = document.querySelector('.genesis-coin-frame');
+    if (genesisCoin) {
+      genesisCoin.addEventListener('pointermove', (e) => {
+        const bounds = genesisCoin.getBoundingClientRect();
+        const x = (e.clientX - bounds.left) / bounds.width - .5;
+        const y = (e.clientY - bounds.top) / bounds.height - .5;
+        genesisCoin.style.setProperty('--coin-tilt-x', `${y * -3}deg`);
+        genesisCoin.style.setProperty('--coin-tilt-y', `${x * 4}deg`);
+      });
+      genesisCoin.addEventListener('pointerleave', () => {
+        genesisCoin.style.setProperty('--coin-tilt-x', '0deg');
+        genesisCoin.style.setProperty('--coin-tilt-y', '0deg');
+      });
+    }
   }
   updateScrollProgress();
 }
