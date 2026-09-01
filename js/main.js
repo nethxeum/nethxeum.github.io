@@ -83,7 +83,6 @@ const translations = {
 
     // Hero
     hero_live: "Mainnet Live",
-    chain_live_label: "Live Blockchain",
     hero_title_line1: "The Future of",
     hero_title_line2: "Private Finance",
     hero_card_title: "Network Stats",
@@ -306,7 +305,6 @@ const translations = {
 
     // Hero
     hero_live: "Réseau en ligne",
-    chain_live_label: "Chaîne en direct",
     hero_title_line1: "Le Futur de la",
     hero_title_line2: "Finance Privée",
     hero_card_title: "Stats Réseau",
@@ -1561,6 +1559,32 @@ function initNetworkAnimation() {
   let lastFrame = 0;
   let lastPacketSpawn = 0;
 
+  // ── Real chain data from the Nethxeum block explorer API ──────
+  const EXPLORER_API = 'https://explore.nethxeum.com/api';
+  const CHAIN_REFRESH_MS = 30000;
+  let realChain = null; // ordered oldest -> newest
+  let lastChainFetch = 0;
+
+  function fetchRealChain() {
+    if (!window.fetch) return;
+    lastChainFetch = Date.now();
+    fetch(`${EXPLORER_API}/blocks?page=1&limit=5`, { mode: 'cors' })
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        const blocks = data && data.blocks;
+        if (Array.isArray(blocks) && blocks.length) {
+          realChain = blocks.slice().reverse();
+        }
+      })
+      .catch(() => { /* keep previous data / fake fallback */ });
+  }
+
+  fetchRealChain();
+  window.setInterval(fetchRealChain, CHAIN_REFRESH_MS);
+
   function resize() {
     const bounds = canvas.getBoundingClientRect();
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1642,6 +1666,86 @@ function initNetworkAnimation() {
     context.restore();
   }
 
+  function drawBlockchain(timestamp) {
+    const usingRealChain = Array.isArray(realChain) && realChain.length >= 2;
+    const blockCount = usingRealChain ? realChain.length : 5;
+    const blockWidth = Math.min(74, Math.max(46, width * .09));
+    const gap = 14;
+    const chainWidth = blockCount * blockWidth + (blockCount - 1) * gap;
+    const startX = Math.max(18, (width - chainWidth) / 2);
+    const y = Math.max(112, height * .14);
+
+    context.save();
+    context.font = '600 8px "JetBrains Mono", "Fira Code", monospace';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+
+    const latestHeight = usingRealChain ? realChain[realChain.length - 1].height : null;
+
+    for (let index = 0; index < blockCount; index++) {
+      const block = usingRealChain ? realChain[index] : null;
+      const isLatest = index === blockCount - 1;
+      const x = startX + index * (blockWidth + gap);
+      const pulse = (Math.sin(timestamp * .0018 + index * 1.2) + 1) / 2;
+      const blockGradient = context.createLinearGradient(x, y, x + blockWidth, y + 38);
+      blockGradient.addColorStop(0, isLatest ? 'rgba(98,211,227,.16)' : 'rgba(141,121,214,.10)');
+      blockGradient.addColorStop(1, 'rgba(8,8,25,.8)');
+      context.fillStyle = blockGradient;
+      context.strokeStyle = isLatest
+        ? `rgba(98,211,227,${.30 + pulse * .16})`
+        : 'rgba(141,121,214,.20)';
+      context.lineWidth = 1;
+      context.beginPath();
+      context.roundRect(x, y, blockWidth, 38, 8);
+      context.fill();
+      context.stroke();
+
+      if (block) {
+        const shortHash = typeof block.hash === 'string' ? block.hash.slice(0, 6) : '';
+        context.fillStyle = isLatest ? palette.cyan : palette.text;
+        context.fillText(`#${block.height}`, x + blockWidth / 2, y + 9);
+        context.fillStyle = isLatest ? palette.cyan : 'rgba(238,242,255,.34)';
+        if (isLatest) {
+          context.globalAlpha = .55 + pulse * .45;
+          context.fillText('LIVE', x + blockWidth / 2, y + 19);
+          context.globalAlpha = 1;
+        } else {
+          context.fillText(shortHash, x + blockWidth / 2, y + 19);
+        }
+        context.fillStyle = 'rgba(238,242,255,.30)';
+        context.fillText(`${block.num_txes ?? '?'} tx`, x + blockWidth / 2, y + 30);
+      } else {
+        context.fillStyle = isLatest ? palette.cyan : palette.text;
+        context.fillText(isLatest ? 'LIVE' : `#${420 + index}`, x + blockWidth / 2, y + 14);
+        context.fillStyle = 'rgba(238,242,255,.34)';
+        context.fillText(isLatest ? 'MINING' : 'VERIFIED', x + blockWidth / 2, y + 27);
+      }
+
+      if (index < blockCount - 1) {
+        const lineStart = x + blockWidth + 4;
+        const lineEnd = x + blockWidth + gap - 4;
+        context.strokeStyle = 'rgba(98,211,227,.20)';
+        context.beginPath();
+        context.moveTo(lineStart, y + 19);
+        context.lineTo(lineEnd, y + 19);
+        context.stroke();
+        context.fillStyle = palette.cyan;
+        context.beginPath();
+        context.arc(lineStart + ((timestamp * .025 + index * 11) % Math.max(1, lineEnd - lineStart)), y + 19, 1.5, 0, Math.PI * 2);
+        context.fill();
+      }
+    }
+
+    context.textAlign = 'left';
+    context.fillStyle = 'rgba(98,211,227,.38)';
+    context.font = '700 8px "JetBrains Mono", "Fira Code", monospace';
+    context.fillText(
+      usingRealChain ? `LIVE CHAIN — HEIGHT ${latestHeight}` : 'BLOCKCHAIN / CONSENSUS',
+      startX, y - 11
+    );
+    context.restore();
+  }
+
   function drawNetworkCore(timestamp) {
     const coreX = width * .5;
     const coreY = height * .52;
@@ -1688,6 +1792,7 @@ function initNetworkAnimation() {
     context.clearRect(0, 0, width, height);
     drawGrid();
     drawSignalRoutes(timestamp);
+    drawBlockchain(timestamp);
     drawNetworkCore(timestamp);
 
     nodes.forEach(node => {
@@ -1809,96 +1914,6 @@ function initNetworkAnimation() {
   requestAnimationFrame(animate);
 }
 
-// ════════════════════════════════════════════════════════════
-// LIVE CHAIN — vraie chaîne de blocs depuis explore.nethxeum.com
-// Portage direct du composant "chain" de l'explorateur officiel
-// ════════════════════════════════════════════════════════════
-
-function initLiveChain() {
-  const track = document.getElementById('chain-track');
-  if (!track || !window.fetch) return;
-
-  const API = 'https://explore.nethxeum.com/api';
-  const EXPLORER = 'https://explore.nethxeum.com';
-  const REFRESH_MS = 30000;
-  const visible = []; // blocs affichés, ordre ancien -> récent
-
-  function connEl() {
-    const conn = document.createElement('div');
-    conn.className = 'chain-conn';
-    conn.innerHTML = '<div class="chain-conn__line"></div><div class="chain-conn__pulse"></div><div class="chain-conn__arrow">▶</div>';
-    return conn;
-  }
-
-  function cardEl(block, isNew) {
-    const card = document.createElement('a');
-    card.className = 'chain-card' + (isNew ? ' chain-card--new' : '');
-    card.href = `${EXPLORER}/block/${block.height}`;
-    card.target = '_blank';
-    card.rel = 'noopener';
-    card.setAttribute('aria-label', `Block #${block.height}`);
-    const shortHash = typeof block.hash === 'string' ? block.hash.slice(0, 12) : '';
-    card.innerHTML =
-      `<div class="chain-card__header"><span class="chain-card__icon">⬡</span>` +
-      `<span class="chain-card__height">#${block.height}</span></div>` +
-      `<div class="chain-card__hash">${shortHash}…</div>` +
-      `<div class="chain-card__meta">${block.num_txes ?? '?'} tx</div>` +
-      (isNew ? '<div class="chain-card__new-badge">NEW</div>' : '');
-    return card;
-  }
-
-  function renderInitial(blocks) {
-    track.innerHTML = '';
-    blocks.slice(-8).forEach((b, i) => {
-      if (i > 0) track.appendChild(connEl());
-      track.appendChild(cardEl(b, false));
-      visible.push(b);
-    });
-    // Afficher le bloc le plus récent (à droite)
-    requestAnimationFrame(() => {
-      track.parentElement.scrollLeft = track.parentElement.scrollWidth;
-    });
-  }
-
-  function addBlock(b) {
-    if (visible.some(v => v.height === b.height)) return;
-    track.appendChild(connEl());
-    track.appendChild(cardEl(b, true));
-    visible.push(b);
-    while (visible.length > 8) {
-      visible.shift();
-      // retire carte + connecteur les plus anciens
-      track.removeChild(track.firstElementChild);
-      if (track.firstElementChild) track.removeChild(track.firstElementChild);
-    }
-    const card = track.lastElementChild;
-    setTimeout(() => {
-      card.classList.remove('chain-card--new');
-      const badge = card.querySelector('.chain-card__new-badge');
-      if (badge) badge.remove();
-    }, 4000);
-  }
-
-  function refresh() {
-    fetch(`${API}/blocks?page=1&limit=8`, { mode: 'cors' })
-      .then(res => { if (!res.ok) throw new Error(res.status); return res.json(); })
-      .then(data => {
-        const blocks = (data && data.blocks || []).slice().reverse(); // ancien -> récent
-        if (!blocks.length) return;
-        if (!visible.length) {
-          renderInitial(blocks);
-          return;
-        }
-        const newest = visible[visible.length - 1].height;
-        blocks.filter(b => b.height > newest).forEach(addBlock);
-      })
-      .catch(() => { /* exploreur injoignable : on garde l'état courant (ou les squelettes) */ });
-  }
-
-  refresh();
-  window.setInterval(refresh, REFRESH_MS);
-}
-
 // ============================================
 // INITIALIZATION
 // ============================================
@@ -1910,7 +1925,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
   
   initNetworkAnimation();
-  initLiveChain();
 });
 
 // Export for inline scripts
