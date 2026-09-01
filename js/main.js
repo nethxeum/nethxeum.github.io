@@ -1585,6 +1585,46 @@ function initNetworkAnimation() {
   fetchRealChain();
   window.setInterval(fetchRealChain, CHAIN_REFRESH_MS);
 
+  // ── Temps réel : même flux Socket.IO que l'explorateur ────────
+  // Charge socket.io-client à la demande et écoute 'block:new' /
+  // 'network:summary' pour mettre à jour la chaîne instantanément.
+  (function connectExplorerSocket() {
+    const onReady = () => {
+      if (typeof io !== 'function') return;
+      try {
+        const socket = io('https://explore.nethxeum.com', {
+          transports: ['websocket', 'polling'],
+          reconnection: true,
+          reconnectionDelay: 3000,
+          timeout: 10000,
+        });
+
+        socket.on('block:new', (block) => {
+          if (!block || typeof block.height !== 'number') return;
+          if (realChain && realChain.some(b => b.height === block.height)) return;
+          if (realChain && realChain.length) {
+            realChain.push(block);
+            realChain = realChain.slice(-5);
+          }
+          // Resynchronise toutes les données (nouveau bloc confirmé)
+          fetchRealChain();
+        });
+
+        socket.on('network:height', () => {
+          fetchRealChain();
+        });
+      } catch (_) { /* websocket indisponible -> polling en secours */ }
+    };
+
+    if (window.io) { onReady(); return; }
+    const s = document.createElement('script');
+    s.src = 'https://cdn.socket.io/4.7.5/socket.io.min.js';
+    s.crossOrigin = 'anonymous';
+    s.onload = onReady;
+    s.onerror = () => { /* CDN inaccessible : le polling continue */ };
+    document.head.appendChild(s);
+  })();
+
   function resize() {
     const bounds = canvas.getBoundingClientRect();
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1724,15 +1764,28 @@ function initNetworkAnimation() {
       if (index < blockCount - 1) {
         const lineStart = x + blockWidth + 4;
         const lineEnd = x + blockWidth + gap - 4;
+        const lineY = y + 19;
         context.strokeStyle = 'rgba(98,211,227,.20)';
         context.beginPath();
-        context.moveTo(lineStart, y + 19);
-        context.lineTo(lineEnd, y + 19);
+        context.moveTo(lineStart, lineY);
+        context.lineTo(lineEnd, lineY);
         context.stroke();
-        context.fillStyle = palette.cyan;
-        context.beginPath();
-        context.arc(lineStart + ((timestamp * .025 + index * 11) % Math.max(1, lineEnd - lineStart)), y + 19, 1.5, 0, Math.PI * 2);
-        context.fill();
+
+        // ── Impulsion lumineuse identique à l'explorateur ───────
+        // Barre dégradée de 14px traversant le connecteur (36px) en
+        // 2,4s, fondu entrée/sortie, décalage 0,35s par connecteur
+        const CYCLE = 2400, STAGGER = 350, PULSE_HALF = 7;
+        const progress = ((timestamp + 100000000) % CYCLE + index * STAGGER) % CYCLE / CYCLE;
+        const fade = progress < 0.1 ? progress * 10
+                   : progress > 0.9 ? (1 - progress) * 10
+                   : 1;
+        const pulseX = (lineStart - PULSE_HALF) + progress * ((lineEnd - lineStart) + PULSE_HALF * 2);
+        const g = context.createLinearGradient(pulseX - PULSE_HALF, 0, pulseX + PULSE_HALF, 0);
+        g.addColorStop(0, 'rgba(98,211,227,0)');
+        g.addColorStop(0.5, `rgba(165,180,252,${0.9 * fade})`);
+        g.addColorStop(1, 'rgba(98,211,227,0)');
+        context.fillStyle = g;
+        context.fillRect(pulseX - PULSE_HALF, lineY - 1, PULSE_HALF * 2, 2);
       }
     }
 
