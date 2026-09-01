@@ -1153,7 +1153,7 @@ document.addEventListener('click', (e) => {
 
 const nav = document.querySelector('.main-nav');
 const announceBar = document.getElementById('announce-bar');
-const ANN_H = 38; // must match --ann-h in CSS
+const ANN_H = announceBar ? 38 : 0; // must match --ann-h in CSS
 
 function updateScrollProgress() {
   const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
