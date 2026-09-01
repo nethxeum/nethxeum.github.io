@@ -1559,6 +1559,32 @@ function initNetworkAnimation() {
   let lastFrame = 0;
   let lastPacketSpawn = 0;
 
+  // ── Real chain data from the Nethxeum block explorer API ──────
+  const EXPLORER_API = 'https://explore.nethxeum.com/api';
+  const CHAIN_REFRESH_MS = 30000;
+  let realChain = null; // ordered oldest -> newest
+  let lastChainFetch = 0;
+
+  function fetchRealChain() {
+    if (!window.fetch) return;
+    lastChainFetch = Date.now();
+    fetch(`${EXPLORER_API}/blocks?page=1&limit=5`, { mode: 'cors' })
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        const blocks = data && data.blocks;
+        if (Array.isArray(blocks) && blocks.length) {
+          realChain = blocks.slice().reverse();
+        }
+      })
+      .catch(() => { /* keep previous data / fake fallback */ });
+  }
+
+  fetchRealChain();
+  window.setInterval(fetchRealChain, CHAIN_REFRESH_MS);
+
   function resize() {
     const bounds = canvas.getBoundingClientRect();
     dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1641,7 +1667,8 @@ function initNetworkAnimation() {
   }
 
   function drawBlockchain(timestamp) {
-    const blockCount = 5;
+    const usingRealChain = Array.isArray(realChain) && realChain.length >= 2;
+    const blockCount = usingRealChain ? realChain.length : 5;
     const blockWidth = Math.min(74, Math.max(46, width * .09));
     const gap = 14;
     const chainWidth = blockCount * blockWidth + (blockCount - 1) * gap;
@@ -1653,14 +1680,18 @@ function initNetworkAnimation() {
     context.textAlign = 'center';
     context.textBaseline = 'middle';
 
+    const latestHeight = usingRealChain ? realChain[realChain.length - 1].height : null;
+
     for (let index = 0; index < blockCount; index++) {
+      const block = usingRealChain ? realChain[index] : null;
+      const isLatest = index === blockCount - 1;
       const x = startX + index * (blockWidth + gap);
       const pulse = (Math.sin(timestamp * .0018 + index * 1.2) + 1) / 2;
       const blockGradient = context.createLinearGradient(x, y, x + blockWidth, y + 38);
-      blockGradient.addColorStop(0, index === blockCount - 1 ? 'rgba(98,211,227,.16)' : 'rgba(141,121,214,.10)');
+      blockGradient.addColorStop(0, isLatest ? 'rgba(98,211,227,.16)' : 'rgba(141,121,214,.10)');
       blockGradient.addColorStop(1, 'rgba(8,8,25,.8)');
       context.fillStyle = blockGradient;
-      context.strokeStyle = index === blockCount - 1
+      context.strokeStyle = isLatest
         ? `rgba(98,211,227,${.30 + pulse * .16})`
         : 'rgba(141,121,214,.20)';
       context.lineWidth = 1;
@@ -1669,10 +1700,26 @@ function initNetworkAnimation() {
       context.fill();
       context.stroke();
 
-      context.fillStyle = index === blockCount - 1 ? palette.cyan : palette.text;
-      context.fillText(index === blockCount - 1 ? 'LIVE' : `#${420 + index}`, x + blockWidth / 2, y + 14);
-      context.fillStyle = 'rgba(238,242,255,.34)';
-      context.fillText(index === blockCount - 1 ? 'MINING' : 'VERIFIED', x + blockWidth / 2, y + 27);
+      if (block) {
+        const shortHash = typeof block.hash === 'string' ? block.hash.slice(0, 6) : '';
+        context.fillStyle = isLatest ? palette.cyan : palette.text;
+        context.fillText(`#${block.height}`, x + blockWidth / 2, y + 9);
+        context.fillStyle = isLatest ? palette.cyan : 'rgba(238,242,255,.34)';
+        if (isLatest) {
+          context.globalAlpha = .55 + pulse * .45;
+          context.fillText('LIVE', x + blockWidth / 2, y + 19);
+          context.globalAlpha = 1;
+        } else {
+          context.fillText(shortHash, x + blockWidth / 2, y + 19);
+        }
+        context.fillStyle = 'rgba(238,242,255,.30)';
+        context.fillText(`${block.num_txes ?? '?'} tx`, x + blockWidth / 2, y + 30);
+      } else {
+        context.fillStyle = isLatest ? palette.cyan : palette.text;
+        context.fillText(isLatest ? 'LIVE' : `#${420 + index}`, x + blockWidth / 2, y + 14);
+        context.fillStyle = 'rgba(238,242,255,.34)';
+        context.fillText(isLatest ? 'MINING' : 'VERIFIED', x + blockWidth / 2, y + 27);
+      }
 
       if (index < blockCount - 1) {
         const lineStart = x + blockWidth + 4;
@@ -1692,7 +1739,10 @@ function initNetworkAnimation() {
     context.textAlign = 'left';
     context.fillStyle = 'rgba(98,211,227,.38)';
     context.font = '700 8px "JetBrains Mono", "Fira Code", monospace';
-    context.fillText('BLOCKCHAIN / CONSENSUS', startX, y - 11);
+    context.fillText(
+      usingRealChain ? `LIVE CHAIN — HEIGHT ${latestHeight}` : 'BLOCKCHAIN / CONSENSUS',
+      startX, y - 11
+    );
     context.restore();
   }
 
