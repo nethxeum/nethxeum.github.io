@@ -1642,62 +1642,6 @@ function initNetworkAnimation() {
     context.restore();
   }
 
-  function drawBlockchain(timestamp) {
-    const blockCount = 5;
-    const blockWidth = Math.min(74, Math.max(46, width * .09));
-    const gap = 14;
-    const chainWidth = blockCount * blockWidth + (blockCount - 1) * gap;
-    const startX = Math.max(18, (width - chainWidth) / 2);
-    const y = Math.max(112, height * .14);
-
-    context.save();
-    context.font = '600 8px "JetBrains Mono", "Fira Code", monospace';
-    context.textAlign = 'center';
-    context.textBaseline = 'middle';
-
-    for (let index = 0; index < blockCount; index++) {
-      const x = startX + index * (blockWidth + gap);
-      const pulse = (Math.sin(timestamp * .0018 + index * 1.2) + 1) / 2;
-      const blockGradient = context.createLinearGradient(x, y, x + blockWidth, y + 38);
-      blockGradient.addColorStop(0, index === blockCount - 1 ? 'rgba(98,211,227,.16)' : 'rgba(141,121,214,.10)');
-      blockGradient.addColorStop(1, 'rgba(8,8,25,.8)');
-      context.fillStyle = blockGradient;
-      context.strokeStyle = index === blockCount - 1
-        ? `rgba(98,211,227,${.30 + pulse * .16})`
-        : 'rgba(141,121,214,.20)';
-      context.lineWidth = 1;
-      context.beginPath();
-      context.roundRect(x, y, blockWidth, 38, 8);
-      context.fill();
-      context.stroke();
-
-      context.fillStyle = index === blockCount - 1 ? palette.cyan : palette.text;
-      context.fillText(index === blockCount - 1 ? 'LIVE' : `#${420 + index}`, x + blockWidth / 2, y + 14);
-      context.fillStyle = 'rgba(238,242,255,.34)';
-      context.fillText(index === blockCount - 1 ? 'MINING' : 'VERIFIED', x + blockWidth / 2, y + 27);
-
-      if (index < blockCount - 1) {
-        const lineStart = x + blockWidth + 4;
-        const lineEnd = x + blockWidth + gap - 4;
-        context.strokeStyle = 'rgba(98,211,227,.20)';
-        context.beginPath();
-        context.moveTo(lineStart, y + 19);
-        context.lineTo(lineEnd, y + 19);
-        context.stroke();
-        context.fillStyle = palette.cyan;
-        context.beginPath();
-        context.arc(lineStart + ((timestamp * .025 + index * 11) % Math.max(1, lineEnd - lineStart)), y + 19, 1.5, 0, Math.PI * 2);
-        context.fill();
-      }
-    }
-
-    context.textAlign = 'left';
-    context.fillStyle = 'rgba(98,211,227,.38)';
-    context.font = '700 8px "JetBrains Mono", "Fira Code", monospace';
-    context.fillText('BLOCKCHAIN / CONSENSUS', startX, y - 11);
-    context.restore();
-  }
-
   function drawNetworkCore(timestamp) {
     const coreX = width * .5;
     const coreY = height * .52;
@@ -1744,7 +1688,6 @@ function initNetworkAnimation() {
     context.clearRect(0, 0, width, height);
     drawGrid();
     drawSignalRoutes(timestamp);
-    drawBlockchain(timestamp);
     drawNetworkCore(timestamp);
 
     nodes.forEach(node => {
