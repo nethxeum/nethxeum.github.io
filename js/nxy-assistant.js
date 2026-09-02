@@ -1,12 +1,12 @@
 /* ═════════════════════════════════════════════════════════════
    Xeumon — Assistante officielle Nethxeum (widget flottant)
    À inclure sur nethxeum.com et explore.nethxeum.com.
-   API : POST https://explore.nethxeum.com/assistant/chat
+   API : POST https://explore.nethxeum.com/api/assistant/chat
    ═════════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
 
-  var API_URL = 'https://explore.nethxeum.com/assistant/chat';
+  var API_URL = 'https://explore.nethxeum.com/api/assistant/chat';
   var API_KEY = 'jir63n28vug95behsqofwmpaytk47dczxl10';
 
   if (document.getElementById('Xeumon-widget-root')) return; // déjà présent
