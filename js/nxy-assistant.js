@@ -84,29 +84,45 @@
     msgs.scrollTop = msgs.scrollHeight;
   }
 
+  // Mémoire de conversation (persiste pendant la session)
+  var history = [];
+  try {
+    history = JSON.parse(sessionStorage.getItem('nxy-history') || '[]');
+    history.forEach(function (m) { addMsg(m.role, m.content); });
+  } catch (_) { history = []; }
+
+  function pushHistory(role, content) {
+    history.push({ role: role, content: content });
+    if (history.length > 20) history = history.slice(-20);
+    try { sessionStorage.setItem('nxy-history', JSON.stringify(history)); } catch (_) {}
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var text = input.value.trim();
     if (!text) return;
     addMsg('user', text);
+    pushHistory('user', text);
     input.value = '';
     input.disabled = true;
     sendBtn.disabled = true;
     var tip = document.createElement('div');
     tip.className = 'nxy-typing';
-    tip.textContent = '…';
+    tip.textContent = 'NXY écrit…';
     msgs.appendChild(tip);
     msgs.scrollTop = msgs.scrollHeight;
 
     fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-api-key': API_KEY },
-      body: JSON.stringify({ message: text }),
+      body: JSON.stringify({ message: text, history: history }),
     })
       .then(function (r) { return r.json(); })
       .then(function (data) {
         tip.remove();
-        addMsg('bot', data.reply || data.detail || 'Pas de réponse.');
+        var reply = data.reply || data.detail || 'Pas de réponse.';
+        addMsg('bot', reply);
+        pushHistory('assistant', reply);
       })
       .catch(function () {
         tip.remove();
