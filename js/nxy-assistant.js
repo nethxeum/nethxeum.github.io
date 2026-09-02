@@ -69,8 +69,9 @@
   var sendBtn = document.getElementById('Xeumon-send');
 
   document.getElementById('Xeumon-btn').addEventListener('click', function () {
-    panel.classList.toggle('Xeumon-open');
-    if (panel.classList.contains('Xeumon-open')) input.focus();
+    // Va à la page dédiée au lieu d'ouvrir la fenêtre de chat
+    var inPages = /[\/\\]pages[\/\\]/.test(location.pathname);
+    location.href = inPages ? 'assistant.html' : 'pages/assistant.html';
   });
   document.getElementById('Xeumon-close').addEventListener('click', function () {
     panel.classList.remove('Xeumon-open');
