@@ -76,10 +76,37 @@
     panel.classList.remove('nxy-open');
   });
 
+  // API programmable : nxy.toggle() depuis n'importe quelle page
+  window.NXY = {
+    toggle: function () {
+      panel.classList.toggle('nxy-open');
+      if (panel.classList.contains('nxy-open')) input.focus();
+    },
+    open: function () { panel.classList.add('nxy-open'); input.focus(); },
+    close: function () { panel.classList.remove('nxy-open'); },
+  };
+  // If the page host asks to hide the floating button (explorer: icon inside search bar)
+  if (window.NXY_HIDE_FAB) {
+    document.getElementById('nxy-btn').style.display = 'none';
+  }
+
+  function cleanText(t) {
+    if (typeof t !== 'string') return String(t);
+    return t
+      .replace(/\*\*(.+?)\*\*/g, '$1')   // **gras**
+      .replace(/\*(.+?)\*/g, '$1')       // *italique*
+      .replace(/__(.+?)__/g, '$1')
+      .replace(/_(.+?)_/g, '$1')
+      .replace(/`{1,3}([^`]+)`{0,3}/g, '$1')
+      .replace(/^#{1,6}\s*/gm, '')
+      .replace(/^\s*[-•*]\s+/gm, '• ')   // puces propres
+      .trim();
+  }
+
   function addMsg(role, text) {
     var div = document.createElement('div');
     div.className = 'nxy-msg ' + (role === 'user' ? 'nxy-user' : 'nxy-bot');
-    div.textContent = text;
+    div.textContent = cleanText(text);
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
   }
