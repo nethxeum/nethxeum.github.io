@@ -1,5 +1,5 @@
 /* ═════════════════════════════════════════════════════════════
-   NXY — Assistante officielle Nethxeum (widget flottant)
+   Xeumon — Assistante officielle Nethxeum (widget flottant)
    À inclure sur nethxeum.com et explore.nethxeum.com.
    API : POST https://explore.nethxeum.com/assistant/chat
    ═════════════════════════════════════════════════════════════ */
@@ -9,85 +9,85 @@
   var API_URL = 'https://explore.nethxeum.com/assistant/chat';
   var API_KEY = 'jir63n28vug95behsqofwmpaytk47dczxl10';
 
-  if (document.getElementById('nxy-widget-root')) return; // déjà présent
+  if (document.getElementById('Xeumon-widget-root')) return; // déjà présent
 
   var css = `
-    #nxy-btn { position:fixed; right:20px; bottom:20px; z-index:99999; width:52px; height:52px;
+    #Xeumon-btn { position:fixed; right:20px; bottom:20px; z-index:99999; width:52px; height:52px;
       border-radius:50%; border:1px solid rgba(124,58,237,.5); cursor:pointer;
       background:linear-gradient(135deg,#7c3aed,#2dd4ff); color:#fff; font-size:22px;
       display:flex; align-items:center; justify-content:center;
       box-shadow:0 4px 24px rgba(124,58,237,.45); transition:transform .2s, box-shadow .2s; }
-    #nxy-btn:hover { transform:scale(1.08); box-shadow:0 6px 30px rgba(124,58,237,.65); }
-    #nxy-panel { position:fixed; right:20px; bottom:80px; z-index:99999; width:340px; max-width:calc(100vw - 40px);
+    #Xeumon-btn:hover { transform:scale(1.08); box-shadow:0 6px 30px rgba(124,58,237,.65); }
+    #Xeumon-panel { position:fixed; right:20px; bottom:80px; z-index:99999; width:340px; max-width:calc(100vw - 40px);
       height:440px; max-height:calc(100vh - 120px); display:none; flex-direction:column;
       background:#0c0c1e; border:1px solid rgba(124,58,237,.4); border-radius:16px;
       box-shadow:0 20px 60px rgba(0,0,0,.6); overflow:hidden; font-family:system-ui,sans-serif; }
-    #nxy-panel.nxy-open { display:flex; }
-    #nxy-head { padding:12px 14px; background:linear-gradient(135deg, rgba(124,58,237,.25), rgba(45,212,255,.12));
+    #Xeumon-panel.Xeumon-open { display:flex; }
+    #Xeumon-head { padding:12px 14px; background:linear-gradient(135deg, rgba(124,58,237,.25), rgba(45,212,255,.12));
       border-bottom:1px solid rgba(124,58,237,.3); color:#EEF2FF; font-weight:600; font-size:13px;
       display:flex; align-items:center; justify-content:space-between; }
-    #nxy-head span.nxy-status { font-size:11px; font-weight:400; color:#34d399; }
-    #nxy-close { background:none; border:none; color:#94a3b8; cursor:pointer; font-size:16px; }
-    #nxy-msgs { flex:1; overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:8px; }
-    .nxy-msg { max-width:85%; padding:9px 12px; border-radius:14px; font-size:13px; line-height:1.5;
+    #Xeumon-head span.Xeumon-status { font-size:11px; font-weight:400; color:#34d399; }
+    #Xeumon-close { background:none; border:none; color:#94a3b8; cursor:pointer; font-size:16px; }
+    #Xeumon-msgs { flex:1; overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:8px; }
+    .Xeumon-msg { max-width:85%; padding:9px 12px; border-radius:14px; font-size:13px; line-height:1.5;
       white-space:pre-wrap; overflow-wrap:break-word; }
-    .nxy-user { align-self:flex-end; background:linear-gradient(135deg,#7c3aed,#5b21b6); color:#fff;
+    .Xeumon-user { align-self:flex-end; background:linear-gradient(135deg,#7c3aed,#5b21b6); color:#fff;
       border-bottom-right-radius:4px; }
-    .nxy-bot { align-self:flex-start; background:rgba(124,58,237,.14); color:#EEF2FF;
+    .Xeumon-bot { align-self:flex-start; background:rgba(124,58,237,.14); color:#EEF2FF;
       border:1px solid rgba(124,58,237,.25); border-bottom-left-radius:4px; }
-    .nxy-typing { align-self:flex-start; color:#94a3b8; font-size:12px; padding:4px 6px; }
-    #nxy-form { display:flex; gap:8px; padding:10px; border-top:1px solid rgba(124,58,237,.25); }
-    #nxy-input { flex:1; background:#13132a; border:1px solid rgba(124,58,237,.3); border-radius:10px;
+    .Xeumon-typing { align-self:flex-start; color:#94a3b8; font-size:12px; padding:4px 6px; }
+    #Xeumon-form { display:flex; gap:8px; padding:10px; border-top:1px solid rgba(124,58,237,.25); }
+    #Xeumon-input { flex:1; background:#13132a; border:1px solid rgba(124,58,237,.3); border-radius:10px;
       color:#EEF2FF; padding:9px 11px; font-size:13px; outline:none; resize:none; }
-    #nxy-input:focus { border-color:#2dd4ff; }
-    #nxy-send { background:linear-gradient(135deg,#7c3aed,#2dd4ff); border:none; border-radius:10px;
+    #Xeumon-input:focus { border-color:#2dd4ff; }
+    #Xeumon-send { background:linear-gradient(135deg,#7c3aed,#2dd4ff); border:none; border-radius:10px;
       color:#fff; padding:0 14px; cursor:pointer; font-size:15px; }
-    #nxy-send:disabled { opacity:.4; cursor:not-allowed; }
+    #Xeumon-send:disabled { opacity:.4; cursor:not-allowed; }
   `;
   var style = document.createElement('style');
   style.textContent = css;
   document.head.appendChild(style);
 
   var root = document.createElement('div');
-  root.id = 'nxy-widget-root';
+  root.id = 'Xeumon-widget-root';
   root.innerHTML =
-    '<div id="nxy-panel" role="dialog" aria-label="Assistante Nethxeum">' +
-      '<div id="nxy-head"><span>NXY · Assistante Nethxeum</span><span class="nxy-status">● en ligne</span>' +
-      '<button id="nxy-close" aria-label="Fermer">✕</button></div>' +
-      '<div id="nxy-msgs"></div>' +
-      '<form id="nxy-form"><input id="nxy-input" type="text" autocomplete="off" ' +
+    '<div id="Xeumon-panel" role="dialog" aria-label="Assistante Nethxeum">' +
+      '<div id="Xeumon-head"><span>Xeumon · Assistante Nethxeum</span><span class="Xeumon-status">● en ligne</span>' +
+      '<button id="Xeumon-close" aria-label="Fermer">✕</button></div>' +
+      '<div id="Xeumon-msgs"></div>' +
+      '<form id="Xeumon-form"><input id="Xeumon-input" type="text" autocomplete="off" ' +
            'placeholder="Question sur le réseau, un bloc, le projet…" />' +
-      '<button id="nxy-send" type="submit">➤</button></form>' +
+      '<button id="Xeumon-send" type="submit">➤</button></form>' +
     '</div>' +
-    '<button id="nxy-btn" aria-label="Ouvrir l’assistante">✦</button>';
+    '<button id="Xeumon-btn" aria-label="Ouvrir l’assistante">✦</button>';
   document.body.appendChild(root);
 
-  var panel = document.getElementById('nxy-panel');
-  var msgs = document.getElementById('nxy-msgs');
-  var form = document.getElementById('nxy-form');
-  var input = document.getElementById('nxy-input');
-  var sendBtn = document.getElementById('nxy-send');
+  var panel = document.getElementById('Xeumon-panel');
+  var msgs = document.getElementById('Xeumon-msgs');
+  var form = document.getElementById('Xeumon-form');
+  var input = document.getElementById('Xeumon-input');
+  var sendBtn = document.getElementById('Xeumon-send');
 
-  document.getElementById('nxy-btn').addEventListener('click', function () {
-    panel.classList.toggle('nxy-open');
-    if (panel.classList.contains('nxy-open')) input.focus();
+  document.getElementById('Xeumon-btn').addEventListener('click', function () {
+    panel.classList.toggle('Xeumon-open');
+    if (panel.classList.contains('Xeumon-open')) input.focus();
   });
-  document.getElementById('nxy-close').addEventListener('click', function () {
-    panel.classList.remove('nxy-open');
+  document.getElementById('Xeumon-close').addEventListener('click', function () {
+    panel.classList.remove('Xeumon-open');
   });
 
-  // API programmable : nxy.toggle() depuis n'importe quelle page
-  window.NXY = {
+  // API programmable : Xeumon.toggle() depuis n'importe quelle page
+  window.Xeumon = {
     toggle: function () {
-      panel.classList.toggle('nxy-open');
-      if (panel.classList.contains('nxy-open')) input.focus();
+      panel.classList.toggle('Xeumon-open');
+      if (panel.classList.contains('Xeumon-open')) input.focus();
     },
-    open: function () { panel.classList.add('nxy-open'); input.focus(); },
-    close: function () { panel.classList.remove('nxy-open'); },
+    open: function () { panel.classList.add('Xeumon-open'); input.focus(); },
+    close: function () { panel.classList.remove('Xeumon-open'); },
   };
   // If the page host asks to hide the floating button (explorer: icon inside search bar)
-  if (window.NXY_HIDE_FAB) {
-    document.getElementById('nxy-btn').style.display = 'none';
+  if (window.Xeumon_HIDE_FAB) {
+    document.getElementById('Xeumon-btn').style.display = 'none';
   }
 
   function cleanText(t) {
@@ -105,7 +105,7 @@
 
   function addMsg(role, text) {
     var div = document.createElement('div');
-    div.className = 'nxy-msg ' + (role === 'user' ? 'nxy-user' : 'nxy-bot');
+    div.className = 'Xeumon-msg ' + (role === 'user' ? 'Xeumon-user' : 'Xeumon-bot');
     div.textContent = cleanText(text);
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
@@ -114,14 +114,14 @@
   // Mémoire de conversation (persiste pendant la session)
   var history = [];
   try {
-    history = JSON.parse(sessionStorage.getItem('nxy-history') || '[]');
+    history = JSON.parse(sessionStorage.getItem('Xeumon-history') || '[]');
     history.forEach(function (m) { addMsg(m.role, m.content); });
   } catch (_) { history = []; }
 
   function pushHistory(role, content) {
     history.push({ role: role, content: content });
     if (history.length > 20) history = history.slice(-20);
-    try { sessionStorage.setItem('nxy-history', JSON.stringify(history)); } catch (_) {}
+    try { sessionStorage.setItem('Xeumon-history', JSON.stringify(history)); } catch (_) {}
   }
 
   form.addEventListener('submit', function (e) {
@@ -134,8 +134,8 @@
     input.disabled = true;
     sendBtn.disabled = true;
     var tip = document.createElement('div');
-    tip.className = 'nxy-typing';
-    tip.textContent = 'NXY écrit…';
+    tip.className = 'Xeumon-typing';
+    tip.textContent = 'Xeumon écrit…';
     msgs.appendChild(tip);
     msgs.scrollTop = msgs.scrollHeight;
 
