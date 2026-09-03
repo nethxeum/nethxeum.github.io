@@ -111,13 +111,28 @@
       .trim();
   }
 
+  function linkify(text) {
+    const esc = text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+    return esc.replace(
+      /(https?:\/\/[^\s<>"'(){}]+|\b(?:discord\.gg|t\.me|github\.com)\/[A-Za-z0-9_.\/-]+|\bX\s+@nethxeum\b|\b@[A-Za-z0-9_]+\b)/g,
+      function (m) {
+        var url = /^https?:/i.test(m) ? m : 'https://' + m.replace(/@/, 'twitter.com/').replace(/\s+/g, '');
+        return '<a href="' + url + '" target="_blank" rel="noopener" style="color: #8b5cf6; text-decoration: underline; text-decoration-color: rgba(139,92,246,.45); word-break: break-all;">' + m + '</a>';
+      }
+    );
+  }
+
   function add(role, text) {
     var d = document.createElement('div');
-    d.textContent = clean(text);
     d.style.cssText = (role === 'user'
       ? 'align-self:flex-end;max-width:82%;min-width:0;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;padding:10px 14px;border-radius:14px;border-bottom-right-radius:4px;'
       : 'align-self:flex-start;max-width:82%;min-width:0;background:rgba(124,58,237,.13);border:1px solid rgba(124,58,237,.25);color:var(--text-primary);padding:10px 14px;border-radius:14px;border-bottom-left-radius:4px;')
       + 'white-space:pre-wrap;line-height:1.55;font-size:.94rem;overflow-wrap:anywhere;word-break:break-word;box-sizing:border-box;';
+    d.innerHTML = linkify(clean(text));
     msgs.appendChild(d);
     msgs.scrollTop = msgs.scrollHeight;
   }
