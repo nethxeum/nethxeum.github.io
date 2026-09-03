@@ -94,13 +94,14 @@
   background: rgba(6, 11, 31, .38); border-top: 1px solid rgba(124,58,237,.25);
   backdrop-filter: blur(12px);
 }
-.x-input{ flex:1; height:40px; padding:0 14px;
-  background: rgba(255,255,255,.03); border: 1px solid rgba(124,58,237,.35);
-  border-radius: 12px; color: #eef2ff; font-size: 13.5px; outline: none;
-  font-family: inherit;
+.x-input{ flex:1; height:44px; padding:0 16px;\n  background: rgba(9,15,45,.6); border: 1.5px solid rgba(124,58,237,.45);\n  border-radius: 999px; color: #eef2ff; font-size: 14px; outline: none;\n  font-family: inherit;\n  box-shadow: inset 0 2px 8px rgba(0,0,0,.35), 0 0 0 1px rgba(124,58,237,.1);\n  transition: box-shadow .2s, border-color .2s;\n}
+.x-input::placeholder { color: rgba(139,155,178,.5); }
+.x-input:focus {
+  border-color: rgba(45,212,255,.7);
+  box-shadow: inset 0 2px 8px rgba(0,0,0,.35), 0 0 0 3px rgba(45,212,255,.18), 0 0 22px rgba(124,58,237,.18);
 }
-.x-input::placeholder { color: rgba(139,155,178,.55); }
-.x-input:focus { border-color: rgba(45,212,255,.55); box-shadow: 0 0 0 3px rgba(45,212,255,.13); }
+
+
 .x-send { width: 40px; height: 40px; flex-shrink:0; border:0; border-radius:12px;
   background: linear-gradient(135deg,#7c3aed,#1756e0); color:#fff; cursor:pointer;
   box-shadow: 0 0 12px rgba(124,58,237,.35);
