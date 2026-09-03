@@ -140,10 +140,10 @@
     inset 0 0 0 1px rgba(45, 212, 255, .14),
     inset 0 1px 0 rgba(255, 255, 255, .05);
 }
-.x-plus2 { background: rgba(124, 58, 237, .2); border: 1px solid rgba(124, 58, 237, .35); border-radius: 12px; width: 38px; height: 38px; color: #a78bfa; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .18s; }
-.x-plus2:hover { background: rgba(124, 58, 237, .35); border-color: rgba(45,212,255,.55); color: #2dd4ff; }
+.x-plus { background: rgba(124, 58, 237, .2); border: 1px solid rgba(124, 58, 237, .35); border-radius: 12px; width: 38px; height: 38px; color: #a78bfa; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .18s; }
+.x-plus:hover { background: rgba(124, 58, 237, .35); border-color: rgba(45,212,255,.55); color: #2dd4ff; }
 
-.x-input2 {
+.x-input {
   flex: 1; min-width: 0;
   height: 36px;
   background: transparent !important;
@@ -156,9 +156,9 @@
   -webkit-appearance: none;
   border-radius: 0;
 }
-.x-input2::placeholder { color: rgba(139,155,178,.55); }
+.x-input::placeholder { color: rgba(139,155,178,.55); }
 
-.x-send2 {
+.x-send {
   width: 38px; height: 38px; border-radius: 12px; flex-shrink: 0;
   border: none; cursor: pointer;
   background: linear-gradient(135deg,#7c3aed 0%,#2563eb 55%,#2dd4ff 100%);
@@ -169,18 +169,18 @@
     inset 0 0 0 1px rgba(45,212,255,.25);
   transition: all .2s cubic-bezier(.2,.8,.2,1);
 }
-.x-send2:hover:not(:disabled) { 
+.x-send:hover:not(:disabled) { 
   background: linear-gradient(135deg,#8b5cf6,#2dd4ff);
   box-shadow: 0 0 22px rgba(45,212,255,.45), inset 0 0 0 1px rgba(45,212,255,.4);
   transform: scale(1.05);
 }
-.x-send2:active:not(:disabled) { transform: scale(.97); }
-.x-send2:disabled { opacity: .3; box-shadow: none; }
+.x-send:active:not(:disabled) { transform: scale(.97); }
+.x-send:disabled { opacity: .3; box-shadow: none; }
 
 /* Mobile : la barre ne touche pas les bords, la clé n'est pas sur l'écran */
 @media (max-width: 480px) {
   .x-msgbar { padding: 6px; border-radius: 40px; }
-  .x-plus2, .x-send2 { width: 36px; height: 36px; }
+  .x-plus, .x-send { width: 36px; height: 36px; }
   .x-msgbar { left: 10px; right: 10px; bottom: max(8px, env(safe-area-inset-bottom)); }
 }
 
@@ -209,9 +209,12 @@ body.theme-light .x-msgbar {
   <div id="nxy-msgs" class="x-msgs"></div>
 
   <form id="nxy-form" class="x-run" onsubmit="return nxySend(event);">
+    <button class="x-plus" type="button" aria-label="Add note" disabled>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
     <input id="nxy-input" class="x-input" type="text" autocomplete="off" placeholder="Écrivez votre message…" />
     <button id="nxy-send" class="x-send" type="submit" aria-label="Send">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
     </button>
   </form>
 </div>
