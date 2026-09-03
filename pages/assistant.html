@@ -44,9 +44,16 @@
 
 /* Zone messages: conservée ENTIEREMENT transparente */
 .x-msgs {
-  flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
-  padding: 14px 12px; scroll-behavior: smooth;
-  scrollbar-width: thin; scrollbar-color: rgba(124,58,237,.3) transparent;
+  flex: 1;              /* prend tout l'espace entre header et saisie */
+  overflow-y: auto;     /* seule zone qui défile */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 14px;
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(124,58,237,.3) transparent;
 }
 
 .x-row { display: flex; align-items: flex-end; gap: 10px; animation: x-in .25s ease; }
