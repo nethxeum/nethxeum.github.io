@@ -10,7 +10,25 @@
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
 <style>body{overflow:hidden!important;height:100vh;height:100dvh}#Xeumon-widget-root,.nxy-widget-root,#particles-canvas,.main-nav,.main-footer,.mobile-menu-btn,.mobile-menu,.mobile-menu-overlay,.announce-bar,.scroll-top-bar,.cookie-banner{display:none!important}.page-content{background:transparent}.main-nav,.main-footer,.mobile-menu-btn,.mobile-menu,.mobile-menu-overlay,#particles-canvas{display:none!important}#Xeumon-widget-root,.nxy-widget-root,button[aria-label*="Assistant"],button[aria-label*="Ouvrir"]{display:none!important}</style>
-</head>
+<</style>
+<style>
+@keyframes nxy-beam-orbit { to { --beam-angle: 360deg; } }
+@property --beam-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+.nxy-form-beam { position: relative; }
+.nxy-form-beam::before {
+  content: "";
+  position: absolute;
+  inset: 12px 18px;
+  border-radius: 10px;
+  padding: 1.5px;
+  background: conic-gradient(from var(--beam-angle), transparent 0%, transparent 70%, rgba(124,58,237,.95) 84%, rgba(45,212,255,.95) 90%, rgba(45,212,255,0) 96%, transparent 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: nxy-beam-orbit 3.2s linear infinite;
+  pointer-events: none;
+}
+</style></head>
 <body>
 <canvas id="particles-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
 <nav class="main-nav">
@@ -58,7 +76,7 @@
     <span style="margin-left:auto; color:#34d399; font-size:.78rem;">● en ligne</span>
   </div>
   <div id="nxy-page-msgs" style="flex: 1; overflow-y: auto; overflow-x: hidden; padding: 18px; display: flex; flex-direction: column; gap: 10px; max-width: 900px; width: 100%; margin: 0 auto; background: transparent; box-sizing: border-box;"></div>
-  <form id="nxy-page-form" style="display:flex; gap: 10px; padding: 12px 18px; border-top: 1px solid rgba(124,58,237,.2); max-width: 900px; width: 100%; margin: 0 auto;">
+  <form id="nxy-page-form" class="nxy-form-beam" style="display:flex; gap: 10px; padding: 12px 18px; border-top: 1px solid rgba(124,58,237,.2); max-width: 900px; width: 100%; margin: 0 auto; background: transparent;">
     <input id="nxy-page-input" type="text" autocomplete="off" placeholder="Ask about a block, a transaction, the project..." style="flex:1; background: rgba(255,255,255,.03); border: 1px solid rgba(124,58,237,.3); border-radius: 10px; color: var(--text-primary); padding: 12px 14px; font-size: .95rem; outline: none;"/>
     <button type="submit" style="background: linear-gradient(135deg, #7c3aed, #2dd4ff); border: none; border-radius: 10px; color: #fff; padding: 0 18px; cursor: pointer; font-size: 15px;">➤</button>
   </form>
