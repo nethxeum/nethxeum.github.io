@@ -7,7 +7,7 @@
 <meta content="Xeumon, the official AI assistant of Nethxeum." name="description"/>
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
 <style>
-html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #06070d; font-family: "Inter", -apple-system, system-ui, sans-serif; color: #eef2ff; }
+html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: "Inter", -apple-system, system-ui, sans-serif; color: #eef2ff; }
 * { box-sizing: border-box; }
 
 /* ── Header fixe ── */
@@ -55,12 +55,7 @@ html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: 
 .x-head-menu:hover { border-color: rgba(45,212,255,.6); color: #2dd4ff; }
 
 /* ── Fond tech ── */
-.x-bg {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 50% 40% at 20% -5%, rgba(124,58,237,.08), transparent 60%),
-    radial-gradient(ellipse 40% 30% at 85% 90%, rgba(45,212,255,.05), transparent 60%);
-}
+.x-bg { display: none !important; }
 .x-bg::after {
   content:""; position:absolute; inset:0;
   background-image:
@@ -188,7 +183,7 @@ html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: 
 </head>
 <body>
 
-<div class="x-bg"></div>
+
 
 <!-- Header Xeumon -->
 <header class="x-head">
