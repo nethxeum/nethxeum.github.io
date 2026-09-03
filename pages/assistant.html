@@ -94,7 +94,9 @@
   background: rgba(6, 11, 31, .38); border-top: 1px solid rgba(124,58,237,.25);
   backdrop-filter: blur(12px);
 }
-.x-input{ flex:1; height:44px; padding:0 16px; background: rgba(10,15,32,.6); border: 1.2px solid rgba(124,58,237,.35); border-radius: 999px; color: #eef2ff; font-size: 13.5px; outline: none; font-family: inherit; box-shadow: inset 0 1px 4px rgba(0,0,0,.35); transition: border-color .15s, box-shadow .15s; }
+.x-input{ flex:1; height:44px; padding:0 16px; background: rgba(10,15,32,.6); border: 1.2px solid rgba(124,58,237,.38); border-radius: 999px; color: #eef2ff; font-size: 14px; outline: none; font-family: inherit; box-shadow: inset 0 1px 4px rgba(0,0,0,.35); transition: border-color .15s, box-shadow .15s; }
+.x-input::placeholder { color: rgba(139,155,178,.55); }
+.x-input:focus { border-color: rgba(45,212,255,.7); box-shadow: inset 0 1px 4px rgba(0,0,0,.35), 0 0 0 3px rgba(45,212,255,.16), 0 0 22px rgba(124,58,237,.14); }
   background: rgba(10, 15, 32, .7); border: 1.5px solid rgba(124,58,237,.45);\n  border-radius: 999px; color: #eef2ff; font-size: 14px; outline: none;\n  font-family: inherit;\n  box-shadow: inset 0 2px 4px rgba(0,0,0,.3), 0 0 0 1px rgba(124,58,237,.15);\n  transition: box-shadow .2s, border-color .2s;\n}
 .x-input::placeholder { color: rgba(139,155,178,.5); }
 .x-input:focus {
