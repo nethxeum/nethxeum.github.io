@@ -4,298 +4,214 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Assistant — Xeumon · Nethxeum</title>
-<meta content="Xeumon, the official AI assistant of Nethxeum." name="description"/>
+<link href="../css/main.css" rel="stylesheet"/>
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+</head>
+<body style="background: transparent !important;">
+
 <style>
-html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: "Inter", -apple-system, system-ui, sans-serif; color: #eef2ff; }
-* { box-sizing: border-box; }
-
-/* ── Header fixe ── */
+/* ─── Chat chat over the site''s animated background ─────── */
+.x-shell {
+  position: fixed;
+  inset: 0;               /* taille fout de chat qui remplit tout l'écran */
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+  background: transparent; /* le thème animé du site brille derrière */
+}
+/* Header : la même palette, légèrement translucide pour laisser voir le fond */
 .x-head {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 16px;
-  background: rgba(8, 8, 20, .78);
-  border-bottom: 1px solid rgba(124,58,237,.24);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 2px 24px rgba(124,58,237,.08);
+  flex-shrink: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px;
+  background: rgba(6, 11, 31, .38);
+  border-bottom: 1px solid rgba(124, 58, 237, .25);
+  backdrop-filter: blur(10px);
 }
-.x-back {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px; border-radius: 10px; border: 1px solid rgba(124,58,237,.35);
-  color: #9ca3af; text-decoration: none; flex-shrink: 0; transition: all .15s;
+.x-back { display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px;
+  border-radius:10px; border:1px solid rgba(124,58,237,.35); color:rgba(139,155,178,.85); text-decoration:none;
 }
-.x-back:hover { border-color: #2dd4ff; color: #2dd4ff; box-shadow: 0 0 12px rgba(45,212,255,.25); }
-.x-back svg { width: 18px; height: 18px; }
+.x-back:hover { border-color:#2dd4ff; color:#2dd4ff; }
+.x-avatar { width:36px; height:36px; border-radius:50%; border:1.5px solid rgba(45,212,255,.55);
+  box-shadow:0 0 12px rgba(45,212,255,.3); overflow:hidden; flex-shrink:0; }
+.x-avatar img { width:100%; height:100%; object-fit:cover; }
+.x-head-name { color:#eef2ff; font-weight:700; font-size:15px; }
+.x-head-sub  { color:#8b7bc7; font-size:11.5px; letter-spacing:.2px; }
+.x-status { margin-left:auto; display:flex; align-items:center; gap:7px; }
+.x-dot { width:8px; height:8px; border-radius:50%; background:#34d399;
+  box-shadow:0 0 0 3px rgba(52,211,153,.25), 0 0 8px #34d399; animation:pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.x-status-txt { color:#34d399; font-size:11.5px; }
 
-.x-head-brand { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
-.x-avatar {
-  width: 38px; height: 38px; border-radius: 50%;
-  border: 1.5px solid rgba(45,212,255,.55);
-  box-shadow: 0 0 14px rgba(45,212,255,.3), 0 0 0 3px rgba(124,58,237,.15);
-  overflow: hidden; flex-shrink: 0;
-}
-.x-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.x-head-name { color: #eef2ff; font-weight: 700; font-size: 15.5px; }
-.x-head-sub  { color: #8b7bc7; font-size: 12px; letter-spacing: .2px; }
-.x-head-status { display: flex; align-items: center; gap: 7px; }
-.x-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: #34d399; box-shadow: 0 0 0 3px rgba(52,211,153,.25), 0 0 8px #34d399;
-  animation: x-pulse 1.6s ease-in-out infinite;
-}
-@keyframes x-pulse { 0%,100% { opacity:1 } 50% { opacity:.4 } }
-.x-status-txt { color: #34d399; font-size: 12px; }
-
-.x-head-menu {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: transparent; border: 1px solid rgba(124,58,237,.22);
-  color: #8b7bc7; cursor: pointer; display: flex; align-items: center; justify-content: center;
-}
-.x-head-menu:hover { border-color: rgba(45,212,255,.6); color: #2dd4ff; }
-
-/* ── Fond tech ── */
-.x-bg { display: none !important; }
-.x-bg::after {
-  content:""; position:absolute; inset:0;
-  background-image:
-    linear-gradient(rgba(124,58,237,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(124,58,237,.04) 1px, transparent 1px);
-  background-size: 32px 32px;
-}
-
-/* ── Messages ── */
+/* Zone messages: conservée ENTIEREMENT transparente */
 .x-msgs {
-  position: fixed; top: 62px; bottom: 68px; left: 0; right: 0; z-index: 10;
-  overflow-y: auto; padding: 16px 14px;
-  display: flex; flex-direction: column; gap: 8px;
-  scroll-behavior: smooth;
+  flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
+  padding: 14px 12px; scroll-behavior: smooth;
   scrollbar-width: thin; scrollbar-color: rgba(124,58,237,.3) transparent;
 }
-.x-row { display: flex; align-items: flex-end; gap: 9px; animation: x-in .3s ease; }
-.x-row.x-user { flex-direction: row-reverse; }
-.x-row > .x-avatar { width: 30px; height: 30px; flex-shrink: 0; }
-/* Bulles : tag bundle + meta */
-.x-msg-bundle { display: flex; flex-direction: column; max-width: calc(100% - 48px); }
 
-.x-bubble {
-  max-width: 100%;
-  padding: 10px 14px;
-  font-size: 13.5px; line-height: 1.55;
-  white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; box-sizing: border-box;
-}
+.x-row { display: flex; align-items: flex-end; gap: 10px; animation: x-in .25s ease; }
+.x-user { flex-direction: row-reverse; }
+@keyframes x-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
-/* Meta : heure + ✓✓ sous la bubble */
-.x-meta { font-size: 10.5px; color: rgba(139,155,178,.8); margin-top: 4px; display: flex; align-items: center; gap: 5px; }
+.x-msg-bundle { display: flex; flex-direction: column; max-width: calc(100% - 46px); }
+
+.x-meta { font-size: 10.5px; color: rgba(139,155,178,.85); margin-top: 4px; display: flex; align-items: center; gap: 5px; }
 .x-meta--user { justify-content: flex-end; }
 .x-tick { color: #8b5cf6; font-size: 11px; }
 
+.x-bubble {
+  position: relative;
+  padding: 10px 14px; font-size: 13.5px; line-height: 1.55;
+  white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; box-sizing: border-box;
+}
+
+/* Bulle Xeumon : couleur du thème Nethxeum mais légèrement transparente */
 .x-bubble--bot {
-  background: linear-gradient(135deg, rgba(14,12,28,.88), rgba(12,10,24,.82));
-  border: 1px solid rgba(45,212,255,.35);
-  color: #eef2ff; border-radius: 16px 16px 16px 5px;
-  box-shadow: 0 4px 16px rgba(124,58,237,.14), inset 0 1px 0 rgba(255,255,255,.04);
+  background: rgba(20, 18, 40, .75);
+  border: 1px solid rgba(45, 212, 255, .35);
+  color: #eef2ff;
+  border-radius: 16px 16px 16px 5px;
+  box-shadow: 0 4px 16px rgba(124,58,237,.12);
 }
-.x-bubble--bot::before {
-  content:""; position:absolute; left:-5px; top:11px;
-  border:6px solid transparent; border-right-color: rgba(14,12,28,.88);
-}
+.x-bubble--bot::before { content:""; position:absolute; left:-5px; top:12px;
+  border:6px solid transparent; border-right-color:rgba(20,18,40,.75); }
+
+/* Bulle utilisateur : du gradient foncé violet du site */
 .x-bubble--user {
-  background: linear-gradient(135deg, rgba(71,40,149,.92), rgba(30,20,60,.88));
+  background: linear-gradient(135deg, rgba(59,34,109,.9), rgba(34,21,74,.85));
   border: 1px solid rgba(168,85,247,.5);
-  color: #fff; border-radius: 16px 16px 5px 16px;
-  box-shadow: 0 4px 18px rgba(124,58,237,.25), inset 0 1px 0 rgba(255,255,255,.06);
+  color: #fff;
+  border-radius: 16px 16px 5px 16px;
+  box-shadow: 0 4px 16px rgba(124,58,237,.18);
 }
-.x-bubble--user::before {
-  content:""; position:absolute; right:-5px; bottom:3px;
-  border:6px solid transparent; border-left-color: rgba(30,20,60,.88);
+.x-bubble--user::after { content:""; position:absolute; right:-5px; bottom:0;
+  border:6px solid transparent; border-left-color:rgba(34,21,74,.85); }
+
+.chat-link { color: #8b5cf6 !important; text-decoration: underline; text-decoration-color: rgba(139,92,246,.45); word-break: break-all; }
+
+/* Barre de saisie : translucide, laisse respirer le fond
+.x-run { flex-shrink:0; display:flex; gap:10px; padding:12px 14px;
+  background: rgba(6, 11, 31, .38); border-top: 1px solid rgba(124,58,237,.25);
+  backdrop-filter: blur(12px);
 }
-
-/* ── Typing indicator ── */
-.x-typing { animation: x-in .2s ease; }
-.x-typing .x-bubble { padding: 12px 16px; opacity: .7; }
-.x-typing span { display:inline-block; width:6px; height:6px; border-radius:50%; background:#a78bfa; margin-right: 3px; animation:x-dot 1.2s infinite; }
-.x-typing span:nth-child(2) { animation-delay:.2s; }
-.x-typing span:nth-child(3) { animation-delay:.4s; }
-@keyframes x-dot { 0%,60%,100% { transform:none; opacity:.3 } 30% { opacity:1; } }
-
-/* ── Mobile : bubble plus grande ── */
-@media (max-width: 480px) {
-  .x-msg-bundle { max-width: calc(100% - 44px); }
-  .x-bubble { font-size: 12.5px; padding: 10px 12px; }
-}
-
-.x-time { font-size: 10.5px; color: rgba(139,155,178,.85); display: flex; align-items: center; gap: 6px; align-self: flex-start; margin-bottom: 4px; padding-left: 42px; }
-.x-row.x-user + .x-time { justify-content: flex-end; }
-.x-tick { color: #8b5cf9; font-size: 11px; }
-
-.chat-link { color: #8b5cf6; text-decoration: underline; text-decoration-color: rgba(139,92,246,.45); word-break: break-all; }
-.x-bubble--user .chat-link { color: #e2d2ff; }
-
-/* ── Saisie ── */
-.x-run {
-  position: fixed; bottom: 0; left: 0; right: 0; z-index: 60;
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 14px;
-  background: rgba(8,8,20,.8); border-top: 1px solid rgba(124,58,237,.2);
-  backdrop-filter: blur(16px);
-}
-.x-plus {
-  width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0;
-  background: transparent; border: 1px solid rgba(124,58,237,.4);
-  color: #a78bfa; cursor: pointer; display: flex; align-items: center; justify-content: center;
-  transition: all .15s;
-}
-.x-plus:hover { border-color: #45d0ff; color: #45d0ff; box-shadow: 0 0 12px rgba(45,212,255,.22); }
-.x-plus svg { width: 18px; height: 18px; }
-
-#nxy-input {
-  flex: 1; height: 38px;
+.x-input{ flex:1; height:40px; padding:0 14px;
   background: rgba(255,255,255,.03); border: 1px solid rgba(124,58,237,.35);
-  border-radius: 12px; color: #eef2ff; font-size: 13.5px; padding: 0 14px; outline: none;
+  border-radius: 12px; color: #eef2ff; font-size: 13.5px; outline: none;
   font-family: inherit;
 }
-#nxy-input::placeholder { color: rgba(139,158,176,.55); }
-#nxy-input:focus { border-color: rgba(45,212,255,.6); box-shadow: 0 0 0 3px rgba(45,212,255,.12), 0 0 14px rgba(124,58,237,.14); }
-
-#nxy-send {
-  width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0;
-  background: linear-gradient(135deg,#7c3aed,#2563eb);
-  border: 1px solid rgba(139,92,246,.65); color: #fff; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 0 14px rgba(124,58,237,.35);
-  transition: all .15s;
+.x-input::placeholder { color: rgba(139,155,178,.55); }
+.x-input:focus { border-color: rgba(45,212,255,.55); box-shadow: 0 0 0 3px rgba(45,212,255,.13); }
+.x-send { width: 40px; height: 40px; flex-shrink:0; border:0; border-radius:12px;
+  background: linear-gradient(135deg,#7c3aed,#1756e0); color:#fff; cursor:pointer;
+  box-shadow: 0 0 12px rgba(124,58,237,.35);
 }
-#nxy-send:hover:not([disabled]) { box-shadow: 0 0 18px rgba(45,212,255,.45), inset 0 1px 0 rgba(255,255,255,.15); transform: translateY(-1px); }
-#nxy-send:disabled { opacity: .35; }
-#nxy-send svg { width: 18px; height: 18px; }
+.x-send:disabled { opacity:.4; }
 
-.x-ring { position:absolute; inset:-3px; border-radius:50%; border:1.5px solid rgba(45,212,255,.2); animation: x-ring 2.8s ease-in-out infinite; pointer-events:none; }
-@keyframes x-ring { 0%,100% { opacity:.3; } 50% { opacity:.75; } }
-@keyframes x-in { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }
-
-@media (max-width: 480px) {
-  .x-head { padding: 10px 12px; }
-  .x-bubble { max-width: 82%; font-size: 12.5px; }
-  .x-run { padding: 10px 12px; gap: 8px; }
+/* Desktop/mobile responsive */
+@media (max-width: 560px) {
+  .x-bubble { font-size: 12.8px; padding: 9px 12px; }
+  .x-msgs { padding: 12px 10px; gap: 8px; }
 }
 </style>
-</head>
-<body>
 
-
-
-<!-- Header Xeumon -->
-<header class="x-head">
-  <a class="x-back" href="../index.html" title="Home">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-  </a>
-  <div class="x-head-brand">
-    <div class="x-avatar"><img src="../images/assistant.png" alt="Xeumon"/><div class="x-ring"></div></div>
-    <div>
+<div class="x-shell">
+  <!-- Header : logo + titre. Laisse passer le fond animé -->
+  <div class="x-head">
+    <a class="x-back" href="../index.html" aria-label="Retour">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </a>
+    <div class="x-avatar"><img src="../images/assistant.png" alt="Xeumon"></div>
+    <div style="flex:1">
       <div class="x-head-name">Xeumon</div>
-      <div class="x-head-sub">Assistante IA · Nethxeum</div>
+      <div class="x-head-sub">Assistante officielle Nethxeum</div>
     </div>
+    <div class="x-status"><div class="x-dot"></div><span class="x-status-txt">En ligne</span></div>
   </div>
-  <div class="x-head-status"><div class="x-dot"></div><span class="x-status-txt">En ligne</span></div>
-  <button class="x-head-menu" aria-label="Menu"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button>
-</header>
 
-<!-- Zone de messages -->
-<div class="x-msgs" id="nxy-page-msgs"></div>
+  <!-- zone messages : pas de fond solide, le background du site passe partout -->
+  <div id="nxy-msgs" class="x-msgs"></div>
 
-<!-- Barre de saisie -->
-<div class="x-run">
-  <button class="x-plus" type="button" aria-label="Add note">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-  </button>
-  <input id="nxy-input" type="text" autocomplete="off" placeholder="Écrivez votre message…" />
-  <button id="nxy-send" type="button" aria-label="Send">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-  </button>
+  <form id="nxy-form" class="x-run" onsubmit="return nxySend(event);">
+    <input id="nxy-input" class="x-input" type="text" autocomplete="off" placeholder="Écrivez votre message…" />
+    <button id="nxy-send" class="x-send" type="submit" aria-label="Send">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+    </button>
+  </form>
 </div>
 
+<script src="../js/main.js"></script>
 <script>
-(function () {
-  'use strict';
+(function() {
   var API = 'https://explore.nethxeum.com/api/assistant/chat';
   var KEY = 'jir63n28vug95behsqofwmpaytk47dczxl10';
-
-  var msgs = document.getElementById('nxy-page-msgs');
+  var msgs = document.getElementById('nxy-msgs');
   var input = document.getElementById('nxy-input');
-  var sendBtn = document.getElementById('nxy-send');
 
-  function now() {
-    var d = new Date();
-    return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
+  function now() { var d = new Date(); return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0'); }
+  function cls(t) {
+    return (t || '').replace(/\*\*(.+?)\*\*/g,'$1').replace(/\*(.+?)\*/g,'$1').replace(/__(.+?)__/g,'$1').replace(/_(.+?)_/g,'$1').replace(/`{1,3}([^`]+)`{0,3}/g,'$1').replace(/^#{1,6}\s*/gm,'').replace(/^\s*[-*]\s+/gm,'• ').trim();
   }
 
-  function linkify(text) {
-    var esc = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-    return esc.replace(/(https?:\/\/\S+|discord\.gg\/\S+|t\.me\/\S+|github\.com\/\S+|@\w+)/g,
-      function(m){ var url = /^https?:/i.test(m) ? m : (m.charAt(0)==='@' ? 'https://x.com/'+m.slice(1) : 'https://'+m);
-        return '<a class="chat-link" href="'+url+'" target="_blank" rel="noopener">'+m+'</a>'; });
+  function user_api(text, history) {
+    return fetch(API, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'x-api-key': KEY },
+      body: JSON.stringify({ message: text, history: history })
+    }).then(r => r.json()).then(data => (data.reply || 'Pas de réponse.').replace(/\*\*(.+?)\*\*/g,'$1'));
   }
 
   function addMsg(role, text, time) {
-    var row = document.createElement('div');
-    row.className = 'x-row' + (role === 'user' ? ' x-user' : '');
-    var bundle = document.createElement('div');
-    bundle.className = 'x-msg-bundle';
-    if (role === 'assistant') {
-      row.innerHTML = '<div class="x-avatar" style="width:30px;height:30px;flex-shrink:0;"><img src="../images/assistant.png" alt="Xeumon"/></div>';
-      bundle.innerHTML = '<div class="x-bubble x-bubble--bot">' + linkify(text) + '</div><div class="x-meta">' + time + '</div>';
-    } else {
-      bundle.innerHTML = '<div class="x-bubble x-bubble--user">' + linkify(text) + '</div><div class="x-meta x-meta--user">' + time + '<span class="x-tick">✓✓</span></div>';
-    }
+    var row = document.createElement('div'); row.className = 'x-row' + (role === 'user' ? ' x-user' : '');
+    var bundle = document.createElement('div'); bundle.className = 'x-msg-bundle';
+    bundle.innerHTML = (role === 'user'
+      ? '<div class="x-bubble x-bubble--user">' + cls(text) + '</div>'
+      : '<div class="x-bubble x-bubble--bot">' + cls(text) + '</div>')
+      + '<div class="x-meta">' + time + (role === 'user' ? '<span class="x-tick">✓✓</span>' : '') + '</div>';
     row.appendChild(bundle);
     msgs.appendChild(row);
     msgs.scrollTop = msgs.scrollHeight;
   }
 
-  var history = [];
-  try { history = JSON.parse(sessionStorage.getItem('xeumon-history') || '[]'); } catch (_) { history = []; }
-  if (history.length) {
-    // re-rend l'historique sans timestamps datés (on garde juste le texte)
-    history.forEach(function (m) { addMsg(m.role === 'assistant' ? 'assistant' : 'user', m.content, ''); });
-    // mais on strippe les timestamps vides — ça rappelle la FA
-    msgs.querySelectorAll('.x-time').forEach(function(el) { el.remove(); });
-    var lastTimeSpan = msgs.querySelector('.x-row:last-of-type');
-    if (lastTimeSpan) lastTimeSpan.insertAdjacentHTML('afterend', '<div class="x-time x-meta--user">' + now() + '</div>');
-  } else {
-    addMsg('assistant', 'Bonjour ! Je suis Xeumon, l\'assistante officielle Nethxeum. Je connais la chaîne en direct (blocs, transactions, hashrate) et le projet. Que veux-tu savoir ?', now());
-    history.push({ role: 'assistant', content: 'Bonjour !' });
+  var hist = [];
+  try { hist = JSON.parse(sessionStorage.getItem('xeumon-history') || '[]'); } catch (e) { hist = []; }
+
+  // Chat de réactivation (basé sur l'historique) présent en premier
+  hist.forEach(function (m) {
+    addMsg(m.role === 'assistant' ? 'assistant' : 'user', m.content, '');
+  });
+
+  if (!hist.length) {
+    addMsg('assistant', 'Bonjour ! Je suis Xeumon, l\'assistante de Nethxeum. Je peux tb\'indiquer la hauteur actuelle des blocs, info sur la chaîne ou la page. Si tu préfères, pose-moi une question.', now());
   }
 
-  function send() {
+  window.nxySend = function () {
     var text = input.value.trim();
-    if (!text) return;
+    if (!text) return false;
     addMsg('user', text, now());
-    history.push({ role: 'user', content: text });
+    hist.push({ role: 'user', content: text });
     input.value = '';
-    input.disabled = true; sendBtn.disabled = true;
+    input.disabled = true;
+    var sendBtn = document.getElementById('nxy-send');
+    sendBtn.disabled = true;
 
-    var typRow = document.createElement('div');
-    typRow.className = 'x-row';
-    typRow.innerHTML = '<div class="x-avatar" style="width:30px;height:30px;"><img src="../images/assistant.png"></div><div class="x-bubble x-bubble--bot"><i class="fas fa-circle" style="font-size:4px;opacity:.5"></i> <i class="fas fa-circle" style="font-size:4px;opacity:.6"></i> <i class="fas fa-circle" style="font-size:4px;opacity:.7"></i></div>';
-    msgs.appendChild(typRow); msgs.scrollTop = msgs.scrollHeight;
+    var typing = document.createElement('div'); typing.className = 'x-row'; typing.id = 'typing';
+    typing.innerHTML = '<div class="x-msg-bundle"><div class="x-bubble x-bubble--bot">…</div></div>';
+    msgs.appendChild(typing); msgs.scrollTop = msgs.scrollHeight;
 
-    fetch(API, { method:'POST', headers:{'Content-Type':'application/json','x-api-key':KEY}, body: JSON.stringify({ message: text, history: history }) })
-      .then(r => r.json())
-      .then(d => {
-        typRow.remove();
-        var reply = (d.reply || 'Pas de réponse.').replace(/\*\*(.+?)\*\*/g,'$1').replace(/\*(.+?)\*/g,'$1').replace(/^#{1,6}\s*/gm,'').replace(/^[\-*]\s+/gm,'• ');
+    user_api(text, hist)
+      .then(function (reply) {
+        typing.remove();
         addMsg('assistant', reply, now());
-        history.push({ role: 'assistant', content: reply });
-        if (history.length > 20) history = history.slice(-20);
-        try { sessionStorage.setItem('xeumon-history', JSON.stringify(history)); } catch (_) {}
+        hist.push({ role: 'assistant', content: reply });
+        if (hist.length > 20) hist = hist.slice(-20);
+        sessionStorage.setItem('xeumon-history', JSON.stringify(hist));
       })
-      .catch(() => { typRow.remove(); addMsg('assistant', 'Erreur réseau — réessaie dans un instant.', now()); })
-      .finally(() => { input.disabled = false; sendBtn.disabled = false; sendBtn.focus(); });
-  }
-
-  sendBtn.addEventListener('click', send);
-  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); send(); } });
+      .catch(function () {
+        typing.remove();
+        addMsg('assistant', 'Erreur réseau — réessaie dans un instant.', now());
+      })
+      .finally(function () { input.disabled = false; sendBtn.disabled = false; input.focus(); });
+    return false;
+  };
 })();
 </script>
 </body>
