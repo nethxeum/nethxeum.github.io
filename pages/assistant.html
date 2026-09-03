@@ -1,95 +1,202 @@
 ﻿<!DOCTYPE html>
-
 <html dir="ltr" lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Assistant - Nethxeum (NTU)</title>
+<title>Assistant — Xeumon · Nethxeum</title>
 <meta content="Xeumon, the official AI assistant of Nethxeum." name="description"/>
-<link href="../css/main.css" rel="stylesheet"/>
 <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
-<style>body{overflow:hidden!important;height:100vh;height:100dvh}#Xeumon-widget-root,.nxy-widget-root,#particles-canvas,.main-nav,.main-footer,.mobile-menu-btn,.mobile-menu,.mobile-menu-overlay,.announce-bar,.scroll-top-bar,.cookie-banner{display:none!important}.page-content{background:transparent}.main-nav,.main-footer,.mobile-menu-btn,.mobile-menu,.mobile-menu-overlay,#particles-canvas{display:none!important}#Xeumon-widget-root,.nxy-widget-root,button[aria-label*="Assistant"],button[aria-label*="Ouvrir"]{display:none!important}</style>
-<</style>
 <style>
-@keyframes nxy-beam-orbit { to { --beam-angle: 360deg; } }
-@property --beam-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
-.nxy-form-beam { position: relative; }
-.nxy-form-beam::before {
-  content: "";
-  position: absolute;
-  inset: 12px 18px;
-  border-radius: 10px;
-  padding: 1.5px;
-  background: conic-gradient(from var(--beam-angle), transparent 0%, transparent 70%, rgba(124,58,237,.95) 84%, rgba(45,212,255,.95) 90%, rgba(45,212,255,0) 96%, transparent 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: nxy-beam-orbit 3.2s linear infinite;
-  pointer-events: none;
+html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #06070d; font-family: "Inter", -apple-system, system-ui, sans-serif; color: #eef2ff; }
+* { box-sizing: border-box; }
+
+/* ── Header fixe ── */
+.x-head {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  background: rgba(8, 8, 20, .78);
+  border-bottom: 1px solid rgba(124,58,237,.24);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 24px rgba(124,58,237,.08);
 }
-</style></head>
+.x-back {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 10px; border: 1px solid rgba(124,58,237,.35);
+  color: #9ca3af; text-decoration: none; flex-shrink: 0; transition: all .15s;
+}
+.x-back:hover { border-color: #2dd4ff; color: #2dd4ff; box-shadow: 0 0 12px rgba(45,212,255,.25); }
+.x-back svg { width: 18px; height: 18px; }
+
+.x-head-brand { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+.x-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid rgba(45,212,255,.55);
+  box-shadow: 0 0 14px rgba(45,212,255,.3), 0 0 0 3px rgba(124,58,237,.15);
+  overflow: hidden; flex-shrink: 0;
+}
+.x-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.x-head-name { color: #eef2ff; font-weight: 700; font-size: 15.5px; }
+.x-head-sub  { color: #8b7bc7; font-size: 12px; letter-spacing: .2px; }
+.x-head-status { display: flex; align-items: center; gap: 7px; }
+.x-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #34d399; box-shadow: 0 0 0 3px rgba(52,211,153,.25), 0 0 8px #34d399;
+  animation: x-pulse 1.6s ease-in-out infinite;
+}
+@keyframes x-pulse { 0%,100% { opacity:1 } 50% { opacity:.4 } }
+.x-status-txt { color: #34d399; font-size: 12px; }
+
+.x-head-menu {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: transparent; border: 1px solid rgba(124,58,237,.22);
+  color: #8b7bc7; cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.x-head-menu:hover { border-color: rgba(45,212,255,.6); color: #2dd4ff; }
+
+/* ── Fond tech ── */
+.x-bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 40% at 20% -5%, rgba(124,58,237,.08), transparent 60%),
+    radial-gradient(ellipse 40% 30% at 85% 90%, rgba(45,212,255,.05), transparent 60%);
+}
+.x-bg::after {
+  content:""; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(124,58,237,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,58,237,.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ── Messages ── */
+.x-msgs {
+  position: fixed; top: 62px; bottom: 68px; left: 0; right: 0; z-index: 10;
+  overflow-y: auto; padding: 16px 14px;
+  display: flex; flex-direction: column; gap: 8px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin; scrollbar-color: rgba(124,58,237,.3) transparent;
+}
+.x-row { display: flex; align-items: flex-end; gap: 9px; animation: x-in .3s ease; }
+.x-row.x-user { flex-direction: row-reverse; }
+.x-row > .x-avatar { width: 30px; height: 30px; flex-shrink: 0; }
+.x-bubble {
+  max-width: min(78%, 62ch); padding: 10px 14px;
+  font-size: 13px; line-height: 1.55;
+  white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; box-sizing: border-box;
+}
+.x-bubble--bot {
+  color: #eef2ff; border-radius: 16px 16px 16px 5px;
+  background: linear-gradient(135deg, rgba(14,12,28,.88), rgba(12,10,24,.82));
+  border: 1px solid transparent;
+  border-image: linear-gradient(135deg, rgba(45,212,255,.4), rgba(124,58,237,.4)) 1;
+  box-shadow: 0 4px 16px rgba(124,58,237,.12), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.x-bubble--bot::before {
+  content: ""; position: absolute; left: -5px; bottom: 0; top: 50%;
+  border: 6px solid transparent; border-right-color: rgba(14,12,28,.88); border-top-color: transparent;
+}
+.x-bubble--user {
+  color: #fff; border-radius: 16px 16px 5px 16px;
+  background: linear-gradient(135deg, rgba(71,40,149,.92), rgba(30,20,60,.88));
+  border: 1px solid rgba(168,85,247,.5);
+  box-shadow: 0 4px 18px rgba(124,58,237,.25), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.x-bubble--user::after {
+  content: ""; position: absolute; right: -5px; bottom: 0;
+  border: 6px solid transparent; border-left-color: rgba(30,20,60,.88); border-bottom-color: transparent;
+}
+
+.x-time { font-size: 10.5px; color: rgba(139,155,178,.85); display: flex; align-items: center; gap: 6px; align-self: flex-start; margin-bottom: 4px; padding-left: 42px; }
+.x-row.x-user + .x-time { justify-content: flex-end; }
+.x-tick { color: #8b5cf9; font-size: 11px; }
+
+.chat-link { color: #8b5cf6; text-decoration: underline; text-decoration-color: rgba(139,92,246,.45); word-break: break-all; }
+.x-bubble--user .chat-link { color: #e2d2ff; }
+
+/* ── Saisie ── */
+.x-run {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 60;
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  background: rgba(8,8,20,.8); border-top: 1px solid rgba(124,58,237,.2);
+  backdrop-filter: blur(16px);
+}
+.x-plus {
+  width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0;
+  background: transparent; border: 1px solid rgba(124,58,237,.4);
+  color: #a78bfa; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+}
+.x-plus:hover { border-color: #45d0ff; color: #45d0ff; box-shadow: 0 0 12px rgba(45,212,255,.22); }
+.x-plus svg { width: 18px; height: 18px; }
+
+#nxy-input {
+  flex: 1; height: 38px;
+  background: rgba(255,255,255,.03); border: 1px solid rgba(124,58,237,.35);
+  border-radius: 12px; color: #eef2ff; font-size: 13.5px; padding: 0 14px; outline: none;
+  font-family: inherit;
+}
+#nxy-input::placeholder { color: rgba(139,158,176,.55); }
+#nxy-input:focus { border-color: rgba(45,212,255,.6); box-shadow: 0 0 0 3px rgba(45,212,255,.12), 0 0 14px rgba(124,58,237,.14); }
+
+#nxy-send {
+  width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0;
+  background: linear-gradient(135deg,#7c3aed,#2563eb);
+  border: 1px solid rgba(139,92,246,.65); color: #fff; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 14px rgba(124,58,237,.35);
+  transition: all .15s;
+}
+#nxy-send:hover:not([disabled]) { box-shadow: 0 0 18px rgba(45,212,255,.45), inset 0 1px 0 rgba(255,255,255,.15); transform: translateY(-1px); }
+#nxy-send:disabled { opacity: .35; }
+#nxy-send svg { width: 18px; height: 18px; }
+
+.x-ring { position:absolute; inset:-3px; border-radius:50%; border:1.5px solid rgba(45,212,255,.2); animation: x-ring 2.8s ease-in-out infinite; pointer-events:none; }
+@keyframes x-ring { 0%,100% { opacity:.3; } 50% { opacity:.75; } }
+@keyframes x-in { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 480px) {
+  .x-head { padding: 10px 12px; }
+  .x-bubble { max-width: 82%; font-size: 12.5px; }
+  .x-run { padding: 10px 12px; gap: 8px; }
+}
+</style>
+</head>
 <body>
-<canvas id="particles-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
-<nav class="main-nav">
-<div class="nav-container">
-<a class="nav-logo" href="../index.html"><div class="logo-icon"><img alt="Nethxeum" src="../images/logo.png"/></div><span class="logo-text">Nethxeum</span></a>
-<ul class="nav-links">
-<li><a href="getting-started.html">Getting Started</a></li>
-<li><a href="download.html">Downloads</a></li>
-<li><a href="library.html">Library</a></li>
-<li><a href="blog.html">Blog</a></li>
-<li><a href="community.html">Community</a></li>
-<li><a href="resources.html">Resources</a></li>
-</ul>
-<div class="nav-cta">
-<div class="lang-selector">
-<button class="lang-btn"><i class="fas fa-globe"></i><span class="current-lang">EN</span><i class="fas fa-chevron-down" style="font-size:0.7rem"></i></button>
-<div class="lang-dropdown">
-<div class="lang-option active" data-lang="en"><span>English</span></div>
-<div class="lang-option" data-lang="fr"><span>Francais</span></div>
-<div class="lang-option" data-lang="es"><span>Espanol</span></div>
-</div>
-</div>
-</div>
-<button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
-</div>
-</nav>
-<div class="mobile-menu-overlay"></div>
-<div class="mobile-menu">
-<button class="mobile-menu-close"><i class="fas fa-times"></i></button>
-<div class="mobile-menu-category">Menu</div>
-<ul class="mobile-menu-links">
-<li><a href="../index.html">Home</a></li>
-<li><a href="assistant.html">Assistant</a></li>
-</ul>
-</div>
 
-<!-- Chat plein écran (fixed, seule la zone de messages défile) -->
-<div style="position: fixed; inset: 0; display: flex; flex-direction: column; border-top: 1px solid rgba(124,58,237,.3); background: rgba(6,6,22,.28); z-index: 10;">
-  <div style="padding: 10px 18px; border-bottom: 1px solid rgba(124,58,237,.2); display:flex; align-items:center; gap:12px;">
-    <div style="width:34px; height:34px; border-radius:50%; overflow:hidden; border:1px solid rgba(124,58,237,.5); display:flex; align-items:center; justify-content:center;"><img src="../images/assistant.png" alt="Xeumon" style="width:100%; height:100%; object-fit:cover;"/></div>
+<div class="x-bg"></div>
+
+<!-- Header Xeumon -->
+<header class="x-head">
+  <a class="x-back" href="../index.html" title="Home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </a>
+  <div class="x-head-brand">
+    <div class="x-avatar"><img src="../images/assistant.png" alt="Xeumon"/><div class="x-ring"></div></div>
     <div>
-      <div style="font-weight:600; color: var(--text-primary);">Xeumon</div>
-      <div style="font-size:.75rem; color: var(--text-muted);">Assistante officielle Nethxeum — répond dans ta langue</div>
+      <div class="x-head-name">Xeumon</div>
+      <div class="x-head-sub">Assistante IA · Nethxeum</div>
     </div>
-    <span style="margin-left:auto; color:#34d399; font-size:.78rem;">● en ligne</span>
   </div>
-  <div id="nxy-page-msgs" style="flex: 1; overflow-y: auto; overflow-x: hidden; padding: 18px; display: flex; flex-direction: column; gap: 10px; max-width: 900px; width: 100%; margin: 0 auto; background: transparent; box-sizing: border-box;"></div>
-  <form id="nxy-page-form" class="nxy-form-beam" style="display:flex; gap: 10px; padding: 12px 18px; border-top: 1px solid rgba(124,58,237,.2); max-width: 900px; width: 100%; margin: 0 auto; background: transparent;">
-    <input id="nxy-page-input" type="text" autocomplete="off" placeholder="Ask about a block, a transaction, the project..." style="flex:1; background: rgba(255,255,255,.03); border: 1px solid rgba(124,58,237,.3); border-radius: 10px; color: var(--text-primary); padding: 12px 14px; font-size: .95rem; outline: none;"/>
-    <button type="submit" style="background: linear-gradient(135deg, #7c3aed, #2dd4ff); border: none; border-radius: 10px; color: #fff; padding: 0 18px; cursor: pointer; font-size: 15px;">➤</button>
-  </form>
+  <div class="x-head-status"><div class="x-dot"></div><span class="x-status-txt">En ligne</span></div>
+  <button class="x-head-menu" aria-label="Menu"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button>
+</header>
+
+<!-- Zone de messages -->
+<div class="x-msgs" id="nxy-page-msgs"></div>
+
+<!-- Barre de saisie -->
+<div class="x-run">
+  <button class="x-plus" type="button" aria-label="Add note">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+  </button>
+  <input id="nxy-input" type="text" autocomplete="off" placeholder="Écrivez votre message…" />
+  <button id="nxy-send" type="button" aria-label="Send">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+  </button>
 </div>
 
-<footer class="main-footer">
-<div class="container">
-<div class="footer-bottom"><p>Â© Nethxeum Project 2026. Released under the MIT license.</p></div>
-</div>
-</footer>
-
-<script src="../js/main.js"></script>
-<script src="../js/nxy-assistant.js"></script>
 <script>
 (function () {
   'use strict';
@@ -97,84 +204,77 @@
   var KEY = 'jir63n28vug95behsqofwmpaytk47dczxl10';
 
   var msgs = document.getElementById('nxy-page-msgs');
-  var form = document.getElementById('nxy-page-form');
-  var input = document.getElementById('nxy-page-input');
+  var input = document.getElementById('nxy-input');
+  var sendBtn = document.getElementById('nxy-send');
 
-  function clean(t) {
-    return (t || '')
-      .replace(/\*\*(.+?)\*\*/g, '$1')
-      .replace(/\*(.+?)\*/g, '$1')
-      .replace(/__(.+?)__/g, '$1')
-      .replace(/_(.+?)_/g, '$1')
-      .replace(/`{1,3}([^`]+)`{0,3}/g, '$1')
-      .replace(/^#{1,6}\s*/gm, '')
-      .trim();
+  function now() {
+    var d = new Date();
+    return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
   }
 
   function linkify(text) {
-    const esc = text
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-    return esc.replace(
-      /(https?:\/\/[^\s<>"'(){}]+|\b(?:discord\.gg|t\.me|github\.com)\/[A-Za-z0-9_.\/-]+|\bX\s+@nethxeum\b|\b@[A-Za-z0-9_]+\b)/g,
-      function (m) {
-        var url = /^https?:/i.test(m) ? m : 'https://' + m.replace(/@/, 'twitter.com/').replace(/\s+/g, '');
-        return '<a href="' + url + '" target="_blank" rel="noopener" style="color: #8b5cf6; text-decoration: underline; text-decoration-color: rgba(139,92,246,.45); word-break: break-all;">' + m + '</a>';
-      }
-    );
+    var esc = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    return esc.replace(/(https?:\/\/\S+|discord\.gg\/\S+|t\.me\/\S+|github\.com\/\S+|@\w+)/g,
+      function(m){ var url = /^https?:/i.test(m) ? m : (m.charAt(0)==='@' ? 'https://x.com/'+m.slice(1) : 'https://'+m);
+        return '<a class="chat-link" href="'+url+'" target="_blank" rel="noopener">'+m+'</a>'; });
   }
 
-  function add(role, text) {
-    var d = document.createElement('div');
-    d.style.cssText = (role === 'user'
-      ? 'align-self:flex-end;max-width:82%;min-width:0;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;padding:10px 14px;border-radius:14px;border-bottom-right-radius:4px;'
-      : 'align-self:flex-start;max-width:82%;min-width:0;background:rgba(124,58,237,.13);border:1px solid rgba(124,58,237,.25);color:var(--text-primary);padding:10px 14px;border-radius:14px;border-bottom-left-radius:4px;')
-      + 'white-space:pre-wrap;line-height:1.55;font-size:.94rem;overflow-wrap:anywhere;word-break:break-word;box-sizing:border-box;';
-    d.innerHTML = linkify(clean(text));
-    msgs.appendChild(d);
+  function addMsg(role, text, time) {
+    var row = document.createElement('div');
+    row.className = 'x-row' + (role === 'user' ? ' x-user' : '');
+    if (role === 'assistant') {
+      row.innerHTML = '<div class="x-avatar" style="width:30px;height:30px;"><img src="../images/assistant.png" alt="Xeumon"/></div><div class="x-bubble x-bubble--bot">' + linkify(text.trim()) + '</div>';
+    } else {
+      row.innerHTML = '<div class="x-bubble x-bubble--user">' + linkify(text.trim()) + '</div>';
+    }
+    msgs.appendChild(row);
+    var trow = document.createElement('div');
+    trow.className = 'x-time';
+    trow.textContent = time;
+    if (role === 'user') trow.innerHTML += '<span class="x-tick">✓✓</span>';
+    msgs.appendChild(trow);
     msgs.scrollTop = msgs.scrollHeight;
+    return row;
   }
 
   var history = [];
   try { history = JSON.parse(sessionStorage.getItem('xeumon-history') || '[]'); } catch (_) { history = []; }
-  history.forEach(function (m) { add(m.role, m.content); });
+  // remettre l'historique si présent (recréer les bulles)
+  history.forEach(function (m) { addMsg(m.role === 'assistant' ? 'assistant' : 'user', m.content, ''); msgs.querySelector('.x-time:last-child').remove(); });
   if (!history.length) {
-    add('assistant', 'Hi! I am Xeumon, the official Nethxeum assistant. I can show you live chain data (blocks, transactions, hashrate) and answer questions about the project.');
-    history.push({ role: 'assistant', content: 'Hi! I am Xeumon, the official Nethxeum assistant.' });
+    addMsg('assistant', 'Bonjour ! Je suis Xeumon, l\'assistante officielle Nethxeum. Je connais la chaîne en direct (blocs, transactions, hashrate) et le projet. Que veux-tu savoir ?', '09:41');
+    history.push({ role: 'assistant', content: 'Bonjour ! ...' });
   }
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+  function send() {
     var text = input.value.trim();
     if (!text) return;
-    add('user', text);
+    addMsg('user', text, now());
     history.push({ role: 'user', content: text });
     input.value = '';
-    input.disabled = true;
-    var tip = document.createElement('div');
-    tip.textContent = 'Xeumon is typing...';
-    tip.style.cssText = 'align-self:flex-start;color:var(--text-muted);font-size:.8rem;padding:4px 6px;';
-    msgs.appendChild(tip);
+    input.disabled = true; sendBtn.disabled = true;
 
-    fetch(API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-api-key': KEY },
-      body: JSON.stringify({ message: text, history: history }),
-    })
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        tip.remove();
-        var reply = d.reply || 'No answer.';
-        add('assistant', reply);
+    var typRow = document.createElement('div');
+    typRow.className = 'x-row';
+    typRow.innerHTML = '<div class="x-avatar" style="width:30px;height:30px;"><img src="../images/assistant.png"></div><div class="x-bubble x-bubble--bot"><i class="fas fa-circle" style="font-size:4px;opacity:.5"></i> <i class="fas fa-circle" style="font-size:4px;opacity:.6"></i> <i class="fas fa-circle" style="font-size:4px;opacity:.7"></i></div>';
+    msgs.appendChild(typRow); msgs.scrollTop = msgs.scrollHeight;
+
+    fetch(API, { method:'POST', headers:{'Content-Type':'application/json','x-api-key':KEY}, body: JSON.stringify({ message: text, history: history }) })
+      .then(r => r.json())
+      .then(d => {
+        typRow.remove();
+        var reply = (d.reply || 'Pas de réponse.').replace(/\*\*(.+?)\*\*/g,'$1').replace(/\*(.+?)\*/g,'$1').replace(/^#{1,6}\s*/gm,'').replace(/^[\-*]\s+/gm,'• ');
+        addMsg('assistant', reply, now());
         history.push({ role: 'assistant', content: reply });
         if (history.length > 20) history = history.slice(-20);
         try { sessionStorage.setItem('xeumon-history', JSON.stringify(history)); } catch (_) {}
       })
-      .catch(function () { tip.remove(); add('assistant', 'Network error â€” try again in a moment.'); })
-      .finally(function () { input.disabled = false; input.focus(); });
-  });
+      .catch(() => { typRow.remove(); addMsg('assistant', 'Erreur réseau — réessaie dans un instant.', now()); })
+      .finally(() => { input.disabled = false; sendBtn.disabled = false; sendBtn.focus(); });
+  }
+
+  sendBtn.addEventListener('click', send);
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); send(); } });
 })();
 </script>
 </body>
