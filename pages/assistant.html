@@ -115,6 +115,87 @@
   .x-bubble { font-size: 12.8px; padding: 9px 12px; }
   .x-msgs { padding: 12px 10px; gap: 8px; }
 }
+
+/* ─── Barre de saisie futuriste (site) ─────────────────────────── */
+.x-msgbar {
+  display: flex; align-items: center;gap: 8px;
+  position: fixed; left: 12px; right: 12px; bottom: max(10px, env(safe-area-inset-bottom)); z-index: 9999;
+  margin: 0 auto; width: min(calc(100% - 24px), 100%);
+  background: rgba(10, 15, 35, .55);
+  border: 1px solid rgba(124, 58, 237, .45);
+  border-radius: 44px;
+  box-shadow:
+    0 8px 30px rgba(3, 5, 13, .55),
+    inset 0 0 0 1px rgba(45, 212, 255, .12),
+    inset 0 1px 0 rgba(255, 255, 255, .04);
+  backdrop-filter: blur(18px);
+  padding: 8px 8px;
+  -webkit-backdrop-filter: blur(18px);
+}
+.x-msgbar:focus-within {
+  border-color: rgba(45, 212, 255, .6);
+  box-shadow:
+    0 8px 30px rgba(3, 5, 13, .55),
+    0 0 0 3px rgba(45, 212, 255, .15),
+    inset 0 0 0 1px rgba(45, 212, 255, .14),
+    inset 0 1px 0 rgba(255, 255, 255, .05);
+}
+.x-plus2 {
+  width: 36px; height: 36px; border-radius: 12px; flex-shrink: 0;
+  background: rgba(124, 58, 237, .2); border: 1px solid rgba(124, 58, 237, .35);
+  color: #a78bfa;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .18s;
+}
+.x-plus2:hover { background: rgba(124, 58, 237, .35); border-color: rgba(45,212,255,.55):color: #2dd4ff; }
+.x-plus2 svg { width: 18px; height: 18px; }
+
+.x-input2 {
+  flex: 1; min-width: 0;
+  height: 36px;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  color: #eef2ff;
+  font-size: 15px;
+  font-family: inherit;
+  caret-color: #7c4dff;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+.x-input2::placeholder { color: rgba(139,155,178,.55); }
+
+.x-send2 {
+  width: 38px; height: 38px; border-radius: 12px; flex-shrink: 0;
+  border: none; cursor: pointer;
+  background: linear-gradient(135deg,#7c3aed 0%,#2563eb 55%,#2dd4ff 100%);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow:
+    0 0 16px rgba(124,58,237,.45),
+    inset 0 0 0 1px rgba(45,212,255,.25);
+  transition: all .2s cubic-bezier(.2,.8,.2,1);
+}
+.x-send2:hover:not(:disabled) { 
+  background: linear-gradient(135deg,#8b5cf6,#2dd4ff);
+  box-shadow: 0 0 22px rgba(45,212,255,.45), inset 0 0 0 1px rgba(45,212,255,.4);
+  transform: scale(1.05);
+}
+.x-send2:active:not(:disabled) { transform: scale(.97); }
+.x-send2:disabled { opacity: .3; box-shadow: none; }
+
+/* Mobile : la barre ne touche pas les bords, la clé n'est pas sur l'écran */
+@media (max-width: 480px) {
+  .x-msgbar { padding: 6px; border-radius: 40px; }
+  .x-plus2, .x-send2 { width: 36px; height: 36px; }
+  .x-msgbar { left: 10px; right: 10px; bottom: max(8px, env(safe-area-inset-bottom)); }
+}
+
+/* Fallback / transition depuis d'autres thèmes du site */
+body.theme-light .x-msgbar {
+  background: rgba(245, 245,, .252, 0.85);
+  border-color: rgba(124,58,237,.25);
+}
 </style>
 
 <div class="x-shell">
