@@ -80,31 +80,54 @@ html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: 
 .x-row { display: flex; align-items: flex-end; gap: 9px; animation: x-in .3s ease; }
 .x-row.x-user { flex-direction: row-reverse; }
 .x-row > .x-avatar { width: 30px; height: 30px; flex-shrink: 0; }
+/* Bulles : tag bundle + meta */
+.x-msg-bundle { display: flex; flex-direction: column; max-width: calc(100% - 48px); }
+
 .x-bubble {
-  max-width: min(78%, 62ch); padding: 10px 14px;
-  font-size: 13px; line-height: 1.55;
+  max-width: 100%;
+  padding: 10px 14px;
+  font-size: 13.5px; line-height: 1.55;
   white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; box-sizing: border-box;
 }
+
+/* Meta : heure + ✓✓ sous la bubble */
+.x-meta { font-size: 10.5px; color: rgba(139,155,178,.8); margin-top: 4px; display: flex; align-items: center; gap: 5px; }
+.x-meta--user { justify-content: flex-end; }
+.x-tick { color: #8b5cf6; font-size: 11px; }
+
 .x-bubble--bot {
-  color: #eef2ff; border-radius: 16px 16px 16px 5px;
   background: linear-gradient(135deg, rgba(14,12,28,.88), rgba(12,10,24,.82));
-  border: 1px solid transparent;
-  border-image: linear-gradient(135deg, rgba(45,212,255,.4), rgba(124,58,237,.4)) 1;
-  box-shadow: 0 4px 16px rgba(124,58,237,.12), inset 0 1px 0 rgba(255,255,255,.04);
+  border: 1px solid rgba(45,212,255,.35);
+  color: #eef2ff; border-radius: 16px 16px 16px 5px;
+  box-shadow: 0 4px 16px rgba(124,58,237,.14), inset 0 1px 0 rgba(255,255,255,.04);
 }
 .x-bubble--bot::before {
-  content: ""; position: absolute; left: -5px; bottom: 0; top: 50%;
-  border: 6px solid transparent; border-right-color: rgba(14,12,28,.88); border-top-color: transparent;
+  content:""; position:absolute; left:-5px; top:11px;
+  border:6px solid transparent; border-right-color: rgba(14,12,28,.88);
 }
 .x-bubble--user {
-  color: #fff; border-radius: 16px 16px 5px 16px;
   background: linear-gradient(135deg, rgba(71,40,149,.92), rgba(30,20,60,.88));
   border: 1px solid rgba(168,85,247,.5);
+  color: #fff; border-radius: 16px 16px 5px 16px;
   box-shadow: 0 4px 18px rgba(124,58,237,.25), inset 0 1px 0 rgba(255,255,255,.06);
 }
-.x-bubble--user::after {
-  content: ""; position: absolute; right: -5px; bottom: 0;
-  border: 6px solid transparent; border-left-color: rgba(30,20,60,.88); border-bottom-color: transparent;
+.x-bubble--user::before {
+  content:""; position:absolute; right:-5px; bottom:3px;
+  border:6px solid transparent; border-left-color: rgba(30,20,60,.88);
+}
+
+/* ── Typing indicator ── */
+.x-typing { animation: x-in .2s ease; }
+.x-typing .x-bubble { padding: 12px 16px; opacity: .7; }
+.x-typing span { display:inline-block; width:6px; height:6px; border-radius:50%; background:#a78bfa; margin-right: 3px; animation:x-dot 1.2s infinite; }
+.x-typing span:nth-child(2) { animation-delay:.2s; }
+.x-typing span:nth-child(3) { animation-delay:.4s; }
+@keyframes x-dot { 0%,60%,100% { transform:none; opacity:.3 } 30% { opacity:1; } }
+
+/* ── Mobile : bubble plus grande ── */
+@media (max-width: 480px) {
+  .x-msg-bundle { max-width: calc(100% - 44px); }
+  .x-bubble { font-size: 12.5px; padding: 10px 12px; }
 }
 
 .x-time { font-size: 10.5px; color: rgba(139,155,178,.85); display: flex; align-items: center; gap: 6px; align-self: flex-start; margin-bottom: 4px; padding-left: 42px; }
@@ -222,28 +245,31 @@ html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: 
   function addMsg(role, text, time) {
     var row = document.createElement('div');
     row.className = 'x-row' + (role === 'user' ? ' x-user' : '');
+    var bundle = document.createElement('div');
+    bundle.className = 'x-msg-bundle';
     if (role === 'assistant') {
-      row.innerHTML = '<div class="x-avatar" style="width:30px;height:30px;"><img src="../images/assistant.png" alt="Xeumon"/></div><div class="x-bubble x-bubble--bot">' + linkify(text.trim()) + '</div>';
+      row.innerHTML = '<div class="x-avatar" style="width:30px;height:30px;flex-shrink:0;"><img src="../images/assistant.png" alt="Xeumon"/></div>';
+      bundle.innerHTML = '<div class="x-bubble x-bubble--bot">' + linkify(text) + '</div><div class="x-meta">' + time + '</div>';
     } else {
-      row.innerHTML = '<div class="x-bubble x-bubble--user">' + linkify(text.trim()) + '</div>';
+      bundle.innerHTML = '<div class="x-bubble x-bubble--user">' + linkify(text) + '</div><div class="x-meta x-meta--user">' + time + '<span class="x-tick">✓✓</span></div>';
     }
+    row.appendChild(bundle);
     msgs.appendChild(row);
-    var trow = document.createElement('div');
-    trow.className = 'x-time';
-    trow.textContent = time;
-    if (role === 'user') trow.innerHTML += '<span class="x-tick">✓✓</span>';
-    msgs.appendChild(trow);
     msgs.scrollTop = msgs.scrollHeight;
-    return row;
   }
 
   var history = [];
   try { history = JSON.parse(sessionStorage.getItem('xeumon-history') || '[]'); } catch (_) { history = []; }
-  // remettre l'historique si présent (recréer les bulles)
-  history.forEach(function (m) { addMsg(m.role === 'assistant' ? 'assistant' : 'user', m.content, ''); msgs.querySelector('.x-time:last-child').remove(); });
-  if (!history.length) {
-    addMsg('assistant', 'Bonjour ! Je suis Xeumon, l\'assistante officielle Nethxeum. Je connais la chaîne en direct (blocs, transactions, hashrate) et le projet. Que veux-tu savoir ?', '09:41');
-    history.push({ role: 'assistant', content: 'Bonjour ! ...' });
+  if (history.length) {
+    // re-rend l'historique sans timestamps datés (on garde juste le texte)
+    history.forEach(function (m) { addMsg(m.role === 'assistant' ? 'assistant' : 'user', m.content, ''); });
+    // mais on strippe les timestamps vides — ça rappelle la FA
+    msgs.querySelectorAll('.x-time').forEach(function(el) { el.remove(); });
+    var lastTimeSpan = msgs.querySelector('.x-row:last-of-type');
+    if (lastTimeSpan) lastTimeSpan.insertAdjacentHTML('afterend', '<div class="x-time x-meta--user">' + now() + '</div>');
+  } else {
+    addMsg('assistant', 'Bonjour ! Je suis Xeumon, l\'assistante officielle Nethxeum. Je connais la chaîne en direct (blocs, transactions, hashrate) et le projet. Que veux-tu savoir ?', now());
+    history.push({ role: 'assistant', content: 'Bonjour !' });
   }
 
   function send() {
