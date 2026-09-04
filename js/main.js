@@ -1170,11 +1170,10 @@ window.addEventListener('scroll', () => {
     announceBar.style.transform = `translateY(-${shift}px)`;
   }
 
-  // Move nav up as announcement bar disappears
+  // Nav fixée en permanence — ne bouge jamais au scroll
   if (nav) {
-    const navTop = Math.max(0, ANN_H - y);
-    nav.style.top = navTop + 'px';
-    if (y > ANN_H + 20) {
+    nav.style.top = '0px';
+    if (y > 20) {
       nav.classList.add('scrolled');
     } else {
       nav.classList.remove('scrolled');
