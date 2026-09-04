@@ -1,4 +1,4 @@
-/* Bouton d'accès flottant à l'assistante Xeumon */
+/* Bouton d'accès à l'assistante Xeumon — redirige vers l'explorateur */
 (function () {
   'use strict';
   if (document.getElementById('xeumon-fab')) return;
@@ -15,10 +15,11 @@
   document.head.appendChild(style);
 
   var inPages = /\/pages\//.test(location.pathname);
-  var href = inPages ? 'assistant.html' : 'pages/assistant.html';
   var fab = document.createElement('a');
   fab.id = 'xeumon-fab';
-  fab.href = href;
+  fab.href = 'https://explore.nethxeum.com/assistant';
+  fab.target = '_blank';
+  fab.rel = 'noopener';
   fab.title = 'Assistante Xeumon';
   fab.setAttribute('aria-label', 'Ouvrir l\'assistante Xeumon');
   fab.innerHTML = '<img src="' + (inPages ? '../' : '') + 'images/assistant.png" alt="Xeumon"/>';
