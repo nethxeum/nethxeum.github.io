@@ -1,8 +1,0 @@
-﻿# Supprimer l'assistante du site definitivement
-/pages/assistant.html  /  404!
-/pages/assistant  /  404!
-/assistant.html  /  404!
-/assistant  /  404!
-
-# Laisse tout le monde router normalement (SPA fallback)
-/*  /index.html  200
