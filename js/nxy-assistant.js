@@ -17,9 +17,9 @@
   var inPages = /\/pages\//.test(location.pathname);
   var fab = document.createElement('a');
   fab.id = 'xeumon-fab';
-  fab.href = 'https://explore.nethxeum.com/assistant';
-  fab.target = '_blank';
-  fab.rel = 'noopener';
+  fab.href = '/assistant';
+
+
   fab.title = 'Assistante Xeumon';
   fab.setAttribute('aria-label', 'Ouvrir l\'assistante Xeumon');
   fab.innerHTML = '<img src="' + (inPages ? '../' : '') + 'images/assistant.png" alt="Xeumon"/>';
