@@ -31,6 +31,14 @@
     border-bottom: 1px solid var(--border-subtle);
     background: transparent;
   }
+  .x-head-back {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    background: transparent; border: 1px solid var(--border-default);
+    color: var(--text-secondary); text-decoration: none; transition: all .15s; cursor: pointer;
+  }
+  .x-head-back:hover { border-color: var(--ntu-cyan); color: var(--ntu-cyan); box-shadow: 0 0 12px rgba(45, 212, 255, 0.2); }
+
   .x-head-brand { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
   .x-head-name { color: var(--text-primary); font-weight: 700; font-size: 15.5px; line-height: 1.2; }
   .x-head-sub { color: var(--ntu-violet); font-size: 12px; }
@@ -138,6 +146,9 @@
 <!-- Xeumon chat -->
 <div class="x-chat">
   <header class="x-head">
+    <a class="x-head-back" href="/" aria-label="Back">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </a>
     <div class="x-head-brand">
       <div class="x-avatar x-avatar--head"><img src="images/assistant.png" alt="Xeumon" /></div>
       <div>
